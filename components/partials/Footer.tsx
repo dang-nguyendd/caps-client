@@ -1,15 +1,24 @@
 import React from "react";
+import NextLink, { LinkProps } from "next/link";
 
 interface FooterItemProps {
   Icon: React.ComponentType<any>;
   href: string;
 }
 
+interface LinkCustomProps extends LinkProps {
+  children?: React.ReactNode;
+}
+
 const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <div>
+      Footer
+    </div>
+  );
 };
 
-const Link: React.FC<LinkProps> = (props) => {
+const Link: React.FC<LinkCustomProps> = (props) => {
   return (
     <NextLink {...props}>
       <a className="hover:text-primary-300 transition duration-300">

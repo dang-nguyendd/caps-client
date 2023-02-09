@@ -1,0 +1,1 @@
+For all queries, keep here instead of component file

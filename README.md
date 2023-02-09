@@ -1,6 +1,7 @@
 ## Navigation (Web app overview):
 
 ## Project overview:
+
 ``` bash
     .idea       # intellij setup (for easy introduction to the project)
     build       # temp folder used by groovy for building UI tests
@@ -12,9 +13,8 @@
     pages               # pages define the navigationable structure of the webapp
     public              # main configuration for application
     .dockerignore       # configuration file for the docker setup
-    .eslintrc.js        # configuration file for the eslint setup
+    .eslintrc.json        # configuration file for the eslint setup
     .gitignore          # configuration file for the git setup
-    .npmrc              # configuration file for artifactory
     .prettierrc         # configuration file for code formatting
     Dockerfile          # configuration file for building webapp with Docker containers
     next.config.js      # next project configuration file

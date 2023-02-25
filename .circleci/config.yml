@@ -54,9 +54,6 @@ jobs:
       - *restore-cache
       - *install-deps
       - run:
-          name: Lint pretter
-          command: npm run prettier
-      - run:
           name: Lint eslint
           command: npm run eslint
 

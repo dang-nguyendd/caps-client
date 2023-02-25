@@ -1,24 +1,27 @@
 pipeline {
-    agent any
+    agent {
+            docker {
+                image 'node:14.21.3'
+                args '-p 3000:3000'
+            }
+        }
     stages {
-        stage('Get changed files') {
-            steps {
-                script {
-                    def diffCommand = "git diff --name-only origin/${params.PR_SOURCE_BRANCH.replaceAll('refs/heads/', '')} " +
-                            "`git merge-base origin/${params.PR_SOURCE_BRANCH.replaceAll('refs/heads/', '')} origin/${params.PR_TARGET_BRANCH.replaceAll('refs/heads/', '')}`"
-                    listDiffFile = sh(script: diffCommand, returnStdout: true).trim().split("\\r?\\n")
-                    echo "Update files: \n"
-                    listDiffFile.each { file ->
-                        if (!isConfigFile(file)) {
-                            listDiffFile -= file
-                        }
-                    }
-                    listDiffFile.each { file -> println file }
-                    if (listDiffFile.size() == 0) {
-                        skipChecking = true
+        stages {
+                stage('Install dependencies') {
+                    steps {
+                        sh 'npm install'
                     }
                 }
-            }
+                stage('Build') {
+                     steps {
+                        sh 'npm run build'
+                     }
+                }
+                stage('Unit test') {
+                    steps {
+                        sh 'npm run test'
+                    }
+                }
         }
     }
 }

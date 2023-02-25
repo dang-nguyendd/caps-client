@@ -13,7 +13,7 @@
     pages               # pages define the navigationable structure of the webapp
     public              # main configuration for application
     .dockerignore       # configuration file for the docker setup
-    .eslintrc.json        # configuration file for the eslint setup
+    .eslintrc.json      # configuration file for the eslint setup
     .gitignore          # configuration file for the git setup
     .prettierrc         # configuration file for code formatting
     Dockerfile          # configuration file for building webapp with Docker containers

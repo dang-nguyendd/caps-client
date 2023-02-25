@@ -11,11 +11,7 @@ interface LinkCustomProps extends LinkProps {
 }
 
 const Footer = () => {
-  return (
-    <div>
-      Footer
-    </div>
-  );
+  return <div>Footer</div>;
 };
 
 const Link: React.FC<LinkCustomProps> = (props) => {

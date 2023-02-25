@@ -23,11 +23,11 @@ interface CustomAppProps extends AppProps {
 }
 
 export default function App({
-                              Component,
-                              pageProps,
-                              router,
-                              err
-                            }: CustomAppProps) {
+  Component,
+  pageProps,
+  router,
+  err,
+}: CustomAppProps) {
   const [errorInfo, setErrorInfo] = useState<any>();
 
   const getLayout =
@@ -37,7 +37,7 @@ export default function App({
   const client = new ApolloClient({
     uri: API_BASE_URL,
     ssrMode: true,
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
   });
 
   return (
@@ -59,13 +59,14 @@ export default function App({
             setErrorInfo(info);
           }}
           fallbackRender={(fallbackProps) => {
-            return <AppErrorFallback {...fallbackProps} errorInfo={errorInfo} />;
+            return (
+              <AppErrorFallback {...fallbackProps} errorInfo={errorInfo} />
+            );
           }}
         >
           {getLayout(<Component {...pageProps} err={err} />)}
         </ErrorBoundary>
       </ApolloProvider>
-
     </>
   );
 }

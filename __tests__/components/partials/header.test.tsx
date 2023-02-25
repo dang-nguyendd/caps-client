@@ -4,6 +4,7 @@ import "@testing-library/jest-dom";
 
 describe("Header", () => {
   it("renders a component", () => {
-    render(<Header />);
+    const { getByText } = render(<Header />);
+    expect(getByText("Header")).toBeInTheDocument();
   });
 });

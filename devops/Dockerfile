@@ -17,13 +17,15 @@ COPY --chown=jenkins:jenkins devops/init.groovy.d/ /usr/share/jenkins/ref/init.g
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt && \
     echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$JENKINS_USER', '$JENKINS_PASS')" > /usr/share/jenkins/ref/init.groovy.d/init-user.groovy
 
-RUN mkdir -p /opt && chown -R jenkins:jenkins /opt
-
 # Configure GitHub Credentials
-RUN mkdir -p /var/jenkins_home/credentials/github
-COPY devops/github/github-credentials.xml /var/jenkins_home/credentials/github/
-RUN chown -R jenkins:jenkins /var/jenkins_home/credentials/github
-RUN chmod 644 /var/jenkins_home/credentials/github/*
+COPY devops/github/github-credentials.xml /usr/share/jenkins/ref/credentials.xml
+
+# Configure multi-branch pipeline using GitHub repository
+COPY devops/github/multi-branch-pipeline-config.xml /usr/share/jenkins/ref/
+
+# Add Jenkinsfiles for each pipeline
+COPY devops/jenkins/ /var/jenkins_home/caps-client/jenkins/
+RUN chown -R jenkins:jenkins /var/jenkins_home/caps-client/jenkins/
 
 # Switch back to Jenkins user
 USER jenkins
@@ -41,9 +43,6 @@ USER root
 # Configure GitHub Webhooks integration with SonarQube
 COPY devops/github/sonarqube-github-webhook.xml /var/jenkins_home/
 RUN chown -R jenkins:jenkins /var/jenkins_home/sonarqube-github-webhook.xml
-
-# Copy Jenkinsfile into image
-COPY jenkins/Jenkinsfile /var/jenkins_home/Jenkinsfile
 
 # Expose Jenkins port
 EXPOSE 8080

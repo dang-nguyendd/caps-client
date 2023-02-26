@@ -10,10 +10,10 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
-    container_name: devops-local
+    container_name: jenkins-local
     volumes:
       - jenkins_data:/var/jenkins_home
-      - ./plugins.txt:/usr/share/devops/ref/plugins.txt
+      - ./plugins.txt:/usr/share/jenkins/ref/plugins.txt
     env_file:
       - devops/infrastructure/properties.env
       - devops/infrastructure/local.env

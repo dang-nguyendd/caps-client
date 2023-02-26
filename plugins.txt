@@ -12,4 +12,3 @@ github-api:latest
 sonar:latest
 analysis-core:latest
 github-branch-source:latest
-github-organization-folder:latest

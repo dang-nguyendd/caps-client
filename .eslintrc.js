@@ -19,5 +19,6 @@ module.exports = {
         singleQuote: false,
       },
     ],
+    "@next/next/no-img-element": "off",
   },
 };

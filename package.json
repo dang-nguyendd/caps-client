@@ -17,6 +17,7 @@
     "ts:check": "tsc --noEmit",
     "compile": "graphql-codegen",
     "watch": "graphql-codegen -w",
+    "deploy": "amplify publish",
     "prepare": "husky install"
   },
   "dependencies": {

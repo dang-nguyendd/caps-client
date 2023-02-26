@@ -1,0 +1,69 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+    <actions/>
+    <description>Triggers a SonarQube analysis on pull requests to the master branch</description>
+    <keepDependencies>false</keepDependencies>
+    <properties>
+        <jenkins.model.BuildDiscarderProperty>
+            <strategy class="hudson.tasks.LogRotator">
+                <daysToKeep>-1</daysToKeep>
+                <numToKeep>10</numToKeep>
+                <artifactDaysToKeep>-1</artifactDaysToKeep>
+                <artifactNumToKeep>-1</artifactNumToKeep>
+            </strategy>
+        </jenkins.model.BuildDiscarderProperty>
+        <com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty plugin="gitlab-plugin@1.5.12">
+            <gitLabConnection>null</gitLabConnection>
+        </com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty>
+        <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.33.1">
+            <spec>* * * * *</spec>
+        </com.cloudbees.jenkins.GitHubPushTrigger>
+        <com.cloudbees.jenkins.GitHubPushTriggerProperty>
+            <triggerOnPush>true</triggerOnPush>
+            <triggerOnPushBranches>true</triggerOnPushBranches>
+            <triggerOpenPullRequests>true</triggerOpenPullRequests>
+            <permitAll>false</permitAll>
+            <users/>
+            <orgs>
+                <com.cloudbees.plugins.credentials.domains.Domain>
+                    <name>GitHub</name>
+                    <specifications/>
+                </com.cloudbees.plugins.credentials.domains.Domain>
+            </orgs>
+        </com.cloudbees.jenkins.GitHubPushTriggerProperty>
+        <com.cloudbees.plugins.credentials.SystemCredentialsProvider plugin="credentials@2.5.2">
+            <domainCredentialsMap>
+                <entry>
+                    <com.cloudbees.plugins.credentials.domains.Domain>
+                        <specifications/>
+                    </com.cloudbees.plugins.credentials.domains.Domain>
+                    <java.util.concurrent.CopyOnWriteArrayList>
+                        <org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl>
+                            <scope>GLOBAL</scope>
+                            <id>sonarqube-github-webhook</id>
+                            <description>Credentials to authenticate with GitHub for webhook configuration</description>
+                            <secret>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</secret>
+                        </org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl>
+                    </java.util.concurrent.CopyOnWriteArrayList>
+                </entry>
+            </domainCredentialsMap>
+        </com.cloudbees.plugins.credentials.SystemCredentialsProvider>
+    </properties>
+    <scm class="hudson.plugins.git.GitSCM" plugin="git@4.12.1">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+            <hudson.plugins.git.UserRemoteConfig>
+                <url>https://github.com/Digirent-Enterprise/caps-client.git</url>
+                <credentialsId>sonarqube-github-webhook</credentialsId>
+            </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+            <hudson.plugins.git.BranchSpec>
+                <name>refs/pull/*/head</name>
+            </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions/>
+    </scm>
+</project>

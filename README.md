@@ -3,8 +3,9 @@
 ## Project overview:
 
 ``` bash
-    .idea       # intellij setup (for easy introduction to the project)
-    build       # temp folder used by groovy for building UI tests
+    .idea               # intellij setup (for easy introduction to the project)
+    build               # temp folder used by groovy for building UI tests
+    __test__            # jest unit testing
     components          # CO: components that can be reused in multiple pages
              icons              # CO: Shared icons for components
              partial            # CO: Component used for shared components
@@ -23,3 +24,17 @@
     tailwind.config.js  # tailwind compiled style configuration file
     tsconfig.json       # general-purpose typescript configuration file
 ```
+
+## Development Instruction
+Follow this guide if you want to have Jenkins pipeline run locally
+
+### Prerequisites
+Build docker image using `docker-compose up -d`
+
+### Add GitHub credentials
+1. Go to the script folder `cd devops/scripts`
+2. Create your own `.env.local` file, then copy value from `env.development`. In Unix, you can use `cp .env.development .env.local`
+3. Fill your credentials
+4. Run the scripts `./add-github-credentials.sh`. It may ask for permission, if so, run `chmod +x add-github-credentials.sh` before
+
+### Multi-branch pipeline

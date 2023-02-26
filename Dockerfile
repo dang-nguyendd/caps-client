@@ -20,7 +20,7 @@ COPY . .
 # Build application
 RUN npm run build
 
-#RUN npm install -g @aws-amplify/cli
+RUN npm install -g @aws-amplify/cli
 
 # Stage 2: Create the final image
 FROM node:14-alpine

@@ -1,4 +1,5 @@
 import React from "react";
+
 import NextLink, { LinkProps } from "next/link";
 
 interface FooterItemProps {

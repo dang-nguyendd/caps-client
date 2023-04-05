@@ -1,7 +1,8 @@
-import classNames from "classnames";
 import React, { useEffect } from "react";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
+import classNames from "classnames";
 import isHotKey from "is-hotkey";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 export interface BaseButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
   LeftIcon?: React.ComponentType<{ className: string }>;

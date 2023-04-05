@@ -2,8 +2,7 @@
 
 ## Project overview:
 
-``` bash
-    .idea               # intellij setup (for easy introduction to the project)
+```bash
     build               # temp folder used by groovy for building UI tests
     __test__            # jest unit testing
     components          # CO: components that can be reused in multiple pages
@@ -11,7 +10,7 @@
              partial            # CO: Component used for shared components
              layout             # CO: Layouts define general structures for pages
              shared             # CO: Component used for pages
-    pages               # pages define the navigationable structure of the webapp
+    pages               # pages define the navigation structure of the webapp
     public              # main configuration for application
     .dockerignore       # configuration file for the docker setup
     .eslintrc.json      # configuration file for the eslint setup

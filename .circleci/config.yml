@@ -3,19 +3,19 @@ version: 2.1
 aliases:
   - &restore-cache
     restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+      key: dependency-cache-{{ checksum "package.json" }}
   - &install-deps
     run:
-        name: Install dependencies
-        command: npm ci
+      name: Install dependencies
+      command: npm ci
   - &build-packages
     run:
-        name: Build
-        command: npm run build
+      name: Build
+      command: npm run build
   - &run-unit-tests
     run:
-        name: Test
-        command: npm run test
+      name: Test
+      command: npm run test
 
 unit-tests-template: &unit-tests-template
   steps:
@@ -33,7 +33,7 @@ jobs:
       - checkout
       - run:
           name: Update NPM version
-          command: 'sudo npm install -g npm@^8'
+          command: "sudo npm install -g npm@^8"
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:

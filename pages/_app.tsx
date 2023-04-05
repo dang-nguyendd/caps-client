@@ -1,24 +1,23 @@
-import BaseLayout from "@/components/layouts/BaseLayout";
-
-import { AppErrorFallback } from "@/components/shared/AppErrorFallback";
-import { API_BASE_URL } from "@/constants";
 import "@/styles/globals.css";
+import React, { ReactElement, useState } from "react";
+
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
-import React, { useState } from "react";
-
 import { ErrorBoundary } from "react-error-boundary";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+
+import BaseLayout from "@/components/layouts/BaseLayout";
+import AppErrorFallback from "@/components/shared/AppErrorFallback";
+import { API_BASE_URL } from "@/constants/api";
 
 type Page<P = {}> = NextPage<P> & {
   getLayout?: (page: React.ReactElement) => React.ReactElement;
 };
 
 interface CustomAppProps extends AppProps {
-  err: any;
+  err: Error;
   Component: Page;
 }
 
@@ -28,11 +27,28 @@ export default function App({
   router,
   err,
 }: CustomAppProps) {
-  const [errorInfo, setErrorInfo] = useState<any>();
+  const [errorInfo, setErrorInfo] = useState<React.ErrorInfo | null>(null);
 
   const getLayout =
     Component.getLayout ||
-    ((page: React.ReactElement) => <BaseLayout>{page}</BaseLayout>);
+    ((page: ReactElement) => <BaseLayout>{page}</BaseLayout>);
+
+  const handleOnError = (error: Error, info: React.ErrorInfo) => {
+    setErrorInfo(info);
+  };
+
+  const handleFallbackRender = (fallbackProps: {
+    error: Error;
+    resetErrorBoundary: () => void;
+  }) => {
+    return (
+      <AppErrorFallback
+        error={fallbackProps.error}
+        resetErrorBoundary={fallbackProps.resetErrorBoundary}
+        errorInfo={errorInfo}
+      />
+    );
+  };
 
   const client = new ApolloClient({
     uri: API_BASE_URL,
@@ -41,9 +57,9 @@ export default function App({
   });
 
   return (
-    <>
+    <React.Fragment>
       <ToastContainer
-        position="bottom-left"
+        position="bottom-right"
         autoClose={5000}
         hideProgressBar={true}
         newestOnTop={true}
@@ -55,18 +71,12 @@ export default function App({
       />
       <ApolloProvider client={client}>
         <ErrorBoundary
-          onError={(error, info) => {
-            setErrorInfo(info);
-          }}
-          fallbackRender={(fallbackProps) => {
-            return (
-              <AppErrorFallback {...fallbackProps} errorInfo={errorInfo} />
-            );
-          }}
+          onError={handleOnError}
+          fallbackRender={handleFallbackRender}
         >
           {getLayout(<Component {...pageProps} err={err} />)}
         </ErrorBoundary>
       </ApolloProvider>
-    </>
+    </React.Fragment>
   );
 }

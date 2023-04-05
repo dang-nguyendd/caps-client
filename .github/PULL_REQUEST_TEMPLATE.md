@@ -1,7 +1,9 @@
 ## PR Type
+
 What kind of change does this PR introduce?
 
 <!-- Please check the one that applies to this PR using "x". -->
+
 - [ ] Bugfix
 - [ ] Feature
 - [ ] Code style update (formatting, local variables)
@@ -11,6 +13,7 @@ What kind of change does this PR introduce?
 - [ ] Other... Please describe:
 
 ## What is the current behavior?
+
 <!-- Please describe the current behavior that you are modifying, or link to a relevant issue. -->
 
 ## What is the new behavior?

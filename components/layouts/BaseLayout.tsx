@@ -1,4 +1,5 @@
 import React from "react";
+
 import Footer from "@/components/partials/Footer";
 import Header from "@/components/partials/Header";
 

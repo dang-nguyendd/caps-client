@@ -39,26 +39,21 @@ export const useFetch = () => {
 
         const headers = response.headers;
 
-        const result =
-          contentType &&
+        return contentType &&
           (contentType?.indexOf("application/json") !== -1 ||
             contentType?.indexOf("text/plain") !== -1)
-            ? response.json()
-            : contentDisposition?.indexOf("attachment") !== -1
-            ? response.blob()
-            : response;
-
-        return result;
+          ? response.json()
+          : contentDisposition?.indexOf("attachment") !== -1
+          ? response.blob()
+          : response;
       })
       .catch(async (err) => {
         const contentType = err.headers.get("content-type");
 
-        const errResult =
-          contentType && contentType?.indexOf("application/problem+json") !== -1
-            ? await err.json()
-            : err;
-
-        throw errResult;
+        throw contentType &&
+          contentType?.indexOf("application/problem+json") !== -1
+          ? await err.json()
+          : err;
       });
   };
 

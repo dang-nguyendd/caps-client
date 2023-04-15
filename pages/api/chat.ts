@@ -2,6 +2,7 @@ import tiktokenModel from "@dqbd/tiktoken/encoders/cl100k_base.json";
 import { Tiktoken, init } from "@dqbd/tiktoken/lite/init";
 
 import { ChatBody, Message } from "@/types/Chat";
+import { HttpResponse } from "@/types/enum/HttpResponse";
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from "@/utils/app/const";
 import { OpenAIError, OpenAIStream } from "@/utils/server";
 
@@ -64,9 +65,14 @@ const handler = async (req: Request): Promise<Response> => {
   } catch (error) {
     console.error(error);
     if (error instanceof OpenAIError) {
-      return new Response("Error", { status: 500, statusText: error.message });
+      return new Response("Error", {
+        status: HttpResponse.INTERNAL_SERVER_ERROR,
+        statusText: error.message,
+      });
     } else {
-      return new Response("Error", { status: 500 });
+      return new Response("Error", {
+        status: HttpResponse.INTERNAL_SERVER_ERROR,
+      });
     }
   }
 };

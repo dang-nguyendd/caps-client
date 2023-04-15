@@ -1,3 +1,5 @@
+import { ExportFormatV1, ExportFormatV2, ExportFormatV4 } from "@/types/Export";
+import { OpenAIModelID, OpenAIModels } from "@/types/Openai";
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from "@/utils/app/const";
 import {
   cleanData,
@@ -7,9 +9,6 @@ import {
   isExportFormatV4,
   isLatestExportFormat,
 } from "@/utils/app/importExport";
-
-import { ExportFormatV1, ExportFormatV2, ExportFormatV4 } from "@/types/Export";
-import { OpenAIModelID, OpenAIModels } from "@/types/Openai";
 
 describe("Export Format Functions", () => {
   describe("isExportFormatV1", () => {

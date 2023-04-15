@@ -118,11 +118,7 @@ export const ChatInput = ({
     const selectedPrompt = filteredPrompts[activePromptIndex];
     if (selectedPrompt) {
       setContent((prevContent) => {
-        const newContent = prevContent?.replace(
-          /\/\w*$/,
-          selectedPrompt.content
-        );
-        return newContent;
+        return prevContent?.replace(/\/\w*$/, selectedPrompt.content);
       });
       handlePromptSelect(selectedPrompt);
     }
@@ -196,8 +192,7 @@ export const ChatInput = ({
       setIsModalVisible(true);
     } else {
       setContent((prevContent) => {
-        const updatedContent = prevContent?.replace(/\/\w*$/, prompt.content);
-        return updatedContent;
+        return prevContent?.replace(/\/\w*$/, prompt.content);
       });
       updatePromptListVisibility(prompt.content);
     }
@@ -318,7 +313,7 @@ export const ChatInput = ({
               }`,
             }}
             placeholder={
-              t('Type a message or type "/" to select a promptBar...') || ""
+              t('Type a message or type "/" to select a prompt...') || ""
             }
             value={content}
             rows={1}

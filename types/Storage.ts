@@ -10,7 +10,7 @@ export interface LocalStorage {
   theme: "light" | "dark";
   folders: FolderInterface[];
   prompts: Prompt[];
-  showChatbar: boolean;
-  showPromptbar: boolean;
+  showChatBar: boolean;
+  showPromptBar: boolean;
   pluginKeys: PluginKey[];
 }

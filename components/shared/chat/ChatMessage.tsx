@@ -1,4 +1,11 @@
-import { FC, memo, useContext, useEffect, useRef, useState } from "react";
+import React, {
+  FC,
+  memo,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import {
   IconCheck,

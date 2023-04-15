@@ -12,13 +12,13 @@ import { Prompts } from "@/components/shared/promptBar/Prompts";
 import { useCreateReducer } from "@/hooks/useCreateReducer";
 import { OpenAIModels } from "@/types/Openai";
 import { Prompt } from "@/types/Prompt";
-import { PromptbarInitialState, initialState } from "@/types/Prompt";
+import { PromptBarInitialState, initialState } from "@/types/Prompt";
 import { savePrompts } from "@/utils/app/prompts";
 
 const PromptBar = () => {
   const { t } = useTranslation("promptbar");
 
-  const promptBarContextValue = useCreateReducer<PromptbarInitialState>({
+  const promptBarContextValue = useCreateReducer<PromptBarInitialState>({
     initialState,
   });
 

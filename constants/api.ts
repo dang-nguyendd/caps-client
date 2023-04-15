@@ -1,5 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
+import { HttpResponse } from "@/types/enum/HttpResponse";
+
 export const API_BASE_URL = "http://localhost:8000";
 
 // AUTH MODULE
@@ -21,7 +23,7 @@ export const createAxiosInstance = (): AxiosInstance => {
       return response;
     },
     (error: AxiosError) => {
-      if (error.response?.status === 401) {
+      if (error.response?.status === HttpResponse.UNAUTHORIZED) {
         // Handle unauthorized error
         // For example, redirect to signin page
       }

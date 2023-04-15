@@ -9,12 +9,12 @@ export interface Prompt {
   folderId: string | null;
 }
 
-export interface PromptbarInitialState {
+export interface PromptBarInitialState {
   searchTerm: string;
   filteredPrompts: Prompt[];
 }
 
-export const initialState: PromptbarInitialState = {
+export const initialState: PromptBarInitialState = {
   searchTerm: "",
   filteredPrompts: [],
 };

@@ -1,7 +1,7 @@
 import {
+  createParser,
   ParsedEvent,
   ReconnectInterval,
-  createParser,
 } from "eventsource-parser";
 
 import { Message } from "@/types/Chat";
@@ -90,7 +90,7 @@ export const OpenAIStream = async (
     }
   }
 
-  const stream = new ReadableStream({
+  return new ReadableStream({
     async start(controller) {
       const onParse = (event: ParsedEvent | ReconnectInterval) => {
         if (event.type === "event") {
@@ -118,6 +118,4 @@ export const OpenAIStream = async (
       }
     },
   });
-
-  return stream;
 };

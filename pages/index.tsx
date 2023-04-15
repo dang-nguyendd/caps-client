@@ -53,7 +53,7 @@ const Home = ({
   const { getModelsError } = useErrorService();
   const [initialRender, setInitialRender] = useState<boolean>(true);
 
-  const contextValue = useCreateReducer<HomeInitialState>({
+  const homeContextValue = useCreateReducer<HomeInitialState>({
     initialState,
   });
 
@@ -68,7 +68,7 @@ const Home = ({
       temperature,
     },
     dispatch,
-  } = contextValue;
+  } = homeContextValue;
 
   const stopConversationRef = useRef<boolean>(false);
 
@@ -275,9 +275,9 @@ const Home = ({
       dispatch({ field: "showPromptBar", value: false });
     }
 
-    const showChatbar = localStorage.getItem("showChatBar");
-    if (showChatbar) {
-      dispatch({ field: "showChatBar", value: showChatbar === "true" });
+    const showChatBar = localStorage.getItem("showChatBar");
+    if (showChatBar) {
+      dispatch({ field: "showChatBar", value: showChatBar === "true" });
     }
 
     const showPromptBar = localStorage.getItem("showPromptBar");
@@ -342,7 +342,7 @@ const Home = ({
   return (
     <HomeContext.Provider
       value={{
-        ...contextValue,
+        ...homeContextValue,
         handleNewConversation,
         handleCreateFolder,
         handleDeleteFolder,
@@ -352,8 +352,11 @@ const Home = ({
       }}
     >
       <Head>
-        <title>Chatbot UI</title>
-        <meta name="description" content="ChatGPT but better." />
+        <title>Dengue Intelligent Chatbot Assistance</title>
+        <meta
+          name="description"
+          content="DICA - Dengue Intelligent Chatbot Assistance"
+        />
         <meta
           name="viewport"
           content="height=device-height ,width=device-width, initial-scale=1, user-scalable=no"

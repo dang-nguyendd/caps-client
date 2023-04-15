@@ -1,4 +1,5 @@
 import { Conversation, Message } from "@/types/Chat";
+import { Language } from "@/types/enum/Language";
 import { ErrorMessage } from "@/types/Error";
 import { FolderInterface } from "@/types/Folder";
 import { OpenAIModel, OpenAIModelID } from "@/types/Openai";
@@ -7,9 +8,11 @@ import { Prompt } from "@/types/Prompt";
 
 export interface HomeInitialState {
   apiKey: string;
+  isOpenSettings: boolean;
   pluginKeys: PluginKey[];
   loading: boolean;
   lightMode: "light" | "dark";
+  language: Language;
   messageIsStreaming: boolean;
   modelError: ErrorMessage | null;
   models: OpenAIModel[];
@@ -31,9 +34,11 @@ export interface HomeInitialState {
 
 export const initialState: HomeInitialState = {
   apiKey: "",
+  isOpenSettings: false,
   loading: false,
   pluginKeys: [],
   lightMode: "dark",
+  language: Language.ENGLISH,
   messageIsStreaming: false,
   modelError: null,
   models: [],

@@ -20,8 +20,10 @@ import { Import } from "@/components/shared/settings/Import";
 import { SideBarButton } from "@/components/shared/SideBarButton";
 import UserSettingsModal from "@/components/shared/settings/UserSettingsModal";
 import { Language } from "@/types/enum/Language";
+import { useRouter } from "next/router";
 
 export const ChatBarSettings = () => {
+  const router = useRouter();
   const { t } = useTranslation("sidebar");
 
   const {
@@ -49,7 +51,13 @@ export const ChatBarSettings = () => {
     handleLogout,
   } = useContext(AuthContext);
 
-  const switchLanguage = (language: Language) => {};
+  const switchLanguage = (selectedLanguage: Language) => {
+    const { locale } = router;
+    const newLocale = selectedLanguage.toLowerCase();
+    if (locale !== newLocale) {
+      router.push("/", "/", { locale: newLocale });
+    }
+  };
 
   return (
     <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-sm">

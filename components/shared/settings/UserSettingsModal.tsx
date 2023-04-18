@@ -62,8 +62,6 @@ const UserSettingsModal: React.FC<ModalProps> = ({
                   </label>
                 </div>
                 <div className="flex-1 pl-2">
-                  {" "}
-                  {/* Add flex-1 and pl-2 for spacing */}
                   <select
                     id="language"
                     name="language"
@@ -72,8 +70,14 @@ const UserSettingsModal: React.FC<ModalProps> = ({
                       handleLanguageChange(e.target.value as Language)
                     }
                   >
-                    <option value={Language.ENGLISH}>English</option>
-                    <option value={Language.VIETNAMESE}>Spanish</option>
+                    {Object.keys(Language).map((key) => (
+                      <option
+                        key={key}
+                        value={Language[key as keyof typeof Language]}
+                      >
+                        {Language[key as keyof typeof Language]}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>

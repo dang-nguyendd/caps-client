@@ -2,7 +2,7 @@ import axios, {CreateAxiosDefaults} from "axios";
 
 
 const config = {
-    baseURL : 'http://localhost:8000/',
+    baseURL : 'http://localhost:80/',
     headers: {},
     timeout : 1000,
 }

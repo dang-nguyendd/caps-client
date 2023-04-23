@@ -8,6 +8,7 @@ import {
   IconLogin,
   IconLogout,
 } from "@tabler/icons-react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
@@ -19,9 +20,8 @@ import { Key } from "@/components/shared/settings//Key";
 import { Import } from "@/components/shared/settings/Import";
 import UserSettingsModal from "@/components/shared/settings/UserSettingsModal";
 import { SideBarButton } from "@/components/shared/SideBarButton";
-import { Language } from "@/types/enum/Language";
 import { Routes } from "@/constants/routes";
-import Link from "next/link";
+import { Language } from "@/types/enum/Language";
 
 export const ChatBarSettings = () => {
   const router = useRouter();

@@ -8,19 +8,18 @@ import {
   IconLogin,
   IconLogout,
 } from "@tabler/icons-react";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
 import AuthContext from "@/components/shared/auth/AuthContext";
 import ChatBarContext from "@/components/shared/chatBar/ChatBarContext";
 import { ClearConversation } from "@/components/shared/conversation/ClearConversation";
 import HomeContext from "@/components/shared/home/HomeContext";
-import { PluginKeys } from "@/components/shared/plugin/PluginKeys";
 import { Key } from "@/components/shared/settings//Key";
 import { Import } from "@/components/shared/settings/Import";
-import { SideBarButton } from "@/components/shared/SideBarButton";
 import UserSettingsModal from "@/components/shared/settings/UserSettingsModal";
+import { SideBarButton } from "@/components/shared/SideBarButton";
 import { Language } from "@/types/enum/Language";
-import { useRouter } from "next/router";
 
 export const ChatBarSettings = () => {
   const router = useRouter();
@@ -32,7 +31,6 @@ export const ChatBarSettings = () => {
       isOpenSettings,
       lightMode,
       serverSideApiKeyIsSet,
-      serverSidePluginKeysSet,
       conversations,
     },
     dispatch: homeDispatch,
@@ -114,13 +112,11 @@ export const ChatBarSettings = () => {
         <Key apiKey={apiKey} onApiKeyChange={handleApiKeyChange} />
       ) : null}
 
-      {!serverSidePluginKeysSet ? <PluginKeys /> : null}
-
       {!isAuthenticated ? (
         <SideBarButton
           text={t("Log in")}
           icon={<IconLogin size={18} />}
-          onClick={() => handleLogin("", "")}
+          onClick={() => handleLogin()}
         />
       ) : (
         <SideBarButton

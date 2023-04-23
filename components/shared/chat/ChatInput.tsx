@@ -14,6 +14,7 @@ import {
   IconPlayerStop,
   IconRepeat,
   IconSend,
+  IconArrowDown,
 } from "@tabler/icons-react";
 import { useTranslation } from "next-i18next";
 
@@ -28,15 +29,19 @@ import { Prompt } from "@/types/Prompt";
 interface Props {
   onSend: (message: Message, plugin: Plugin | null) => void;
   onRegenerate: () => void;
+  onScrollDownClick: () => void;
   stopConversationRef: MutableRefObject<boolean>;
   textareaRef: MutableRefObject<HTMLTextAreaElement | null>;
+  showScrollDownButton: boolean;
 }
 
 export const ChatInput = ({
   onSend,
   onRegenerate,
+  onScrollDownClick,
   stopConversationRef,
   textareaRef,
+  showScrollDownButton,
 }: Props) => {
   const { t } = useTranslation("chat");
 
@@ -334,6 +339,17 @@ export const ChatInput = ({
             )}
           </button>
 
+          {showScrollDownButton && (
+            <div className="absolute bottom-12 right-0 lg:bottom-0 lg:-right-10">
+              <button
+                className="flex h-7 w-7 items-center justify-center rounded-full bg-neutral-300 text-gray-800 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-neutral-200"
+                onClick={onScrollDownClick}
+              >
+                <IconArrowDown size={18} />
+              </button>
+            </div>
+          )}
+
           {showPromptList && filteredPrompts.length > 0 && (
             <div className="absolute bottom-12 w-full">
               <PromptList
@@ -348,7 +364,7 @@ export const ChatInput = ({
 
           {isModalVisible && (
             <VariableModal
-              prompt={prompts[activePromptIndex]}
+              prompt={filteredPrompts[activePromptIndex]}
               variables={variables}
               onSubmit={handleSubmit}
               onClose={() => setIsModalVisible(false)}

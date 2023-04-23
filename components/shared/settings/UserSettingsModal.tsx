@@ -1,4 +1,5 @@
 import React from "react";
+
 import { IconX } from "@tabler/icons-react";
 
 import { Language } from "@/types/enum/Language";

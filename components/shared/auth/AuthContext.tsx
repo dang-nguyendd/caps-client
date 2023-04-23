@@ -6,7 +6,7 @@ import { ActionType } from "@/hooks/useCreateReducer";
 export interface AuthContextProps {
   state: AuthInitialState;
   dispatch: Dispatch<ActionType<AuthInitialState>>;
-  handleLogin: (username: string, password: string) => void;
+  handleLogin: () => void;
   handleLogout: () => void;
   handleRegistration: (
     username: string,

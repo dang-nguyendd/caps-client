@@ -23,7 +23,7 @@ export const createAxiosInstance = (): AxiosInstance => {
       return response;
     },
     (error: AxiosError) => {
-      if (error.response?.status === HttpResponse.UNAUTHORIZED) {
+      if (error.response?.status === HttpResponse.WRONG_CREDENTIAL) {
         // Handle unauthorized error
         // For example, redirect to signin page
       }

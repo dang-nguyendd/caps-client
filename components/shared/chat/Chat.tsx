@@ -12,6 +12,7 @@ import { IconArrowDown, IconClearAll, IconSettings } from "@tabler/icons-react";
 import { useTranslation } from "next-i18next";
 import { toast } from "react-toastify";
 
+import BaseSpinner from "@/components/shared/base/BaseSpinner";
 import { ChatLoader } from "@/components/shared/chat//ChatLoader";
 import { ChatInput } from "@/components/shared/chat/ChatInput";
 import { ChatMessage } from "@/components/shared/chat/ChatMessage";
@@ -20,7 +21,6 @@ import { ModelSelect } from "@/components/shared/chat/ModelSelect";
 import { SystemPrompt } from "@/components/shared/chat/SystemPrompt";
 import { TemperatureSlider } from "@/components/shared/chat/Temperature";
 import HomeContext from "@/components/shared/home/HomeContext";
-import Spinner from "@/components/shared/Spinner";
 import { ChatBody, Conversation, Message } from "@/types/Chat";
 import { Plugin } from "@/types/Plugin";
 import { getEndpoint } from "@/utils/app/api";
@@ -399,7 +399,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                   <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
                     {models.length === 0 ? (
                       <div>
-                        <Spinner size="16px" className="mx-auto" />
+                        <BaseSpinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
                       "Chatbot UI"
@@ -489,6 +489,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 handleSend(currentMessage, 2, null);
               }
             }}
+            onScrollDownClick={handleScrollDown}
+            showScrollDownButton={showScrollDownButton}
           />
         </>
       )}

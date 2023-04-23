@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
+import { appWithTranslation } from "next-i18next";
 import { ErrorBoundary } from "react-error-boundary";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
@@ -28,12 +29,7 @@ interface CustomAppProps extends AppProps {
   Component: Page;
 }
 
-export default function App({
-  Component,
-  pageProps,
-  router,
-  err,
-}: CustomAppProps) {
+function App({ Component, pageProps, router, err }: CustomAppProps) {
   const [errorInfo, setErrorInfo] = useState<React.ErrorInfo | null>(null);
 
   const handleOnError = (error: Error, info: React.ErrorInfo) => {
@@ -49,24 +45,12 @@ export default function App({
     dispatch,
   } = authContextValue;
 
-  const handleLogin = () => {
-    // TODO: Implement Login
-
-    dispatch({ field: "isAuthenticated", value: true });
-
-    dispatch({ field: "loading", value: false });
-  };
-
   const handleLogout = () => {
     // TODO: Implement Logout
 
     dispatch({ field: "isAuthenticated", value: false });
 
     dispatch({ field: "loading", value: false });
-  };
-
-  const handleRegistration = () => {
-    // TODO: Implement Registration
   };
 
   const queryClient = new QueryClient();
@@ -88,9 +72,7 @@ export default function App({
     <AuthContext.Provider
       value={{
         ...authContextValue,
-        handleLogin,
         handleLogout,
-        handleRegistration,
       }}
     >
       <div className={inter.className}>
@@ -117,3 +99,5 @@ export default function App({
     </AuthContext.Provider>
   );
 }
+
+export default appWithTranslation(App);

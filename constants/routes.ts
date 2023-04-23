@@ -5,14 +5,14 @@ export interface Route {
 
 export enum RoutePath {
   HOME = "/",
-  SIGN_IN = "/signin",
+  LOGIN = "/login",
   SIGN_UP = "/signup",
   CREATE_ACCOUNT = "/signup/create-account",
 }
 
 export const Routes = {
   HOME: { path: RoutePath.HOME, as: "/" },
-  SIGN_IN: { path: RoutePath.SIGN_IN, as: "/signin" },
+  LOGIN: { path: RoutePath.LOGIN, as: "/login" },
   SIGN_UP: { path: RoutePath.SIGN_UP, as: "/signup" },
   CREATE_ACCOUNT: {
     path: RoutePath.CREATE_ACCOUNT,

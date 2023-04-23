@@ -61,7 +61,7 @@ const Signup = () => {
 
         <label className="text-xl">
           {t("Already have account?")}{" "}
-          <Link href={Routes.SIGN_IN.path}>
+          <Link href={Routes.LOGIN.path}>
             <span className="text-custom-blue">{t("Sign in")}</span>
           </Link>
         </label>

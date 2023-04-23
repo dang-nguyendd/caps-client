@@ -7,7 +7,7 @@ export const API_BASE_URL = "http://localhost:8000";
 // AUTH MODULE
 export const AUTH_ROUTES = {
   SIGNUP: `${API_BASE_URL}/auth/signup`,
-  SIGNIN: `${API_BASE_URL}/auth/signin`,
+  LOGIN: `${API_BASE_URL}/auth/login`,
 };
 
 // Create axios instance with default headers and interceptor
@@ -25,7 +25,7 @@ export const createAxiosInstance = (): AxiosInstance => {
     (error: AxiosError) => {
       if (error.response?.status === HttpResponse.WRONG_CREDENTIAL) {
         // Handle unauthorized error
-        // For example, redirect to signin page
+        // For example, redirect to login page
       }
       return Promise.reject(error);
     }

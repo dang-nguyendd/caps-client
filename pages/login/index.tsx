@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from "react";
 
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -13,24 +12,27 @@ import { AUTH_ROUTES, createAxiosInstance } from "@/constants/api";
 import { Routes } from "@/constants/routes";
 import { HttpResponse } from "@/types/enum/HttpResponse";
 
-const Signin = () => {
-  const { t } = useTranslation("signin");
+const Login = () => {
+  const { t } = useTranslation("login");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const axiosInstance = createAxiosInstance();
 
-  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
 
     try {
       const formData = new FormData(event.currentTarget);
-      const response = await axiosInstance.post(AUTH_ROUTES.SIGNIN, {
+      const response = await axiosInstance.post(AUTH_ROUTES.LOGIN, {
         email: formData.get("email"),
         password: formData.get("password"),
       });
 
-      if (response.status === 200 || response.status === 201) {
+      if (
+        response.status === HttpResponse.OK ||
+        response.status === HttpResponse.CREATED
+      ) {
         toast.success(`Signed in successfully!`, { theme: "dark" });
         await router.push(Routes.HOME.path);
       }
@@ -43,7 +45,7 @@ const Signin = () => {
           theme: "dark",
         });
       } else {
-        toast.error(`Error signing in: ${error}`, { theme: "dark" });
+        toast.error(`Error loging in: ${error}`, { theme: "dark" });
       }
     } finally {
       setIsLoading(false);
@@ -56,7 +58,7 @@ const Signin = () => {
         <h1 className="mb-12 text-2xl font-bold text-black text-center">
           {t("Sign in to Chat")}
         </h1>
-        <form onSubmit={handleSignIn}>
+        <form onSubmit={handleLogin}>
           <BaseInputField
             inputLabel={t("Email")}
             inputFor="email"
@@ -92,16 +94,16 @@ const Signin = () => {
   );
 };
 
-Signin.getLayout = function noLayout(page: ReactElement) {
+Login.getLayout = function noLayout(page: ReactElement) {
   return page;
 };
 
-export default Signin;
+export default Login;
 
 export async function getServerSideProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["signin"])),
+      ...(await serverSideTranslations(locale, ["login"])),
     },
   };
 }

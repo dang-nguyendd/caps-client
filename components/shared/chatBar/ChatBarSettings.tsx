@@ -20,9 +20,13 @@ import { Import } from "@/components/shared/settings/Import";
 import UserSettingsModal from "@/components/shared/settings/UserSettingsModal";
 import { SideBarButton } from "@/components/shared/SideBarButton";
 import { Language } from "@/types/enum/Language";
+import { Routes } from "@/constants/routes";
+import Link from "next/link";
 
 export const ChatBarSettings = () => {
   const router = useRouter();
+  const { lang } = router.query;
+
   const { t } = useTranslation("sidebar");
 
   const {
@@ -45,16 +49,13 @@ export const ChatBarSettings = () => {
 
   const {
     state: { isAuthenticated },
-    handleLogin,
     handleLogout,
   } = useContext(AuthContext);
 
-  const switchLanguage = (selectedLanguage: Language) => {
-    const { locale } = router;
-    const newLocale = selectedLanguage.toLowerCase();
-    if (locale !== newLocale) {
-      router.push("/", "/", { locale: newLocale });
-    }
+  const handleLanguageChange = (selectedLanguage: Language) => {
+    const locale = selectedLanguage === Language.ENGLISH ? "en" : "vi";
+
+    router.push(router.pathname, router.asPath, { locale });
   };
 
   return (
@@ -104,7 +105,7 @@ export const ChatBarSettings = () => {
           })
         }
         onChangeLanguage={(language) => {
-          switchLanguage(language);
+          handleLanguageChange(language);
         }}
       />
 
@@ -113,11 +114,9 @@ export const ChatBarSettings = () => {
       ) : null}
 
       {!isAuthenticated ? (
-        <SideBarButton
-          text={t("Log in")}
-          icon={<IconLogin size={18} />}
-          onClick={() => handleLogin()}
-        />
+        <Link href={Routes.LOGIN.path}>
+          <SideBarButton text={t("Log in")} icon={<IconLogin size={18} />} />
+        </Link>
       ) : (
         <SideBarButton
           text={t("Log out")}

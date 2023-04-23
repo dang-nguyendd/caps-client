@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import { IconX } from "@tabler/icons-react";
 
@@ -15,9 +15,29 @@ const UserSettingsModal: React.FC<ModalProps> = ({
   onClose,
   onChangeLanguage,
 }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
   const handleLanguageChange = (language: Language) => {
     onChangeLanguage(language);
   };
+
+  const handleCloseModal = (e: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleCloseModal);
+    } else {
+      document.removeEventListener("mousedown", handleCloseModal);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleCloseModal);
+    };
+  }, [isOpen]);
 
   return (
     <div
@@ -38,6 +58,7 @@ const UserSettingsModal: React.FC<ModalProps> = ({
         </span>
 
         <div
+          ref={modalRef}
           className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
           role="dialog"
           aria-modal="true"
@@ -48,7 +69,7 @@ const UserSettingsModal: React.FC<ModalProps> = ({
               <h3 className="text-lg leading-6 font-medium text-gray-900">
                 Settings
               </h3>
-              <IconX onClick={onClose} />
+              <IconX onClick={onClose} size={18} />
             </div>
           </div>
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">

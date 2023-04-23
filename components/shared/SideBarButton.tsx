@@ -3,7 +3,7 @@ import { FC } from "react";
 interface Props {
   text: string;
   icon: JSX.Element;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const SideBarButton: FC<Props> = ({ text, icon, onClick }) => {

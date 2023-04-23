@@ -41,7 +41,9 @@
     "react-query": "^3.39.3",
     "react-syntax-highlighter": "^15.5.0",
     "react-toastify": "^9.1.2",
+    "rehype-mathjax": "^4.0.2",
     "remark-gfm": "^3.0.1",
+    "remark-math": "^5.1.1",
     "typescript": "5.0.4",
     "uuid": "^9.0.0",
     "yup": "^1.1.1"

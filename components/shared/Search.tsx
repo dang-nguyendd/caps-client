@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { IconSearch, IconX } from '@tabler/icons-react';
+import { IconSearch, IconX } from "@tabler/icons-react";
 import { useTranslation } from "next-i18next";
 
 interface Props {
@@ -39,7 +39,7 @@ const Search: FC<Props> = ({
       <input
         className="w-full flex-1 text-ellipsis rounded-md border border-neutral-600 bg-[#202123] px-4 py-3 pr-10 text-[14px] leading-3 text-white"
         type="text"
-        placeholder={t(placeholder) || ''}
+        placeholder={t(placeholder) || ""}
         value={searchTerm}
         onChange={handleSearchChange}
         onFocus={onFocus}

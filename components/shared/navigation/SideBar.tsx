@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 import { IconFolderPlus, IconMistOff, IconPlus } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
@@ -54,6 +54,12 @@ const SideBar = <T,>({
     e.target.style.background = "none";
   };
 
+  const [showChatBarIcons, setShowChatBarIcons] = useState<boolean>(true);
+
+  const toggleChatBarIcons = () => {
+    setShowChatBarIcons(!showChatBarIcons);
+  };
+
   return isOpen ? (
     <div>
       <div
@@ -82,6 +88,8 @@ const SideBar = <T,>({
           placeholder={t("Search prompts...") || ""}
           searchTerm={searchTerm}
           onSearch={handleSearchTerm}
+          onFocus={toggleChatBarIcons}
+          onBlur={toggleChatBarIcons}
         />
 
         <div className="flex-grow overflow-auto">

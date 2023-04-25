@@ -17,13 +17,13 @@ interface LoginButton {
   children: any;
   label: string;
   backgroundColor?: string;
-  handleButtonClick?: (e: any) => void
+  handleButtonClick?: (e: any) => void;
 }
 
 const handleOauthSignUp = (e: any) => {
-  e.preventDefault()
-  signIn()
-}
+  e.preventDefault();
+  signIn();
+};
 
 const Signup = () => {
   const { t } = useTranslation("signup");

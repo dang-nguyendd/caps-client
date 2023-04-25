@@ -8,7 +8,12 @@ import {
   useState,
 } from "react";
 
-import { IconClearAll, IconSettings } from "@tabler/icons-react";
+import {
+  IconClearAll,
+  IconSettings,
+  IconVolume,
+  IconVolumeOff,
+} from '@tabler/icons-react';
 import { useTranslation } from "next-i18next";
 import { toast } from "react-toastify";
 
@@ -312,6 +317,60 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   //   }
   // }, [currentMessage]);
 
+  const [isAudioEnabled, setIsAudioEnabled] = useState(false);
+  const [lastSpokenIndex, setLastSpokenIndex] = useState(-1);
+  const [messageBuffer, setMessageBuffer] = useState('');
+
+  const speak = useCallback((message: any) => {
+    if (!("speechSynthesis" in window)) {
+      alert(
+        "Text-to-speech not supported in this browser. Please try another browser."
+      );
+      return;
+    }
+    const utterance = new SpeechSynthesisUtterance(message.content);
+    utterance.lang = "en-US";
+    speechSynthesis.speak(utterance);
+    setLastSpokenIndex(message.index);
+  }, []);
+
+  const toggleAudio = () => {
+    if (!isAudioEnabled) {
+      setIsAudioEnabled(true);
+    } else {
+      speechSynthesis.cancel();
+    }
+    setIsAudioEnabled(!isAudioEnabled);
+  };
+
+  useEffect(() => {
+    if (isAudioEnabled && selectedConversation) {
+      const messages = selectedConversation.messages;
+      const lastMessage = messages[messages.length - 1];
+
+      if (lastMessage.role === 'assistant' && messages.length - 1 !== lastSpokenIndex) {
+        if (messageIsStreaming) {
+          setMessageBuffer(lastMessage.content);
+        } else {
+          setTimeout(() => {
+            speak({ content: messageBuffer, index: messages.length - 1 });
+            setMessageBuffer('');
+          }, 1000);
+        }
+      }
+    }
+  }, [selectedConversation, isAudioEnabled, lastSpokenIndex, speak, messageIsStreaming]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: any) => {
+      speechSynthesis.cancel(); // Cancel any ongoing speech synthesis
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   useEffect(() => {
     throttledScrollDown();
     selectedConversation &&
@@ -450,6 +509,16 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     onClick={onClearAll}
                   >
                     <IconClearAll size={18} />
+                  </button>
+                  <button
+                    className="ml-2 cursor-pointer hover:opacity-50"
+                    onClick={toggleAudio}
+                  >
+                    {isAudioEnabled ? (
+                      <IconVolume size={18} />
+                    ) : (
+                      <IconVolumeOff size={18} />
+                    )}
                   </button>
                 </div>
                 {showSettings && (

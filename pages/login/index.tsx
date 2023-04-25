@@ -8,15 +8,15 @@ import { toast } from "react-toastify";
 
 import BaseButton from "@/components/shared/base/BaseButton";
 import BaseInputField from "@/components/shared/base/BaseInputField";
-import { AUTH_ROUTES, createAxiosInstance } from "@/constants/api";
+import { AUTH_ROUTES } from "@/constants/api";
 import { Routes } from "@/constants/routes";
 import { HttpResponse } from "@/types/enum/HttpResponse";
+import axiosInstance from "@/utils/axios";
 
 const Login = () => {
   const { t } = useTranslation("login");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-  const axiosInstance = createAxiosInstance();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -13,7 +13,7 @@ import {
   IconSettings,
   IconVolume,
   IconVolumeOff,
-} from '@tabler/icons-react';
+} from "@tabler/icons-react";
 import { useTranslation } from "next-i18next";
 import { toast } from "react-toastify";
 
@@ -319,7 +319,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
 
   const [isAudioEnabled, setIsAudioEnabled] = useState(false);
   const [lastSpokenIndex, setLastSpokenIndex] = useState(-1);
-  const [messageBuffer, setMessageBuffer] = useState('');
+  const [messageBuffer, setMessageBuffer] = useState("");
 
   const speak = useCallback((message: any) => {
     if (!("speechSynthesis" in window)) {
@@ -348,26 +348,35 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       const messages = selectedConversation.messages;
       const lastMessage = messages[messages.length - 1];
 
-      if (lastMessage.role === 'assistant' && messages.length - 1 !== lastSpokenIndex) {
+      if (
+        lastMessage.role === "assistant" &&
+        messages.length - 1 !== lastSpokenIndex
+      ) {
         if (messageIsStreaming) {
           setMessageBuffer(lastMessage.content);
         } else {
           setTimeout(() => {
             speak({ content: messageBuffer, index: messages.length - 1 });
-            setMessageBuffer('');
+            setMessageBuffer("");
           }, 1000);
         }
       }
     }
-  }, [selectedConversation, isAudioEnabled, lastSpokenIndex, speak, messageIsStreaming]);
+  }, [
+    selectedConversation,
+    isAudioEnabled,
+    lastSpokenIndex,
+    speak,
+    messageIsStreaming,
+  ]);
 
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
       speechSynthesis.cancel(); // Cancel any ongoing speech synthesis
     };
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
 

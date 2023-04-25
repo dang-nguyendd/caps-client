@@ -190,6 +190,7 @@ const Home = ({
       prompt: DEFAULT_SYSTEM_PROMPT,
       temperature: DEFAULT_TEMPERATURE,
       folderId: null,
+      time: new Date().getTime(),
     };
 
     const updatedConversations = [...conversations, newConversation];
@@ -329,6 +330,7 @@ const Home = ({
           prompt: DEFAULT_SYSTEM_PROMPT,
           temperature: DEFAULT_TEMPERATURE,
           folderId: null,
+          time: new Date().getTime(),
         },
       });
     }

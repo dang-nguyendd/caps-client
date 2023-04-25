@@ -9,6 +9,9 @@ import { OpenAIError, OpenAIStream } from "@/utils/server";
 // @ts-expect-error
 import wasm from "../../node_modules/@dqbd/tiktoken/lite/tiktoken_bg.wasm?module";
 
+const COMPLETION_TOKEN_LIMIT = 1000;
+const TOKENIZER_BUFFER_FACTOR = 0.9; // Set a buffer of 10% to account for any discrepancies in token counting
+
 export const config = {
   runtime: "edge",
 };
@@ -44,7 +47,10 @@ const handler = async (req: Request): Promise<Response> => {
       const message = messages[i];
       const tokens = encoding.encode(message.content);
 
-      if (tokenCount + tokens.length + 1000 > model.tokenLimit) {
+      if (
+        tokenCount + tokens.length + COMPLETION_TOKEN_LIMIT >
+        model.tokenLimit * TOKENIZER_BUFFER_FACTOR
+      ) {
         break;
       }
       tokenCount += tokens.length;

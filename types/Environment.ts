@@ -4,4 +4,12 @@ export interface ProcessEnv {
   OPENAI_API_TYPE?: "openai" | "azure";
   OPENAI_API_VERSION?: string;
   OPENAI_ORGANIZATION?: string;
+  TWITTER_CLIENT_ID?: string;
+  TWITTER_CLIENT_SECRET?: string;
+  FACEBOOK_CLIENT_ID?: string;
+  FACEBOOK_CLIENT_SECRET?: string;
+  GOOGLE_CLIENT_ID?: string;
+  GOOGLE_CLIENT_SECRET?: string;
+  NEXTAUTH_ENABLED: "true" | "false";
+  NEXTAUTH_EMAIL_PATTERN?: string;
 }

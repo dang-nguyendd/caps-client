@@ -6,6 +6,7 @@ import {
   IconBrandTwitter,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -16,6 +17,12 @@ interface LoginButton {
   children: any;
   label: string;
   backgroundColor?: string;
+  handleButtonClick?: (e: any) => void
+}
+
+const handleOauthSignUp = (e: any) => {
+  e.preventDefault()
+  signIn()
 }
 
 const Signup = () => {
@@ -28,19 +35,24 @@ const Signup = () => {
           {t("Join chat")}
         </h2>
 
-        <SignupButton label={t("Sign in with Facebook")}>
+        <SignupButton
+          label={t("Sign up with Facebook")}
+          handleButtonClick={handleOauthSignUp}
+        >
           <IconBrandFacebook className="w-4 h-4" />
         </SignupButton>
 
         <SignupButton
-          label={t("Sign in with Google")}
+          label={t("Sign up with Google")}
+          handleButtonClick={handleOauthSignUp}
           backgroundColor="#ea4335"
         >
           <IconBrandGoogle className="w-4 h-4" />
         </SignupButton>
 
         <SignupButton
-          label={t("Sign in with Twitter")}
+          label={t("Sign up with Twitter")}
+          handleButtonClick={handleOauthSignUp}
           backgroundColor="#0077b5"
         >
           <IconBrandTwitter className="w-4 h-4" />
@@ -76,6 +88,7 @@ const SignupButton = ({
   children,
   label,
   backgroundColor = "#1877f2",
+  handleButtonClick,
 }: LoginButton) => {
   return (
     <div
@@ -88,6 +101,7 @@ const SignupButton = ({
         data-te-ripple-color="light"
         className="inline-block px-2 py-2 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
         style={{ backgroundColor: backgroundColor, borderRadius: "50%" }}
+        onClick={handleButtonClick}
       >
         {children}
       </button>

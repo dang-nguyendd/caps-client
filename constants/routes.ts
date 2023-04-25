@@ -1,3 +1,5 @@
+export const CLIENT_BASE_URL = "http://localhost:3000";
+
 export interface Route {
   path: string;
   as: string;

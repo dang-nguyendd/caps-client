@@ -1,7 +1,8 @@
 import OutlineButton from "@/core/outline-button";
+import withAuth from "@/hoc/withLogin";
 import { showToast } from "@/utils/app";
 
-export default function Home() {
+const Home = () => {
   const _handleClick = () => {
     showToast("success", "hi name is bap");
   };
@@ -11,4 +12,6 @@ export default function Home() {
       <OutlineButton> 12323321</OutlineButton>
     </main>
   );
-}
+};
+
+export default withAuth(Home);

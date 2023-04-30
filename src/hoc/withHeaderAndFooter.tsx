@@ -19,4 +19,6 @@ const withLayout = <P extends object>(
   };
 };
 
+withLayout.displayName = "withLayout";
+
 export default withLayout;

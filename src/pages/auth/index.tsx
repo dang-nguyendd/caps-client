@@ -6,4 +6,6 @@ const Component = React.memo(() => {
   return <Login />;
 });
 
+Component.displayName = "Auth";
+
 export default Component;

@@ -18,4 +18,6 @@ const Component = React.memo(() => {
   );
 });
 
+Component.displayName = "ToastContainer";
+
 export default Component;

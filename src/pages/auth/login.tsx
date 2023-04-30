@@ -12,4 +12,6 @@ const Component = React.memo(() => {
   );
 });
 
+Component.displayName = "Login";
+
 export default withLayout(Component);

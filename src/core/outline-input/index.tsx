@@ -23,4 +23,6 @@ const Component = React.memo((props: IOutlineInputProps) => {
   );
 });
 
+Component.displayName = "OutlineInput";
+
 export default Component;

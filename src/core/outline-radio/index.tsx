@@ -54,4 +54,6 @@ const Component = React.memo((props: IOutlineRadioProps) => {
   );
 });
 
+Component.displayName = "OutlineRadio";
+
 export default Component;

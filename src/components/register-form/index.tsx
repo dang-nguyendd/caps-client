@@ -107,4 +107,6 @@ const Component = React.memo(() => {
   );
 });
 
+Component.displayName = "RegisterForm";
+
 export default Component;

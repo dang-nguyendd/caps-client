@@ -62,4 +62,6 @@ const Component = React.memo(() => {
   );
 });
 
+Component.displayName = "LoginForm";
+
 export default Component;

@@ -11,4 +11,5 @@ const Component = React.memo(() => {
   );
 });
 
+Component.displayName = "Register";
 export default withLayout(Component);

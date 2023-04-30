@@ -27,4 +27,5 @@ const Component = React.memo((props: IOutlineButtonProps) => {
   );
 });
 
+Component.displayName = "OutlineButton";
 export default Component;

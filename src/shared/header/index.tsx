@@ -12,4 +12,6 @@ const Component = React.memo(() => {
   );
 });
 
+Component.displayName = "Header";
+
 export default Component;

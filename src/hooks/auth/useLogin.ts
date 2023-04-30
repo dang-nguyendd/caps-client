@@ -1,35 +1,29 @@
 import { useState, useEffect } from 'react';
-import axios from "../../axios";
-interface LoginData {
-    username: string;
-    password: string;
-}
+import {AuthService} from "@/services/auth";
+import {AuthNS} from "@/services/auth/type";
+
 
 type LoginResult = {
     data: any;
     isLoading: boolean;
+    login: (x: AuthNS.LoginRequest) => void;
 };
 
-const useLogin = (authData: LoginData | null) => {
-    const [data, setData] = useState<any>(null);
+const useLogin = () => {
+    const [data, setData] = useState<AuthNS.LoginResponse | null>(null);
     const [isLoading, setLoading] = useState<boolean>(false);
 
-    const login = async () => {
+    const login = async (authData: AuthNS.LoginRequest) => {
         if (!authData) return;
         setLoading(true)
-        const response = await axios.post('/auth/login', authData)
-        if (response){
-            setLoading(false)
-        }
-        const data = response.data.json()
-        setData(data);
+        const response: Promise<AuthNS.LoginResponse> = await AuthService.login(authData)
+        setLoading(false)
+        setData(response);
+        console.log(response)
     }
 
-    useEffect(() => {
-        login()
-    }, [authData]);
 
-    return { data, isLoading } as LoginResult;
+    return { data, isLoading, login } as LoginResult;
 };
 
 export default useLogin;

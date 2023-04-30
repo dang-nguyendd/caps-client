@@ -1,8 +1,10 @@
 export interface IOutlineInputProps {
-    onChange?: (x: string, extension?: FormExtension | null) => void;
+    onChange?: (x: string, extension?: FormExtension) => void;
     value: string;
     disable?: boolean;
-    placeHolder: string
+    placeHolder: string;
+    dataKey?: string;
+    type?: string
 }
 
 export type FormExtension = {

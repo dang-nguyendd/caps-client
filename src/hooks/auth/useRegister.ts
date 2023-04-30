@@ -21,7 +21,7 @@ const useRegister = (authData: RegisterData | null) => {
         if (response){
             setLoading(false)
         }
-        const data = response.data.json()
+        const data = response.data
         setData(data);
     }
 

@@ -1,10 +1,12 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
 import { HttpResponse } from "@/types/enum/HttpResponse";
-import { showToast } from "@/utils/app";
+import { showToast } from "@/utils/toast";
+
+export const API_BASE_URL = "http://localhost:3003";
 
 const api: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3003",
+  baseURL: API_BASE_URL,
 });
 
 api.interceptors.response.use(

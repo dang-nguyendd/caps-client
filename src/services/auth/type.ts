@@ -4,6 +4,11 @@ export namespace AuthNS {
     password: string;
   };
 
+  export type LoginResponse = {
+    access_token: string;
+    refresh_token: string;
+  };
+
   export type RegisterRequest = {
     name: string;
     email: string;
@@ -13,8 +18,12 @@ export namespace AuthNS {
     confirmPassword: string;
   };
 
-  export type LoginResponse = {
-    access_token: string;
-    refresh_token: string;
+  export type RegisterResponse = {
+    id: number;
+    email: string;
+    name: string;
+    dob: string;
+    gender: string;
+    createdAt: string;
   };
 }

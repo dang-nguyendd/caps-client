@@ -1,14 +1,23 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: true,
   theme: {
     extend: {
       backgroundColor: {
-        primary: "#f97316",
-        white: "#ffffff",
+        orange: "#E18204",
+        "darker-blue": "#44687E",
+        grey: "#475D78",
+        yellow: "#F5CE48",
+        blue: "#002248",
+        black: "#18181D",
+        white: "#FFFFFF",
+        red: "#Ef4444",
+        green: "#10B981",
+        button: "#",
+        "hover-button": "#",
       },
       textColor: {
-        black: "#000000",
+        black: "#18181D",
       },
     },
   },

@@ -2,10 +2,10 @@ import { useState } from "react";
 
 import axios from "@/axios";
 import { AuthNS } from "@/services/auth/type";
-import { showToast } from "@/utils/app";
+import { showToast } from "@/utils/toast";
 
 type RegisterResult = {
-  data: any;
+  data: AuthNS.RegisterResponse;
   register: (x: AuthNS.RegisterRequest) => void;
   isLoading: boolean;
 };

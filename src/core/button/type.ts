@@ -1,9 +1,10 @@
 import React, { ReactNode } from "react";
 
-export interface IOutlineButtonProps {
-  mode?: "save" | "default";
+export interface IButtonProps {
+  mode?: "primary" | "secondary";
   icon?: ReactNode;
   size?: "s" | "m" | "l";
+  isLoading?: boolean;
   disabled?: boolean;
   children: ReactNode;
   onClick?: () => void;

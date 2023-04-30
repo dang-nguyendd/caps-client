@@ -1,4 +1,4 @@
-import { RadioOption, RadioOptions } from "@/core/outline-radio/type";
+import { RadioOption, RadioOptions } from "@/core/radio/type";
 
 export const GenderOptions: RadioOptions = [
   { label: "Male", value: "male" },

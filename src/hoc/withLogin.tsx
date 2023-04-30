@@ -13,7 +13,7 @@ export default function withAuth<P extends object>(
 
     React.useEffect(() => {
       if (!user) {
-        router.replace("/login");
+        router.replace("/auth/login");
       }
     }, [user, router]);
 

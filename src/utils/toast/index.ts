@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-import { MessageTypes } from "@/utils/type";
+import { MessageTypes } from "@/utils/toast/type";
 
 export const showToast = (messageType: MessageTypes, message: string) => {
   switch (messageType) {

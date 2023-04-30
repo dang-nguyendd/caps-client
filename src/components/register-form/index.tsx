@@ -9,11 +9,11 @@ import {
   GenderOptions,
 } from "@/components/register-form/constant";
 import { DefaultRegisterForm } from "@/constant/auth-page";
-import OutlineButton from "@/core/outline-button";
-import OutlineInput from "@/core/outline-input";
-import { FormExtension } from "@/core/outline-input/type";
-import OutlineRadio from "@/core/outline-radio";
-import { RadioOption } from "@/core/outline-radio/type";
+import Button from "@/core/button";
+import Input from "@/core/input";
+import { FormExtension } from "@/core/input/type";
+import Radio from "@/core/radio";
+import { RadioOption } from "@/core/radio/type";
 import useRegister from "@/hooks/auth/useRegister";
 
 const Component = React.memo(() => {
@@ -62,37 +62,44 @@ const Component = React.memo(() => {
 
   return (
     <div className="flex flex-col w-1/5 gap-1">
-      <div className="text-blue-800 text-center w-full">
-        {" "}
-        Example Register Form
-      </div>
-      <OutlineInput
+      <div className="text-blue-800 text-center w-full">Register</div>
+      <Input
+        label="Full name"
+        type="text"
         value={form.name}
+        name="fullName"
         placeHolder={"Full Name"}
         dataKey="name"
         onChange={_onInputChange}
       />
-      <OutlineInput
+      <Input
+        label="email"
+        type="text"
+        name="email"
         value={form.email}
         placeHolder={"email"}
         dataKey="email"
         onChange={_onInputChange}
       />
-      <OutlineInput
+      <Input
+        label="Password"
         type="password"
+        name="password"
         value={form.password}
         placeHolder={"Password"}
         dataKey="password"
         onChange={_onInputChange}
       />
-      <OutlineInput
+      <Input
+        label="Confirm password"
         type="password"
+        name="confirmPassword"
         value={form.confirmPassword}
         placeHolder={"Confirm your password"}
         dataKey="confirmPassword"
         onChange={_onInputChange}
       />
-      <OutlineRadio
+      <Radio
         onChange={_onChangeRadioOption}
         dataKey="gender"
         selectedOption={selectedGender}
@@ -102,7 +109,7 @@ const Component = React.memo(() => {
       <Link href={"/auth"}>
         <p className="text-blue-800 text-center w-full"> Go to login</p>
       </Link>
-      <OutlineButton onClick={_handleSubmit}> Register </OutlineButton>
+      <Button onClick={_handleSubmit}> Register </Button>
     </div>
   );
 });

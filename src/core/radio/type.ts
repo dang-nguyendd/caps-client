@@ -1,4 +1,4 @@
-export type IOutlineRadioProps = {
+export type IRadioProps = {
   onChange: (x: RadioOption, extension?: FormExtension) => void;
   selectedOption: RadioOption;
   options: RadioOptions;

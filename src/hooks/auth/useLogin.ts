@@ -4,10 +4,10 @@ import { AuthService } from "@/services/auth";
 import { AuthNS } from "@/services/auth/type";
 import { LocalStorageService } from "@/services/local-storage";
 import { LocalStorageKeys } from "@/services/local-storage/constant";
-import { showToast } from "@/utils/app";
+import { showToast } from "@/utils/toast";
 
 type LoginResult = {
-  data: any;
+  data: AuthNS.LoginResponse;
   isLoading: boolean;
   login: (x: AuthNS.LoginRequest) => void;
 };

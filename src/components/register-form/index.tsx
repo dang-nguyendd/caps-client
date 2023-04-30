@@ -14,7 +14,7 @@ import {RadioOption} from "@/core/outline-radio/type";
 const Component = React.memo(() => {
     const [form, setForm] = useImmer(DefaultRegisterForm);
     const [selectedGender, setSelectedGender] = useImmer<RadioOption>(DefaultGenderOption)
-    const {register, data, isLoading} = useRegister()
+    const {register} = useRegister()
 
     const _onInputChange = (value: string, extension?: FormExtension) => {
         const {dataKey} = extension!;
@@ -37,7 +37,7 @@ const Component = React.memo(() => {
 
     const _handleSubmit = () => {
         register(form);
-        setForm(DefaultRegisterForm);
+        // setForm(DefaultRegisterForm);
     }
 
     const _onChangeRadioOption = (option: RadioOption, extension?: FormExtension) => {
@@ -53,17 +53,18 @@ const Component = React.memo(() => {
 
     return <div className='flex flex-col w-1/5 gap-1'>
         <div className='text-blue-800 text-center w-full'> Example Register Form</div>
+        <OutlineInput value={form.name} placeHolder={'Full Name'} dataKey='name' onChange={_onInputChange}/>
         <OutlineInput value={form.email} placeHolder={'email'} dataKey='email' onChange={_onInputChange}/>
         <OutlineInput type='password' value={form.password} placeHolder={'Password'} dataKey='password'
                       onChange={_onInputChange}/>
-        <OutlineInput type='password' value={form.password} placeHolder={'Confirm your password'}
+        <OutlineInput type='password' value={form.confirmPassword} placeHolder={'Confirm your password'}
                       dataKey='confirmPassword' onChange={_onInputChange}/>
         <OutlineRadio onChange={_onChangeRadioOption} dataKey='gender' selectedOption={selectedGender}
                       options={GenderOptions} title='Gender'/>
         <Link href={'/auth'}>
             <p className='text-blue-800 text-center w-full'> Go to login</p>
         </Link>
-        <OutlineButton onClick={_handleSubmit}> Submit </OutlineButton>
+        <OutlineButton onClick={_handleSubmit}> Register </OutlineButton>
     </div>
 })
 

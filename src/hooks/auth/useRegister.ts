@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from "../../axios";
 import {AuthNS} from "@/services/auth/type";
+import {showToast} from "@/utils/app";
 
 type RegisterResult = {
     data: any;
@@ -18,6 +19,8 @@ const useRegister = () => {
         const response = await axios.post('/auth/register', authData)
         if (response){
             setLoading(false)
+            showToast('success', 'Register successfully!')
+
         }
         const data = response.data
         setData(data);

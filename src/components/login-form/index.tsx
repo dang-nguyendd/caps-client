@@ -41,7 +41,7 @@ const Component = React.memo(() => {
         <Link href={'/auth/register'}>
             <p className='text-blue-800 text-center w-full'> Go to register</p>
         </Link>
-        <OutlineButton onClick={_handleSubmit}> Submit </OutlineButton>
+        <OutlineButton onClick={_handleSubmit}> Login </OutlineButton>
     </div>
 })
 

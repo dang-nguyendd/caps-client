@@ -3,6 +3,7 @@ import {AuthService} from "@/services/auth";
 import {AuthNS} from "@/services/auth/type";
 import {LocalStorageService} from "@/services/local-storage";
 import {LocalStorageKeys} from "@/services/local-storage/constant";
+import {showToast} from "@/utils/app";
 
 
 type LoginResult = {
@@ -21,7 +22,7 @@ const useLogin = () => {
         const response: AuthNS.LoginResponse = await AuthService.login(authData)
         setLoading(false)
         setData(response);
-        console.log(response)
+        showToast('success', 'Login successfully!')
         LocalStorageService.getInstance().setItem(LocalStorageKeys.access_token, response.access_token)
         LocalStorageService.getInstance().setItem(LocalStorageKeys.refresh_token, response.refresh_token)
     }

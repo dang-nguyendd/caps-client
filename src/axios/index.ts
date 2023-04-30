@@ -12,24 +12,25 @@ api.interceptors.response.use(
     (error: AxiosError) => {
         if (error.response) {
             const { status, data } = error.response;
+            const {message} = data as AxiosError
             switch (status) {
                 case 400:
-                    showToast('error', `Bad Request`);
+                    showToast('error', `Bad Request: ${message}`);
                     break;
                 case 401:
-                    showToast('error', `Unauthorized`);
+                    showToast('error', `Unauthorized: ${message}`);
                     break;
                 case 403:
-                    showToast('error', `Forbidden`);
+                    showToast('error', `Forbidden: ${message}`);
                     break;
                 case 404:
-                    showToast('error', `Not Found`);
+                    showToast('error', `Not Found: ${message}`);
                     break;
                 case 500:
-                    showToast('error', `Internal Server Error`);
+                    showToast('error', `Internal Server Error: ${message}`);
                     break;
                 default:
-                    showToast('error', `Error ${status}`);
+                    showToast('error', `Error ${status}: ${message}`);
                     break;
             }
         } else if (error.request) {

@@ -1,4 +1,5 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from "next/document";
+
 import ToastContainer from "@/core/toast-container";
 
 export default function Document() {
@@ -10,5 +11,5 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  )
+  );
 }

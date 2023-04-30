@@ -1,12 +1,14 @@
 import "../styles/globals.scss";
-import type {AppProps} from 'next/app'
+import type { AppProps } from "next/app";
+
 import ToastContainer from "@/core/toast-container";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
-
-export default function App({Component, pageProps}: AppProps) {
-    return <>
-        <Component {...pageProps} />
-        <ToastContainer/>
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Component {...pageProps} />
+      <ToastContainer />
     </>
+  );
 }

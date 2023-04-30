@@ -1,19 +1,19 @@
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  darkMode: false,
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: true,
   theme: {
     extend: {
       backgroundColor: {
-        'primary': '#f97316',
-        'white': '#ffffff',
+        primary: "#f97316",
+        white: "#ffffff",
       },
       textColor: {
-        'black': '#000000',
+        black: "#000000",
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
-}
+  plugins: [require("tailwindcss-animate")],
+};

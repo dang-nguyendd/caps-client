@@ -1,14 +1,17 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import {Inter} from 'next/font/google'
+import {showToast} from "@/utils/app";
+import OutlineButton from "@/core/outline-button";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({subsets: ['latin']})
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-2">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-      <div> Dengue Portal just for example </div>
-      </div>
-    </main>
-  )
+    const _handleClick = () => {
+        showToast('success', 'hi name is bap')
+    }
+    return (
+        <main className="flex min-h-screen flex-col items-center justify-between p-2">
+            qwe2e123s
+            <OutlineButton> 12323321</OutlineButton>
+        </main>
+    )
 }

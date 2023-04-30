@@ -1,13 +1,11 @@
 import React from "react";
-import withLayout from "@/hoc/withHeaderAndFooter";
 import OutlineInput from "@/core/outline-input";
 import {useImmer} from "use-immer";
-import {DefaultLoginForm, DefaultRegisterForm} from "@/constant/auth-page";
+import {DefaultRegisterForm} from "@/constant/auth-page";
 import {FormExtension} from "@/core/outline-input/type";
 import {cloneDeep} from 'lodash'
 import OutlineButton from "@/core/outline-button";
 import Link from "next/link";
-import {Typography} from "@mui/material";
 import useRegister from "@/hooks/auth/useRegister";
 import OutlineRadio from "@/core/outline-radio";
 import {DefaultGenderOption, GenderOptions} from "@/components/register-form/constant";

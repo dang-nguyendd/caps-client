@@ -1,9 +1,8 @@
 import { useState } from "react";
 
+import axios from "@/axios";
 import { AuthNS } from "@/services/auth/type";
 import { showToast } from "@/utils/app";
-
-import axios from "@/axios";
 
 type RegisterResult = {
   data: any;

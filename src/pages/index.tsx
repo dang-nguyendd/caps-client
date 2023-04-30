@@ -1,9 +1,5 @@
-import { Inter } from "next/font/google";
-
 import OutlineButton from "@/core/outline-button";
 import { showToast } from "@/utils/app";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const _handleClick = () => {

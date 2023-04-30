@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
-import { showToast } from "@/utils/app";
 import { HttpResponse } from "@/types/enum/HttpResponse";
+import { showToast } from "@/utils/app";
 
 const api: AxiosInstance = axios.create({
   baseURL: "http://localhost:3003",

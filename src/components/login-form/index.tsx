@@ -5,11 +5,10 @@ import Link from "next/link";
 import { useImmer } from "use-immer";
 
 import { DefaultLoginForm } from "@/constant/auth-page";
+import Button from "@/core/button";
+import Input from "@/core/input";
 import { FormExtension } from "@/core/input/type";
 import useLogin from "@/hooks/auth/useLogin";
-
-import OutlineButton from "../../core/button";
-import OutlineInput from "../../core/input";
 
 const Component = React.memo(() => {
   const [form, setForm] = useImmer(DefaultLoginForm);
@@ -37,7 +36,7 @@ const Component = React.memo(() => {
   return (
     <div className="flex flex-col w-1/5 gap-1">
       <div className="text-blue-800 text-center w-full">Login</div>
-      <OutlineInput
+      <Input
         label="Email"
         type="text"
         name="email"
@@ -46,7 +45,7 @@ const Component = React.memo(() => {
         dataKey="email"
         onChange={_onInputChange}
       />
-      <OutlineInput
+      <Input
         label="Password"
         type="password"
         name="password"
@@ -58,9 +57,9 @@ const Component = React.memo(() => {
       <Link href={"/auth/register"}>
         <p className="text-blue-800 text-center w-full"> Go to register</p>
       </Link>
-      <OutlineButton onClick={_handleSubmit} mode="primary">
+      <Button onClick={_handleSubmit} mode="primary">
         Login
-      </OutlineButton>
+      </Button>
     </div>
   );
 });

@@ -109,7 +109,9 @@ const Component = React.memo(() => {
       <Link href={"/auth"}>
         <p className="text-blue-800 text-center w-full"> Go to login</p>
       </Link>
-      <Button onClick={_handleSubmit}> Register </Button>
+      <Button onClick={_handleSubmit} mode="primary">
+        Register
+      </Button>
     </div>
   );
 });

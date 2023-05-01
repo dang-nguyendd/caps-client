@@ -10,7 +10,7 @@ const withLayout = <P extends object>(
     return (
       <>
         <Header />
-        <main className="container mt-24 px-2 bg-white">
+        <main className="container px-2 bg-white h-screen">
           <WrappedComponent {...props} />
         </main>
         <Footer />

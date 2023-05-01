@@ -29,7 +29,7 @@ const Component = React.memo((props: IButtonProps) => {
   return (
     <button
       disabled={disabled}
-      className={`border border-black border-solid rounded-md w-full text-white ${colorClass} ${sizeClass}`}
+      className={`mb-5 border border-black border-solid rounded-md w-full text-white ${colorClass} ${sizeClass}`}
       onClick={_onClick}
     >
       {children}

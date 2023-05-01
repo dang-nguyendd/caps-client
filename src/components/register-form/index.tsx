@@ -61,23 +61,25 @@ const Component = React.memo(() => {
   };
 
   return (
-    <div className="flex flex-col w-1/5 gap-1">
-      <div className="text-blue-800 text-center w-full">Register</div>
+    <div className="flex flex-col w-2/5 gap-1">
+      <div className="text-blue text-center w-full tracking-normal font-bold text-3xl mb-[40px]">
+        Register
+      </div>
       <Input
         label="Full name"
         type="text"
         value={form.name}
         name="fullName"
-        placeHolder={"Full Name"}
+        placeHolder="full name"
         dataKey="name"
         onChange={_onInputChange}
       />
       <Input
-        label="email"
+        label="Email"
         type="text"
         name="email"
         value={form.email}
-        placeHolder={"email"}
+        placeHolder="email"
         dataKey="email"
         onChange={_onInputChange}
       />
@@ -86,7 +88,7 @@ const Component = React.memo(() => {
         type="password"
         name="password"
         value={form.password}
-        placeHolder={"Password"}
+        placeHolder="password"
         dataKey="password"
         onChange={_onInputChange}
       />
@@ -95,7 +97,7 @@ const Component = React.memo(() => {
         type="password"
         name="confirmPassword"
         value={form.confirmPassword}
-        placeHolder={"Confirm your password"}
+        placeHolder="retype your password"
         dataKey="confirmPassword"
         onChange={_onInputChange}
       />
@@ -106,12 +108,16 @@ const Component = React.memo(() => {
         options={GenderOptions}
         title="Gender"
       />
-      <Link href={"/auth"}>
-        <p className="text-blue-800 text-center w-full"> Go to login</p>
-      </Link>
+
       <Button onClick={_handleSubmit} mode="primary">
         Register
       </Button>
+      <label className="text-xl">
+        Already have account?{" "}
+        <Link href={"/auth/login"}>
+          <span className="text-blue">Sign in</span>
+        </Link>
+      </label>
     </div>
   );
 });

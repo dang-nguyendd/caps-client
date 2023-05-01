@@ -34,8 +34,10 @@ const Component = React.memo(() => {
   };
 
   return (
-    <div className="flex flex-col w-1/5 gap-1">
-      <div className="text-blue-800 text-center w-full">Login</div>
+    <div className="flex flex-col w-2/5 gap-1">
+      <div className="text-blue text-center w-full tracking-normal font-bold text-3xl mb-[40px]">
+        Login
+      </div>
       <Input
         label="Email"
         type="text"
@@ -54,12 +56,16 @@ const Component = React.memo(() => {
         dataKey="password"
         onChange={_onInputChange}
       />
-      <Link href={"/auth/register"}>
-        <p className="text-blue-800 text-center w-full"> Go to register</p>
-      </Link>
+
       <Button onClick={_handleSubmit} mode="primary">
         Login
       </Button>
+      <label className="text-xl">
+        Did not have an account?{" "}
+        <Link href={"/auth/register"}>
+          <span className="text-blue">Register</span>
+        </Link>
+      </label>
     </div>
   );
 });

@@ -21,7 +21,7 @@ const Component = React.memo((props: IInputProps) => {
     }
   };
   return (
-    <div className="space-y-1">
+    <div className="space-y-1 mb-5">
       <label className="text-gray-500 font-medium block mb-2" htmlFor={name}>
         {label}
       </label>

@@ -18,6 +18,7 @@ module.exports = {
       },
       textColor: {
         black: "#18181D",
+        blue: "#002248",
       },
     },
   },

@@ -3,7 +3,7 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      backgroundColor: {
+      colors: {
         orange: "#E18204",
         "darker-blue": "#44687E",
         grey: "#475D78",
@@ -15,10 +15,6 @@ module.exports = {
         green: "#10B981",
         button: "#",
         "hover-button": "#",
-      },
-      textColor: {
-        black: "#18181D",
-        blue: "#002248",
       },
     },
   },

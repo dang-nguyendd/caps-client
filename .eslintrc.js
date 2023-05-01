@@ -8,7 +8,12 @@ module.exports = {
     parser: "@typescript-eslint/parser",
   },
   plugins: ["@typescript-eslint", "prettier"],
-  extends: ["prettier", "next/core-web-vitals", "next"],
+  extends: [
+    "prettier",
+    "plugin:tailwindcss/recommended",
+    "next/core-web-vitals",
+    "next",
+  ],
   rules: {
     "prettier/prettier": [
       "error",

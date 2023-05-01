@@ -61,8 +61,8 @@ const Component = React.memo(() => {
   };
 
   return (
-    <div className="flex flex-col w-2/5 gap-1">
-      <div className="text-blue text-center w-full tracking-normal font-bold text-3xl mb-[40px]">
+    <div className="flex w-2/5 flex-col gap-1">
+      <div className="mb-[40px] w-full text-center text-3xl font-bold tracking-normal text-blue">
         Register
       </div>
       <Input

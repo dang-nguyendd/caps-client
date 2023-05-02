@@ -10,7 +10,9 @@
     "lint:fix": "eslint --ext .js,.tsx,.ts --ignore-path .gitignore . --fix",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "ts:check": "tsc --noEmit",
+    "deploy": "amplify publish"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",

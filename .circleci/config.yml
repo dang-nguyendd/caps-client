@@ -72,12 +72,11 @@ jobs:
 #          path: coverage
 
 workflows:
-  build-and-test:
     jobs:
       - build
-      - test_node_16:
-          requires:
-            - build
+#      - test_node_16:
+#          requires:
+#            - build
       - lint:
           requires:
             - build

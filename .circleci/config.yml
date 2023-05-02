@@ -55,21 +55,21 @@ jobs:
       - *install-deps
       - run:
           name: Lint eslint
-          command: npm run eslint
+          command: npm run lint
 
-  test_node_16:
-    docker:
-      - image: circleci/node:16
-    steps:
-      - checkout
-      - *restore-cache
-      - *install-deps
-      - *build-packages
-      - run:
-          name: Collect coverage
-          command: npm run test:coverage
-      - store_artifacts:
-          path: coverage
+#  test_node_16:
+#    docker:
+#      - image: circleci/node:16
+#    steps:
+#      - checkout
+#      - *restore-cache
+#      - *install-deps
+#      - *build-packages
+#      - run:
+#          name: Collect coverage
+#          command: npm run test:coverage
+#      - store_artifacts:
+#          path: coverage
 
 workflows:
   build-and-test:

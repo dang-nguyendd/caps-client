@@ -1,6 +1,6 @@
 import React from "react";
 
-import Input from "../../../core/text-input";
+import Input from "@/core/input";
 
 const Component = React.memo(() => {
   return (

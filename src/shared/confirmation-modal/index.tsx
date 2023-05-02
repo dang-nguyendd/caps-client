@@ -61,6 +61,7 @@ const Component = React.memo((props: IConfirmationModalProps) => {
       left: "50%",
       right: "auto",
       bottom: "auto",
+      width: "500px",
       transform: "translate(-50%, -50%)",
       backgroundColor: "#1F2937",
       border: "none",
@@ -98,9 +99,9 @@ const Component = React.memo((props: IConfirmationModalProps) => {
       <div className={`mt-2 text-center`} style={{ color: color }}>
         {type}
       </div>
-      <h2 className="mb-2 text-lg font-bold">{title}</h2>
-      <p className="mb-4">{description}</p>
-      <div className="flex justify-end ">
+      <h2 className="my-5 text-lg font-bold text-white">{title}</h2>
+      <p className="mb-5 text-white">{description}</p>
+      <div className="flex justify-end">
         {secondButton && (
           <Button onClick={onSecondaryButtonClick} mode="secondary">
             {secondaryButtonText}

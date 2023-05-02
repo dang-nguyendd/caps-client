@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IInputProps } from "@/core/input/type";
+import { IInputProps } from "@/core/text-input/type";
 
 const Component = React.memo((props: IInputProps) => {
   const {
@@ -41,6 +41,6 @@ const Component = React.memo((props: IInputProps) => {
   );
 });
 
-Component.displayName = "Input";
+Component.displayName = "TextInput";
 
 export default Component;

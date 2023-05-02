@@ -1,25 +1,32 @@
+import {
+  DragEvent,
+  KeyboardEvent,
+  MouseEventHandler,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+
 import { IconPlus, IconExternalLink } from "@tabler/icons-react";
 import Link from "next/link";
 
 import MessageInput from "@/core/message-input";
+import ConversationModal from "@/shared/conversation-modal";
 import SearchInput from "@/shared/search-input";
-import { useState } from "react";
-import ChatModal from "@/shared/chat-modal";
+
 const Home = () => {
-  const [showChatModal, setShowChatModal] = useState(false);
-  const [chatNames, setChatNames] = useState("");
+  const [showConversationModal, setShowConversationModal] = useState(false);
+  const [conversationNames, setConversationNames] = useState<string[]>([]);
 
-  const handleOpenChatModal = () => {
-    setShowChatModal(true);
+  const handleOpenConversationModal = () => {
+    setShowConversationModal(true);
   };
 
-  const handleCloseChatModal = () => {
-    setShowChatModal(false);
+  const handleCloseConversationModal = () => {
+    setShowConversationModal(false);
   };
 
-  const handleSaveChat = () => {
-    handleCloseChatModal();
-  };
+  const handleSaveConversation = () => {};
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-gray-900 text-gray-200 antialiased">
@@ -44,20 +51,18 @@ const Home = () => {
             <div className="mx-4 flex-none cursor-pointer gap-3 rounded-md border border-white/20 p-4 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10">
               <div
                 className="flex cursor-pointer items-center"
-                onClick={handleOpenChatModal}
+                onClick={handleOpenConversationModal}
               >
                 <IconPlus />
-                <span className="ml-2 text-white">New chat</span>
+                <span className="ml-2 text-white">New Conversation</span>
               </div>
             </div>
-            <div>Chat Room {chatNames}</div>
 
-            <ChatModal
-              isOpen={showChatModal}
-              handleNameChange={setChatNames}
-              onClose={handleCloseChatModal}
-              handleCancelClick={handleCloseChatModal}
-              handleSaveClick={handleSaveChat}
+            <ConversationModal
+              isOpen={showConversationModal}
+              onClose={handleCloseConversationModal}
+              handleCancelClick={handleCloseConversationModal}
+              handleSaveClick={handleSaveConversation}
             />
 
             <div className="grow"></div>

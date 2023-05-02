@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
-import Modal from "react-modal";
 import { IconX } from "@tabler/icons-react";
+import Modal from "react-modal";
 
-import { IChatModalProps } from "@/shared/chat-modal/type";
 import Button from "@/core/button";
+import { IConversationModalProps } from "@/shared/conversation-modal/type";
 
-const Component = React.memo((props: IChatModalProps) => {
+const Component = React.memo((props: IConversationModalProps) => {
   const {
     isOpen,
     name,
@@ -26,6 +26,7 @@ const Component = React.memo((props: IChatModalProps) => {
       left: "50%",
       right: "auto",
       bottom: "auto",
+      width: "500px",
       transform: "translate(-50%, -50%)",
       backgroundColor: "#1F2937",
       border: "none",
@@ -42,24 +43,25 @@ const Component = React.memo((props: IChatModalProps) => {
           <IconX />
         </button>
       </div>
-      <h2 className="text-xl font-bold text-white mb-4">Create a new chat</h2>
+      <h2 className="mb-4 text-xl font-bold text-white">
+        Create a new conversation
+      </h2>
       <div className="mb-4">
-        <label htmlFor="chatName" className="sr-only">
-          Chat Name
-        </label>
         <input
-          id="chatName"
+          id="conversation"
           type="text"
-          placeholder="Enter chat name"
+          placeholder="Enter conversation name"
           value={name}
           onChange={handleNameChange}
-          className="w-full bg-gray-800 text-white border border-white/20 rounded-lg py-2 px-4 mb-4"
+          className="w-full rounded-md border border-gray-700 bg-gray-700 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
         />
       </div>
       <div className="flex justify-end pr-2">
-        <Button mode="secondary" onClick={handleCancelClick}>
-          Cancel
-        </Button>
+        <div className="ml-5">
+          <Button mode="secondary" onClick={handleCancelClick}>
+            Cancel
+          </Button>
+        </div>
         <div className="ml-5">
           <Button mode="primary" onClick={handleSaveClick}>
             Save
@@ -70,6 +72,6 @@ const Component = React.memo((props: IChatModalProps) => {
   );
 });
 
-Component.displayName = "ChatModal";
+Component.displayName = "ConversationModal";
 
 export default Component;

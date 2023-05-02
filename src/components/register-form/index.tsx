@@ -10,11 +10,12 @@ import {
 } from "@/components/register-form/constant";
 import { DefaultRegisterForm } from "@/constant/auth-page";
 import Button from "@/core/button";
-import Input from "@/core/input";
-import { FormExtension } from "@/core/input/type";
 import Radio from "@/core/radio";
 import { RadioOption } from "@/core/radio/type";
+import { FormExtension } from "@/core/text-input/type";
 import useRegister from "@/hooks/auth/useRegister";
+
+import Input from "../../core/text-input";
 
 const Component = React.memo(() => {
   const [form, setForm] = useImmer(DefaultRegisterForm);

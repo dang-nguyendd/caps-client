@@ -6,9 +6,10 @@ import { useImmer } from "use-immer";
 
 import { DefaultLoginForm } from "@/constant/auth-page";
 import Button from "@/core/button";
-import Input from "@/core/input";
-import { FormExtension } from "@/core/input/type";
+import { FormExtension } from "@/core/text-input/type";
 import useLogin from "@/hooks/auth/useLogin";
+
+import Input from "../../core/text-input";
 
 const Component = React.memo(() => {
   const [form, setForm] = useImmer(DefaultLoginForm);

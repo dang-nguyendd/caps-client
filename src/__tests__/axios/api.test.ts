@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import MockAdapter from "axios-mock-adapter";
 
 import api, { API_BASE_URL } from "@/axios";

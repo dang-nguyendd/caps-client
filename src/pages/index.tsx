@@ -16,7 +16,6 @@ import SearchInput from "@/shared/search-input";
 
 const Home = () => {
   const [showConversationModal, setShowConversationModal] = useState(false);
-  const [conversationNames, setConversationNames] = useState<string[]>([]);
 
   const handleOpenConversationModal = () => {
     setShowConversationModal(true);
@@ -26,7 +25,7 @@ const Home = () => {
     setShowConversationModal(false);
   };
 
-  const handleSaveConversation = () => {};
+  const handleSaveConversation = async () => {};
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-gray-900 text-gray-200 antialiased">

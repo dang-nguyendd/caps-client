@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { IconX } from "@tabler/icons-react";
 import Modal from "react-modal";
@@ -7,14 +7,9 @@ import Button from "@/core/button";
 import { IConversationModalProps } from "@/shared/conversation-modal/type";
 
 const Component = React.memo((props: IConversationModalProps) => {
-  const {
-    isOpen,
-    name,
-    handleNameChange,
-    onClose,
-    handleCancelClick,
-    handleSaveClick,
-  } = props;
+  const { isOpen, onClose, handleCancelClick, handleSaveClick } = props;
+
+  const [conversationName, setConversationName] = useState<string>("");
 
   const customStyles = {
     overlay: {
@@ -51,8 +46,10 @@ const Component = React.memo((props: IConversationModalProps) => {
           id="conversation"
           type="text"
           placeholder="Enter conversation name"
-          value={name}
-          onChange={handleNameChange}
+          value={conversationName}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setConversationName(e.target.value)
+          }
           className="w-full rounded-md border border-gray-700 bg-gray-700 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
         />
       </div>

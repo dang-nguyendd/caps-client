@@ -11,7 +11,7 @@ describe("api", () => {
   let mock: MockAdapter;
 
   beforeEach(() => {
-    mock = new MockAdapter(axios);
+    mock = new MockAdapter(api);
   });
 
   afterEach(() => {
@@ -137,5 +137,35 @@ describe("api", () => {
       "error",
       `No response received: ${error.message}`
     );
+  });
+
+  it("should handle request error", async () => {
+    mock.onGet("/test").networkErrorOnce();
+
+    try {
+      await api.get("/test");
+    } catch (error: any) {
+      expect(error).toBeInstanceOf(AxiosError);
+      expect(showToast).toHaveBeenCalledWith(
+        "error",
+        `Request error: ${error.message}`
+      );
+      expect(error.message).toEqual("Network Error");
+    }
+  });
+
+  it("should handle no response error", async () => {
+    mock.onGet("/test").timeoutOnce();
+
+    try {
+      await api.get("/test");
+    } catch (error: any) {
+      expect(error).toBeInstanceOf(AxiosError);
+      expect(showToast).toHaveBeenCalledWith(
+        "error",
+        `No response received: ${error.message}`
+      );
+      expect(error.message).toEqual("timeout of 0ms exceeded");
+    }
   });
 });

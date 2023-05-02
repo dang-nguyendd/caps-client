@@ -2,7 +2,7 @@ import axios from "@/axios";
 import { AuthNS } from "@/services/auth/type";
 
 export class AuthService {
-  static login = (data: AuthNS.LoginRequest): any => {
+  static login = (data: AuthNS.LoginRequest) => {
     return axios.post("/auth/login", data);
   };
   static register = (data: AuthNS.RegisterRequest) => {

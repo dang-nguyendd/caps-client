@@ -1,5 +1,3 @@
 export namespace ConversationNS {
-  export type ConversationRequest = {
-
-  };
+  export type ConversationRequest = {};
 }

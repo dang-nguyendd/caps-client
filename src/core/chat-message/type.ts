@@ -1,7 +1,7 @@
-export interface ChatMessage {
-  type: ChatRequest | ChatResponse;
+export interface IChatMessageProps {
+  conservationId: number;
+  content: string;
+  senderType: SenderType;
 }
 
-export type ChatRequest = {};
-
-export type ChatResponse = {};
+export type SenderType = "chatbot" | "user";

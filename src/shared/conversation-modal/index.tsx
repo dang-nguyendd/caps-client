@@ -4,12 +4,16 @@ import { IconX } from "@tabler/icons-react";
 import Modal from "react-modal";
 
 import Button from "@/core/button";
+import DropdownMenu from "@/core/dropdown-menu";
 import { IConversationModalProps } from "@/shared/conversation-modal/type";
 
 const Component = React.memo((props: IConversationModalProps) => {
   const { isOpen, onClose, handleCancelClick, handleSaveClick } = props;
 
   const [conversationName, setConversationName] = useState<string>("");
+  const models = ["OpenAPI", "Gpt4All"];
+
+  const [selectedModel, setSelectedModel] = useState(models[0]);
 
   const customStyles = {
     overlay: {
@@ -29,6 +33,10 @@ const Component = React.memo((props: IConversationModalProps) => {
       borderRadius: "8px",
       padding: "24px",
     },
+  };
+
+  const handleModelTypeChange = (value: string) => {
+    setSelectedModel(value);
   };
 
   return (
@@ -51,6 +59,12 @@ const Component = React.memo((props: IConversationModalProps) => {
             setConversationName(e.target.value)
           }
           className="w-full rounded-md border border-gray-700 bg-gray-700 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
+        />
+        <DropdownMenu
+          options={models}
+          onChange={(value) => handleModelTypeChange(value)}
+          selectedValue={selectedModel}
+          label="Model type"
         />
       </div>
       <div className="flex justify-end pr-2">

@@ -5,6 +5,4 @@ export default class ConversationService {
   static createNewConversation = (data: ConversationNS.ConversationRequest) => {
     return axios.post("/conversation", data);
   };
-
-  static getConversat
 }

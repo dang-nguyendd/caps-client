@@ -10,6 +10,7 @@ import {
 import { IconPlus, IconExternalLink } from "@tabler/icons-react";
 import Link from "next/link";
 
+import ChatMessage from "@/core/chat-message";
 import MessageInput from "@/core/message-input";
 import ConversationModal from "@/shared/conversation-modal";
 import SearchInput from "@/shared/search-input";
@@ -75,7 +76,29 @@ const Home = () => {
             </Link>
           </section>
           <section className="flex flex-auto flex-col border-l border-gray-800">
-            <div className="flex-1 overflow-y-scroll p-4"></div>
+            <div className="flex-1 overflow-y-scroll p-4">
+              <ChatMessage
+                conservationId={0}
+                content={
+                  "chatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbot"
+                }
+                senderType={"chatbot"}
+              />
+              <ChatMessage
+                conservationId={0}
+                content={
+                  "useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruser"
+                }
+                senderType={"user"}
+              />
+              <ChatMessage
+                conservationId={0}
+                content={
+                  "useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruser"
+                }
+                senderType={"user"}
+              />
+            </div>
             <div className="flex-none">
               <div className="flex flex-row items-center p-4">
                 <MessageInput />

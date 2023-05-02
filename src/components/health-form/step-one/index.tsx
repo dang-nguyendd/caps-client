@@ -1,25 +1,25 @@
 import React from "react";
 
-import Input from "@/core/input";
+import TextInput from "@/core/text-input";
 
 const Component = React.memo(() => {
   return (
     <div className="mt-5 flex w-2/5 flex-col">
-      <Input
+      <TextInput
         value={""}
         type="number"
         placeHolder="age"
         label="Age"
         name="age"
       />
-      <Input
+      <TextInput
         value={""}
         type="number"
         placeHolder="weight in kg"
         label="Weight"
         name="weight"
       />
-      <Input
+      <TextInput
         value={""}
         type="number"
         placeHolder="height in cm"

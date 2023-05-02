@@ -3,10 +3,10 @@ import React from "react";
 import Footer from "@/shared/footer";
 import Header from "@/shared/header";
 
-const withLayout = <P extends object>(
+export default function withLayout<P extends object>(
   WrappedComponent: React.ComponentType<P>
-): React.FC<P> => {
-  return (props: P) => {
+): React.FC<P> {
+  const WithLayout: React.FC<P> = (props: P) => {
     return (
       <>
         <Header />
@@ -17,8 +17,14 @@ const withLayout = <P extends object>(
       </>
     );
   };
-};
 
-withLayout.displayName = "withLayout";
+  WithLayout.displayName = `withLayout(${getDisplayName(WrappedComponent)})`;
 
-export default withLayout;
+  return WithLayout;
+}
+
+function getDisplayName<P>(WrappedComponent: React.ComponentType<P>) {
+  return (
+    WrappedComponent.displayName || WrappedComponent.name || "WrappedComponent"
+  );
+}

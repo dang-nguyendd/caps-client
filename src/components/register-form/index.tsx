@@ -12,10 +12,9 @@ import { DefaultRegisterForm } from "@/constant/auth-page";
 import Button from "@/core/button";
 import Radio from "@/core/radio";
 import { RadioOption } from "@/core/radio/type";
+import TextInput from "@/core/text-input";
 import { FormExtension } from "@/core/text-input/type";
 import useRegister from "@/hooks/auth/useRegister";
-
-import Input from "../../core/text-input";
 
 const Component = React.memo(() => {
   const [form, setForm] = useImmer(DefaultRegisterForm);
@@ -66,7 +65,7 @@ const Component = React.memo(() => {
       <div className="mb-[40px] w-full text-center text-3xl font-bold tracking-normal text-blue">
         Register
       </div>
-      <Input
+      <TextInput
         label="Full name"
         type="text"
         value={form.name}
@@ -75,7 +74,7 @@ const Component = React.memo(() => {
         dataKey="name"
         onChange={_onInputChange}
       />
-      <Input
+      <TextInput
         label="Email"
         type="text"
         name="email"
@@ -84,7 +83,7 @@ const Component = React.memo(() => {
         dataKey="email"
         onChange={_onInputChange}
       />
-      <Input
+      <TextInput
         label="Password"
         type="password"
         name="password"
@@ -93,7 +92,7 @@ const Component = React.memo(() => {
         dataKey="password"
         onChange={_onInputChange}
       />
-      <Input
+      <TextInput
         label="Confirm password"
         type="password"
         name="confirmPassword"

@@ -7,7 +7,7 @@ import StepTwo from "@/components/health-form/step-two";
 import Button from "@/core/button";
 import withLayout from "@/hoc/withLayout";
 import ProgressBar from "@/shared/progress-bar";
-import { FormStep } from "@/types/enum/FormStep";
+import { FormStep } from "@/types/enum/form-step";
 
 const Component = React.memo(() => {
   const [currentStep, setCurrentStep] = useState(FormStep.STEP_TWO);

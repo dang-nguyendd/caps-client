@@ -1,5 +1,5 @@
 export enum FormStep {
-  StepOne,
-  StepTwo,
-  StepThree,
+  STEP_ONE,
+  STEP_TWO,
+  STEP_THREE,
 }

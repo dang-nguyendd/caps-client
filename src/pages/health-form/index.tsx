@@ -11,7 +11,7 @@ import ProgressBar from "@/shared/progress-bar";
 import { FormStep } from "@/types/enum/FormStep";
 
 const Component = React.memo(() => {
-  const [currentStep, setCurrentStep] = useState(FormStep.StepOne);
+  const [currentStep, setCurrentStep] = useState(FormStep.STEP_ONE);
 
   const steps = [
     { icon: <IconUser />, label: "Personal Details" },
@@ -27,9 +27,9 @@ const Component = React.memo(() => {
         isLastStep={currentStep === steps.length - 1}
       />
       <div className="flex w-full flex-col items-center justify-center">
-        {currentStep === FormStep.StepOne && <StepOne />}
-        {currentStep === FormStep.StepTwo && <StepTwo />}
-        {currentStep === FormStep.StepThree && <StepThree />}
+        {currentStep === FormStep.STEP_ONE && <StepOne />}
+        {currentStep === FormStep.STEP_TWO && <StepTwo />}
+        {currentStep === FormStep.STEP_THREE && <StepThree />}
         <div className="mt-8 flex w-2/5 justify-between">
           <div className="cursor-pointer text-gray-600 hover:text-black">
             Skip for now

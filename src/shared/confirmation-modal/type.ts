@@ -1,4 +1,4 @@
-export interface IModalProps {
+export interface IConfirmationModalProps {
   type: "success" | "warning" | "error" | "info";
   isOpen: boolean;
   onClose: () => void;

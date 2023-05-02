@@ -8,10 +8,10 @@ import {
 import Modal from "react-modal";
 
 import Button from "@/core/button";
-import { IModalProps } from "@/shared/modal/type";
+import { IConfirmationModalProps } from "@/shared/confirmation-modal/type";
 
-const Component = React.memo((props: IModalProps) => {
-  const getModalTypeStyle = (type: string) => {
+const Component = React.memo((props: IConfirmationModalProps) => {
+  const getConfirmationModalTypeStyle = (type: string) => {
     switch (type) {
       case "success":
         return {
@@ -49,7 +49,7 @@ const Component = React.memo((props: IModalProps) => {
     secondButton = false,
   } = props;
 
-  const { color } = getModalTypeStyle(type);
+  const { color } = getConfirmationModalTypeStyle(type);
 
   const customStyles = {
     overlay: {
@@ -57,18 +57,20 @@ const Component = React.memo((props: IModalProps) => {
       zIndex: 100,
     },
     content: {
-      backgroundColor: "#FFFFFF",
-      borderRadius: "10px",
       top: "50%",
       left: "50%",
       right: "auto",
       bottom: "auto",
       transform: "translate(-50%, -50%)",
-      border: `solid 2px ${color}`,
+      backgroundColor: "#1F2937",
+      border: "none",
+      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
+      borderRadius: "8px",
+      padding: "24px",
     },
   };
 
-  const getModalIcon = () => {
+  const getConfirmationModalIcon = () => {
     switch (type) {
       case "success":
         return <IconCheck color={color} />;
@@ -90,7 +92,7 @@ const Component = React.memo((props: IModalProps) => {
           className={`mb-2 flex h-16 w-16 items-center justify-center rounded-full border-2`}
           style={{ borderColor: color }}
         >
-          {getModalIcon()}
+          {getConfirmationModalIcon()}
         </div>
       </div>
       <div className={`mt-2 text-center`} style={{ color: color }}>
@@ -114,6 +116,6 @@ const Component = React.memo((props: IModalProps) => {
   );
 });
 
-Component.displayName = "Modal";
+Component.displayName = "ConfirmationModal";
 
 export default Component;

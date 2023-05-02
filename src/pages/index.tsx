@@ -3,11 +3,24 @@ import Link from "next/link";
 
 import MessageInput from "@/core/message-input";
 import SearchInput from "@/shared/search-input";
+import { useState } from "react";
+import ChatModal from "@/shared/chat-modal";
 const Home = () => {
-  const handleNewRoomClick = () => {
-    // logic to create new room
-    console.log("New room created");
+  const [showChatModal, setShowChatModal] = useState(false);
+  const [chatNames, setChatNames] = useState("");
+
+  const handleOpenChatModal = () => {
+    setShowChatModal(true);
   };
+
+  const handleCloseChatModal = () => {
+    setShowChatModal(false);
+  };
+
+  const handleSaveChat = () => {
+    handleCloseChatModal();
+  };
+
   return (
     <div className="flex h-screen w-full overflow-hidden bg-gray-900 text-gray-200 antialiased">
       <div className="flex flex-1 flex-col">
@@ -31,12 +44,22 @@ const Home = () => {
             <div className="mx-4 flex-none cursor-pointer gap-3 rounded-md border border-white/20 p-4 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10">
               <div
                 className="flex cursor-pointer items-center"
-                onClick={handleNewRoomClick}
+                onClick={handleOpenChatModal}
               >
                 <IconPlus />
                 <span className="ml-2 text-white">New chat</span>
               </div>
             </div>
+            <div>Chat Room {chatNames}</div>
+
+            <ChatModal
+              isOpen={showChatModal}
+              handleNameChange={setChatNames}
+              onClose={handleCloseChatModal}
+              handleCancelClick={handleCloseChatModal}
+              handleSaveClick={handleSaveChat}
+            />
+
             <div className="grow"></div>
             <Link href={"/settings"}>
               <div className="flex border-t border-gray-800 p-4 pt-8">

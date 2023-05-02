@@ -10,7 +10,10 @@ export default function withLayout<P extends object>(
     return (
       <>
         <Header />
-        <main className="container h-screen bg-white px-2">
+        <main
+          data-testid="wrapped-component"
+          className="container h-screen bg-white px-2"
+        >
           <WrappedComponent {...props} />
         </main>
         <Footer />

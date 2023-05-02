@@ -1,13 +1,33 @@
+import {
+  DragEvent,
+  KeyboardEvent,
+  MouseEventHandler,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+
 import { IconPlus, IconExternalLink } from "@tabler/icons-react";
 import Link from "next/link";
 
+import ChatMessage from "@/core/chat-message";
 import MessageInput from "@/core/message-input";
+import ConversationModal from "@/shared/conversation-modal";
 import SearchInput from "@/shared/search-input";
+
 const Home = () => {
-  const handleNewRoomClick = () => {
-    // logic to create new room
-    console.log("New room created");
+  const [showConversationModal, setShowConversationModal] = useState(false);
+
+  const handleOpenConversationModal = () => {
+    setShowConversationModal(true);
   };
+
+  const handleCloseConversationModal = () => {
+    setShowConversationModal(false);
+  };
+
+  const handleSaveConversation = async () => {};
+
   return (
     <div className="flex h-screen w-full overflow-hidden bg-gray-900 text-gray-200 antialiased">
       <div className="flex flex-1 flex-col">
@@ -31,12 +51,20 @@ const Home = () => {
             <div className="mx-4 flex-none cursor-pointer gap-3 rounded-md border border-white/20 p-4 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10">
               <div
                 className="flex cursor-pointer items-center"
-                onClick={handleNewRoomClick}
+                onClick={handleOpenConversationModal}
               >
                 <IconPlus />
-                <span className="ml-2 text-white">New chat</span>
+                <span className="ml-2 text-white">New Conversation</span>
               </div>
             </div>
+
+            <ConversationModal
+              isOpen={showConversationModal}
+              onClose={handleCloseConversationModal}
+              handleCancelClick={handleCloseConversationModal}
+              handleSaveClick={handleSaveConversation}
+            />
+
             <div className="grow"></div>
             <Link href={"/settings"}>
               <div className="flex border-t border-gray-800 p-4 pt-8">
@@ -48,7 +76,29 @@ const Home = () => {
             </Link>
           </section>
           <section className="flex flex-auto flex-col border-l border-gray-800">
-            <div className="flex-1 overflow-y-scroll p-4"></div>
+            <div className="flex-1 overflow-y-scroll p-4">
+              <ChatMessage
+                conservationId={0}
+                content={
+                  "chatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbotchatbot"
+                }
+                senderType={"chatbot"}
+              />
+              <ChatMessage
+                conservationId={0}
+                content={
+                  "useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruser"
+                }
+                senderType={"user"}
+              />
+              <ChatMessage
+                conservationId={0}
+                content={
+                  "useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruser"
+                }
+                senderType={"user"}
+              />
+            </div>
             <div className="flex-none">
               <div className="flex flex-row items-center p-4">
                 <MessageInput />

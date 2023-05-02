@@ -55,7 +55,7 @@ jobs:
       - *install-deps
       - run:
           name: Lint eslint
-          command: npm run eslint
+          command: npm run lint
 
   test_node_16:
     docker:
@@ -72,7 +72,6 @@ jobs:
           path: coverage
 
 workflows:
-  build-and-test:
     jobs:
       - build
       - test_node_16:

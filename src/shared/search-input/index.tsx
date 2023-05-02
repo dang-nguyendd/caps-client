@@ -24,7 +24,7 @@ const Component = React.memo((props: ISearchInputProps) => {
         />
       )}
       <input
-        className="w-full flex-1 text-ellipsis rounded-md border border-neutral-600 bg-[#202123] px-4 py-3 pr-10 text-[14px] leading-3 text-white"
+        className="w-full rounded-md border border-gray-700 bg-gray-700 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
         type="text"
         placeholder={placeholder || ""}
         value={searchTerm}

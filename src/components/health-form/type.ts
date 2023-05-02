@@ -9,6 +9,8 @@ export interface IHealthFormProps {
   surgeryDescription: string;
   hasChronicIllness: boolean;
   chronicIllnessDescription: string;
+  hasHereditaryDisease: boolean;
+  familyHistoryDescription: string;
 }
 
 export const DefaultHealthForm: IHealthFormProps = {
@@ -22,4 +24,6 @@ export const DefaultHealthForm: IHealthFormProps = {
   surgeryDescription: "",
   hasChronicIllness: false,
   chronicIllnessDescription: "",
+  hasHereditaryDisease: false,
+  familyHistoryDescription: "",
 };

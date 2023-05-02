@@ -3,22 +3,31 @@ import React from "react";
 import Footer from "@/shared/footer";
 import Header from "@/shared/header";
 
-const withLayout = <P extends object>(
+export default function withLayout<P extends object>(
   WrappedComponent: React.ComponentType<P>
-): React.FC<P> => {
-  return (props: P) => {
+): React.FC<P> {
+  const WithLayout: React.FC<P> = (props: P) => {
     return (
       <>
         <Header />
-        <main className="container h-screen bg-white px-2">
+        <main
+          data-testid="wrapped-component"
+          className="container h-screen bg-white px-2"
+        >
           <WrappedComponent {...props} />
         </main>
         <Footer />
       </>
     );
   };
-};
 
-withLayout.displayName = "withLayout";
+  WithLayout.displayName = `withLayout(${getDisplayName(WrappedComponent)})`;
 
-export default withLayout;
+  return WithLayout;
+}
+
+function getDisplayName<P>(WrappedComponent: React.ComponentType<P>) {
+  return (
+    WrappedComponent.displayName || WrappedComponent.name || "WrappedComponent"
+  );
+}

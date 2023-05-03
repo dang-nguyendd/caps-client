@@ -2,14 +2,19 @@ import React, { useContext, useEffect } from "react";
 
 import { useImmer } from "use-immer";
 
+import { IConversationList } from "@/components/conversation-list/type";
+import useMessage from "@/hooks/message";
 import { ConversationNS } from "@/services/conversation/type";
 import Conversation from "@/shared/conversation";
 import { DefaultConversation } from "@/shared/conversation/type";
-import {IConversationList} from "@/components/conversation-list/type";
-import useMessage from "@/hooks/message";
 
 export const ConversationList: React.FC = (props: IConversationList) => {
-  const {getAllConversations, conversations, setSelectedConversation, selectedConversation} = props
+  const {
+    getAllConversations,
+    conversations,
+    setSelectedConversation,
+    selectedConversation,
+  } = props;
   const _onSelectConversation = (item: ConversationNS.Conversation) => {
     setSelectedConversation(item);
   };

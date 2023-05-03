@@ -6,7 +6,6 @@ import {
   CheckboxOptions,
   DefaultCheckboxOption,
 } from "@/components/health-form/constant";
-import { DefaultGenderOption } from "@/components/register-form/constant";
 import Option from "@/core/select-option";
 import { SelectOption } from "@/core/select-option/type";
 import TextInput from "@/core/text-input";
@@ -14,6 +13,8 @@ import Textarea from "@/core/textarea";
 
 const Component = () => {
   const [bloodPressure, setBloodPressure] = useState("");
+  const [bloodType, setBloodType] = useState("");
+
   const [allergies, setAllergies] = useState<string[]>([]);
   const [medications, setMedications] = useState<string[]>([]);
   const [hasSurgery, setHasSurgery] = useImmer<SelectOption>(
@@ -31,6 +32,10 @@ const Component = () => {
 
   const handleChangeBloodPressure = (value: string) => {
     setBloodPressure(value);
+  };
+
+  const handleChangeBloodType = (value: string) => {
+    setBloodType(value);
   };
 
   const handleAllergiesChange = (
@@ -62,14 +67,28 @@ const Component = () => {
   return (
     <div className="mt-5 grid grid-cols-2 gap-4">
       <div>
-        <TextInput
-          value={bloodPressure}
-          type="text"
-          placeHolder="blood pressure"
-          label="Blood pressure"
-          name="blood-pressure"
-          onChange={(value) => handleChangeBloodPressure(value)}
-        />
+        <div className="flex">
+          <div className="mr-2 flex-1">
+            <TextInput
+              value={bloodPressure}
+              type="text"
+              placeHolder="blood pressure"
+              label="Blood pressure"
+              name="blood-pressure"
+              onChange={(value) => handleChangeBloodPressure(value)}
+            />
+          </div>
+          <div className="ml-2 flex-1">
+            <TextInput
+              value={bloodType}
+              type="text"
+              placeHolder="blood type"
+              label="Blood type"
+              name="blood-type"
+              onChange={(value) => handleChangeBloodType(value)}
+            />
+          </div>
+        </div>
         <Option
           type="checkbox"
           options={CheckboxOptions}
@@ -113,6 +132,6 @@ const Component = () => {
   );
 };
 
-Component.displayName = "HealthFormStepTwo";
+Component.displayName = "HealthFormHealthRecord";
 
 export default Component;

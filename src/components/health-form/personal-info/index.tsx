@@ -3,19 +3,19 @@ import React, { useState } from "react";
 import TextInput from "@/core/text-input";
 
 const Component = () => {
-  const [age, setAge] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
 
-  const handleChangeAge = (value: number) => {
+  const handleChangeAge = (value: string) => {
     setAge(value);
   };
 
-  const handleChangeWeight = (value: number) => {
+  const handleChangeWeight = (value: string) => {
     setWeight(value);
   };
 
-  const handleChangeHeight = (value: number) => {
+  const handleChangeHeight = (value: string) => {
     setHeight(value);
   };
 
@@ -23,7 +23,7 @@ const Component = () => {
     <div className="mt-5 flex w-full flex-col">
       <TextInput
         value={age}
-        type="number"
+        type="text"
         placeHolder="age"
         label="Age"
         name="age"
@@ -31,7 +31,7 @@ const Component = () => {
       />
       <TextInput
         value={weight}
-        type="number"
+        type="text"
         placeHolder="weight in kg"
         label="Weight"
         name="weight"
@@ -39,7 +39,7 @@ const Component = () => {
       />
       <TextInput
         value={height}
-        type="number"
+        type="text"
         placeHolder="height in cm"
         label="Height"
         name="height"
@@ -49,6 +49,6 @@ const Component = () => {
   );
 };
 
-Component.displayName = "HealthFormStepOne";
+Component.displayName = "HealthFormPersonalInfo";
 
 export default Component;

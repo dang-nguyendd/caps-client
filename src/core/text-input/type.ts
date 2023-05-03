@@ -1,7 +1,7 @@
 export interface IInputProps {
   required?: true;
-  onChange?: (x: any, extension?: FormExtension) => void;
-  value: any;
+  onChange?: (x: string, extension?: FormExtension) => void;
+  value: string;
   disable?: boolean;
   placeHolder: string;
   dataKey?: string;

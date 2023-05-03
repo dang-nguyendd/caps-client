@@ -1,8 +1,8 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import MockAdapter from "axios-mock-adapter";
 
 import api, { API_BASE_URL } from "@/axios";
-import { HttpResponse } from "@/types/enum/HttpResponse";
+import { HttpResponse } from "@/types/enum/http-response";
 import { showToast } from "@/utils/toast";
 
 jest.mock("@/utils/toast");

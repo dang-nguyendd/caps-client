@@ -12,7 +12,7 @@ const Component: React.FC = (props: IMessageList) => {
     const {selectedConversation} = props
     const {getAllMessages, messages, setMessages} = useMessage()
     const [message, setMessage] = useImmer<string>('')
-    const messagesEndRef = useRef<HTMLDivElement>(null);
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
     const _clearMessage = () => {
         setMessage('')
@@ -44,8 +44,9 @@ const Component: React.FC = (props: IMessageList) => {
     }, []);
 
     const scrollToBottom = () => {
-        if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        if (messagesEndRef && messagesEndRef.current) {
+            const dom = messagesEndRef.current as HTMLDivElement
+            dom.scrollIntoView({behavior: 'smooth'});
         }
     };
 
@@ -56,7 +57,7 @@ const Component: React.FC = (props: IMessageList) => {
 
     const _handleSend = () => {
         const socket = getSocket();
-        if (socket && selectedConversation && selectedConversation.id){
+        if (socket && selectedConversation && selectedConversation.id) {
             socket.emit('message', {
                 conversationId: selectedConversation.id,
                 content: message,
@@ -67,36 +68,48 @@ const Component: React.FC = (props: IMessageList) => {
     }
 
 
-    return   <section className="flex flex-auto flex-col border-l border-gray-800">
+    return <section className="flex flex-auto flex-col border-l border-gray-800">
         <div className="flex-1 overflow-y-scroll p-4">
-            {messages.map(message =>  <ChatMessage
+            {messages.map(message => <ChatMessage
                 conservationId={message.id}
                 content={message.content}
                 senderType={message.sender}
             />)}
             <div ref={messagesEndRef}></div>
-        </div>
-        <div className="flex-none">
-            <div className="flex flex-row items-center p-4">
-                <div className="relative grow">
-                    <input
-                        className="w-full rounded-full border border-gray-800 bg-gray-800 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
-                        type="text"
-                        value={message}
-                        onChange={e => _onValueChange(e.target.value)}
-                        placeholder="Ask anything ( Shift-Enter to new line)"
-                    />
+            {(messages && messages.length && messages[messages.length - 1].sender === MessageNS.SenderType.USER) ? (
+                <div style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    fontWeight: 'bold',
+                    fontStyle: 'italic',
+                }}>
+                    The chat advisor is typing...
                 </div>
-                <button
-                    type="button"
-                    className="mx-2 flex h-6 w-6 shrink-0 text-blue hover:text-blue focus:outline-none"
-                    onClick={message ? _handleSend : () => {}}
-                >
-                    <IconSend color="white" />
-                </button>
+            ) : null}
+    </div>
+    <div className="flex-none">
+        <div className="flex flex-row items-center p-4">
+            <div className="relative grow">
+                <input
+                    className="w-full rounded-full border border-gray-800 bg-gray-800 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
+                    type="text"
+                    value={message}
+                    onChange={e => _onValueChange(e.target.value)}
+                    placeholder="Ask anything ( Shift-Enter to new line)"
+                />
             </div>
+            <button
+                type="button"
+                className="mx-2 flex h-6 w-6 shrink-0 text-blue hover:text-blue focus:outline-none"
+                onClick={message ? _handleSend : () => {
+                }}
+            >
+                <IconSend color="white"/>
+            </button>
         </div>
-    </section>
+    </div>
+</section>
 }
 
 export default Component

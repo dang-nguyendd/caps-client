@@ -6,12 +6,12 @@ import { MessageNS } from "@/services/message/type";
 import { showToast } from "@/utils/toast";
 
 type MessageResult = {
-  getAllMessage: ({ conversationId }) => void;
+  getAllMessages: (conversationId: number) => void;
   messages: MessageNS.Messages;
   setMessages: (messages: MessageNS.Message) => void;
 };
 
-const useMessage = () => {
+const useMessage = (): MessageResult => {
   const [messages, setMessages] = useState<MessageNS.Messages>([]);
   const { setLoading } = useContext(LoadingContext);
 
@@ -34,7 +34,7 @@ const useMessage = () => {
     getAllMessages,
     messages,
     setMessages: _handleSetMessage,
-  } as MessageResult;
+  };
 };
 
 export default useMessage;

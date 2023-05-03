@@ -3,15 +3,13 @@ import React, { useEffect, useRef } from "react";
 import { IconSend } from "@tabler/icons-react";
 import { useImmer } from "use-immer";
 
-import { IMessageList } from "@/components/message-list/type";
+import { IMessageListProps } from "@/components/message-list/type";
 import ChatMessage from "@/core/chat-message";
-import MessageInput from "@/core/message-input";
-import useMessage from "@/hooks/message";
+import useMessage from "@/hooks/message/useMessage";
 import { MessageNS } from "@/services/message/type";
 import { closeSocket, getSocket, initSocket } from "@/socket";
 
-const Component: React.FC = (props: IMessageList) => {
-  const { selectedConversation } = props;
+const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
   const { getAllMessages, messages, setMessages } = useMessage();
   const [message, setMessage] = useImmer<string>("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -26,7 +24,7 @@ const Component: React.FC = (props: IMessageList) => {
 
   useEffect(() => {
     if (selectedConversation && selectedConversation.id)
-      getAllMessages({ conversationId: selectedConversation.id });
+      getAllMessages(selectedConversation.id);
   }, [selectedConversation]);
 
   useEffect(() => {
@@ -54,7 +52,7 @@ const Component: React.FC = (props: IMessageList) => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages[messages.length - 1]]); // Watch the last message in the array
+  }, [messages[messages.length - 1]]);
 
   const _handleSend = () => {
     const socket = getSocket();
@@ -73,6 +71,7 @@ const Component: React.FC = (props: IMessageList) => {
       <div className="flex-1 overflow-y-scroll p-4">
         {messages.map((message) => (
           <ChatMessage
+            key={message.id}
             conservationId={message.id}
             content={message.content}
             senderType={message.sender}
@@ -82,17 +81,7 @@ const Component: React.FC = (props: IMessageList) => {
         {messages &&
         messages.length &&
         messages[messages.length - 1].sender === MessageNS.SenderType.USER ? (
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              fontWeight: "bold",
-              fontStyle: "italic",
-            }}
-          >
-            The chat advisor is typing...
-          </div>
+          <div className="text-white">The chat advisor is typing...</div>
         ) : null}
       </div>
       <div className="flex-none">
@@ -118,5 +107,7 @@ const Component: React.FC = (props: IMessageList) => {
     </section>
   );
 };
+
+Component.displayName = "MessageList";
 
 export default Component;

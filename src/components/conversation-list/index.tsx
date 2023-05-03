@@ -1,20 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 
-import { useImmer } from "use-immer";
-
-import { IConversationList } from "@/components/conversation-list/type";
-import useMessage from "@/hooks/message";
+import { IConversationListProps } from "@/components/conversation-list/type";
 import { ConversationNS } from "@/services/conversation/type";
 import Conversation from "@/shared/conversation";
-import { DefaultConversation } from "@/shared/conversation/type";
 
-export const ConversationList: React.FC = (props: IConversationList) => {
-  const {
-    getAllConversations,
-    conversations,
-    setSelectedConversation,
-    selectedConversation,
-  } = props;
+const Component: React.FC<IConversationListProps> = ({
+  getAllConversations,
+  conversations,
+  setSelectedConversation,
+  selectedConversation,
+}) => {
   const _onSelectConversation = (item: ConversationNS.Conversation) => {
     setSelectedConversation(item);
   };
@@ -45,4 +40,6 @@ export const ConversationList: React.FC = (props: IConversationList) => {
     </div>
   );
 };
-export default ConversationList;
+
+Component.displayName = "ConversationList";
+export default Component;

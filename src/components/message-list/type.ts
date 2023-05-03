@@ -1,5 +1,5 @@
 import { ConversationNS } from "@/services/conversation/type";
 
-export interface IMessageList {
+export interface IMessageListProps {
   selectedConversation: ConversationNS.Conversation;
 }

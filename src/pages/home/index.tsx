@@ -6,18 +6,14 @@ import {
   IconUserCancel,
 } from "@tabler/icons-react";
 import Link from "next/link";
-import { useImmer } from "use-immer";
 
 import ConversationList from "@/components/conversation-list";
 import MessageList from "@/components/message-list";
 import { AuthContext } from "@/contexts/auth-context";
-import ChatMessage from "@/core/chat-message";
-import MessageInput from "@/core/message-input";
 import withAuth from "@/hoc/withLogin";
 import useConversation from "@/hooks/conversation/useConversation";
 import ConversationModal from "@/shared/conversation-modal";
 import SearchInput from "@/shared/search-input";
-import { User } from "@/types/context/with-auth-context";
 
 const Component: React.FC = () => {
   {
@@ -94,7 +90,7 @@ const Component: React.FC = () => {
                   <div className="flex cursor-pointer flex-row items-center gap-1">
                     <IconUserCancel />
                     <span
-                      className="ml-2 cursor-pointer text-sm text-white"
+                      className="ml-2 mt-4 cursor-pointer text-sm text-white"
                       onClick={signOut}
                     >
                       Logout

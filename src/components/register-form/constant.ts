@@ -1,9 +1,9 @@
-import { RadioOption, RadioOptions } from "@/core/radio/type";
+import { SelectOption, SelectOptions } from "@/core/select-option/type";
 
-export const GenderOptions: RadioOptions = [
+export const GenderOptions: SelectOptions = [
   { label: "Male", value: "male" },
   { label: "Female", value: "female" },
   { label: "Other", value: "other" },
 ];
 
-export const DefaultGenderOption: RadioOption = GenderOptions[0];
+export const DefaultGenderOption: SelectOption = GenderOptions[0];

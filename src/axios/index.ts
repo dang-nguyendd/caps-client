@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
-import { HttpResponse } from "@/types/enum/HttpResponse";
+import { HttpResponse } from "@/types/enum/http-response";
 import { showToast } from "@/utils/toast";
 import {LocalStorageService} from "@/services/local-storage";
 import {LocalStorageKeys} from "@/services/local-storage/constant";

@@ -1,15 +1,15 @@
-import React, {useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 
 import { cloneDeep } from "lodash";
 import Link from "next/link";
 import { useImmer } from "use-immer";
 
 import { DefaultLoginForm } from "@/constant/auth-page";
+import { LoadingContext } from "@/contexts/loading-context";
 import Button from "@/core/button";
 import TextInput from "@/core/text-input";
 import { FormExtension } from "@/core/text-input/type";
 import useLogin from "@/hooks/auth/useLogin";
-import {LoadingContext} from "@/contexts/loading-context";
 
 const Component = React.memo(() => {
   const [form, setForm] = useImmer(DefaultLoginForm);
@@ -32,7 +32,6 @@ const Component = React.memo(() => {
     login(form);
     setForm(DefaultLoginForm);
   };
-
 
   return (
     <div className="flex w-2/5 flex-col gap-1">

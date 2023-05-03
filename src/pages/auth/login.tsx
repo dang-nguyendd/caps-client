@@ -1,7 +1,8 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
+
 import LoginForm from "@/components/login-form";
+import { LoadingContext } from "@/contexts/loading-context";
 import withLayout from "@/hoc/withLayout";
-import {LoadingContext} from "@/contexts/loading-context";
 
 const Component = React.memo((props) => {
   return (

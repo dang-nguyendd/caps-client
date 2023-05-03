@@ -1,17 +1,18 @@
+import { useContext } from "react";
+
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
+import { LoadingContext } from "@/contexts/loading-context";
+import { LocalStorageService } from "@/services/local-storage";
+import { LocalStorageKeys } from "@/services/local-storage/constant";
 import { HttpResponse } from "@/types/enum/http-response";
 import { showToast } from "@/utils/toast";
-import {LocalStorageService} from "@/services/local-storage";
-import {LocalStorageKeys} from "@/services/local-storage/constant";
-import {useContext} from "react";
-import {LoadingContext} from "@/contexts/loading-context";
 
 export const API_BASE_URL = "http://localhost:3003";
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000
+  timeout: 10000,
 });
 
 api.interceptors.response.use(

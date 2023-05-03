@@ -94,7 +94,9 @@ const Component = React.memo((props: IConversationProps) => {
     }
   }, [isRenaming, isDeleting]);
   return (
-    <div className={`relative flex items-center ${selected ? 'bg-gray-700' : ''}`}>
+    <div
+      className={`relative flex items-center ${selected ? "bg-gray-700" : ""}`}
+    >
       {isRenaming && selectedConversation?.id === conversation.id ? (
         <div className="flex w-full items-center gap-3 rounded-lg bg-[#343541]/90 p-3">
           <IconMessage size={18} />

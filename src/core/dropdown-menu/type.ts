@@ -1,6 +1,6 @@
 export interface IDropDownMenuProps {
   options: string[];
-  onChange: (value: string) => void;
+  onChange: (value: any) => void;
   selectedValue: string;
   label?: string;
 }

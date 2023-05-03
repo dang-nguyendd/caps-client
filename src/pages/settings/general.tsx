@@ -1,6 +1,7 @@
 import React from "react";
 
-import withLayout from "@/hoc/withLayout";
+import SettingSideBar from "@/components/settings";
+import withSettings from "@/hoc/withSettings";
 
 const Component = React.memo(() => {
   return (
@@ -12,4 +13,4 @@ const Component = React.memo(() => {
 
 Component.displayName = "General";
 
-export default withLayout(Component);
+export default withSettings(SettingSideBar, Component);

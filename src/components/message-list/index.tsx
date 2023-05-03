@@ -43,7 +43,7 @@ const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
     };
   }, []);
 
-  const scrollToBottom = () => {
+  const _scrollToBottom = () => {
     if (messagesEndRef && messagesEndRef.current) {
       const dom = messagesEndRef.current as HTMLDivElement;
       dom.scrollIntoView({ behavior: "smooth" });
@@ -51,7 +51,7 @@ const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
   };
 
   useEffect(() => {
-    scrollToBottom();
+    _scrollToBottom();
   }, [messages[messages.length - 1]]);
 
   const _handleSend = () => {

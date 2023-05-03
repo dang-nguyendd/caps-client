@@ -5,7 +5,6 @@ import Modal from "react-modal";
 
 import Button from "@/core/button";
 import DropdownMenu from "@/core/dropdown-menu";
-import useConversation from "@/hooks/conversation/useConversation";
 import { ConversationNS } from "@/services/conversation/type";
 import { CustomStyle } from "@/shared/conversation-modal/constant";
 import { IConversationModalProps } from "@/shared/conversation-modal/type";

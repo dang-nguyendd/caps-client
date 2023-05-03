@@ -1,8 +1,8 @@
+import Link from "next/link";
+
 import Button from "@/core/button";
 
 const Component = () => {
-  const handleStart = () => {};
-
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
       <div className="mb-8">
@@ -74,9 +74,9 @@ const Component = () => {
           </p>
         </div>
         <div>
-          <Button mode="primary" onClick={handleStart}>
-            Start
-          </Button>
+          <Link href={"/health-form/personal-info"}>
+            <Button mode="primary">Start</Button>
+          </Link>
         </div>
       </div>
     </div>

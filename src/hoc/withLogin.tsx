@@ -1,24 +1,44 @@
-import React from "react";
+import React, {useContext, useEffect, useMemo} from "react";
 
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 
-import { useAuth } from "@/contexts/auth-context";
+import {AuthContext, AuthProvider, useAuth} from "@/contexts/auth-context";
+import {LoadingProvider} from "@/contexts/loading-context";
+// import useUser from "@/hooks/user/useUser";
+import useUserDetail from "@/hooks/user/useUser";
 
 export default function withAuth<P extends object>(
-  Component: React.ComponentType<P>
+    Component: React.ComponentType<P>
 ) {
-  const WithAuth: React.FC<P> = (props) => {
-    const router = useRouter();
-    const { user } = useAuth();
+    const WithAuth: React.FC<P> = (props) => {
+        const router = useRouter();
+        const {user, getUser, isLoading} = useUserDetail()
+        const {signIn} = useContext(AuthContext)
+        const _firstGetUser = async () => {
+            const response = await getUser();
+            if (response) {
+                signIn(response)
+            }
+        }
+        useEffect(() => {
+            if (!user) {
+                _firstGetUser()
+            }
+        }, [user])
 
-    React.useEffect(() => {
-      if (!user) {
-        router.replace("/auth/login");
-      }
-    }, [user, router]);
 
-    return user ? <Component {...props} /> : null;
-  };
+        useEffect(() => {
+            if (!user && !isLoading) {
+                router.replace("/auth/login");
+            }
+        }, [user, isLoading, router]);
 
-  return WithAuth;
+        return user ?
+            <LoadingProvider>
+                <Component {...props} />
+            </LoadingProvider>
+         : null;
+    };
+
+    return WithAuth;
 }

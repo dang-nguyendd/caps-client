@@ -4,7 +4,7 @@ const Component = React.memo(() => {
   return (
     <footer
       data-testid="footer"
-      className="fixed bottom-0 w-full bg-orange p-4 md:p-6"
+      className="fixed bottom-0 w-full bg-orange p-2 md:p-3"
     >
       <div className="container mx-auto">
         <p className="text-sm text-white md:text-base">

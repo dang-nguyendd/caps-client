@@ -22,7 +22,7 @@ import {
 } from "@/shared/conversation/type";
 
 const Component = React.memo((props: IConversationProps) => {
-  const { conversation } = props;
+  const { conversation, selected } = props;
   const [selectedConversation, setSelectedConversation] =
     useState(DefaultConversation);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -94,7 +94,7 @@ const Component = React.memo((props: IConversationProps) => {
     }
   }, [isRenaming, isDeleting]);
   return (
-    <div className="relative flex items-center">
+    <div className={`relative flex items-center ${selected ? 'bg-gray-700' : ''}`}>
       {isRenaming && selectedConversation?.id === conversation.id ? (
         <div className="flex w-full items-center gap-3 rounded-lg bg-[#343541]/90 p-3">
           <IconMessage size={18} />

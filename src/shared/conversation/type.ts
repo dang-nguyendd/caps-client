@@ -4,8 +4,8 @@ export interface IConversation {
   model: OpenAIModel | Gpt4AllModel;
 }
 
-export interface IConversationProps {
-  conversation: IConversation;
+export interface IConversationProps extends IConversation {
+  selected: boolean
 }
 
 export interface Model {

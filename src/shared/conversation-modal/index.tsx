@@ -1,86 +1,76 @@
-import React, { useState } from "react";
-
-import { IconX } from "@tabler/icons-react";
+import React, {useState} from "react";
+import {IconX} from "@tabler/icons-react";
 import Modal from "react-modal";
-
 import Button from "@/core/button";
 import DropdownMenu from "@/core/dropdown-menu";
-import { IConversationModalProps } from "@/shared/conversation-modal/type";
+import {IConversationModalProps} from "@/shared/conversation-modal/type";
+import {CustomStyle} from "@/shared/conversation-modal/constant";
+import useConversation from "@/hooks/conversation/useConversation";
+import {ConversationNS} from "@/services/conversation/type";
 
 const Component = React.memo((props: IConversationModalProps) => {
-  const { isOpen, onClose, handleCancelClick, handleSaveClick } = props;
+    const {isOpen, onClose} = props;
+    const {createNewConversation} = useConversation()
+    const [conversationName, setConversationName] = useState<string>('')
+    const models: ConversationNS.ChatbotType[] = [ConversationNS.ChatbotType.DUMMY, ConversationNS.ChatbotType.SMART];
 
-  const [conversationName, setConversationName] = useState<string>("");
-  const models = ["OpenAPI", "Gpt4All"];
+    const [selectedModel, setSelectedModel] =useState<ConversationNS.ChatbotType>(ConversationNS.ChatbotType.DUMMY);
 
-  const [selectedModel, setSelectedModel] = useState(models[0]);
+    const _handleCancelClick = () => {
+        onClose()
+    }
 
-  const customStyles = {
-    overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-      zIndex: 100,
-    },
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "500px",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "#1F2937",
-      border: "none",
-      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
-      borderRadius: "8px",
-      padding: "24px",
-    },
-  };
+    const _handleSubmitModal = () => {
+        createNewConversation(conversationName, selectedModel)
+        onClose()
+    }
 
-  const handleModelTypeChange = (value: string) => {
-    setSelectedModel(value);
-  };
+    const handleModelTypeChange = (value: ConversationNS.ChatbotType) => {
+        setSelectedModel(value);
+    };
 
-  return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-      <div className="flex justify-end">
-        <button onClick={onClose} className="text-white">
-          <IconX />
-        </button>
-      </div>
-      <h2 className="mb-4 text-xl font-bold text-white">
-        Create a new conversation
-      </h2>
-      <div className="mb-4">
-        <input
-          id="conversation"
-          type="text"
-          placeholder="Enter conversation name"
-          value={conversationName}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setConversationName(e.target.value)
-          }
-          className="w-full rounded-md border border-gray-700 bg-gray-700 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
-        />
-        <DropdownMenu
-          options={models}
-          onChange={(value) => handleModelTypeChange(value)}
-          selectedValue={selectedModel}
-          label="Model type"
-        />
-      </div>
-      <div className="flex justify-end pr-2">
-        <div className="ml-5">
-          <Button mode="secondary" onClick={handleCancelClick}>
-            Cancel
-          </Button>
-        </div>
-        <div className="ml-5">
-          <Button mode="primary" onClick={handleSaveClick}>
-            Save
-          </Button>
-        </div>
-      </div>
-    </Modal>
-  );
+    return (
+        <Modal isOpen={isOpen} onRequestClose={onClose} style={CustomStyle}>
+            <div className="flex justify-end">
+                <button onClick={onClose} className="text-white">
+                    <IconX/>
+                </button>
+            </div>
+            <h2 className="mb-4 text-xl font-bold text-white">
+                Create a new conversation
+            </h2>
+            <div className="mb-4">
+                <input
+                    id="conversation"
+                    type="text"
+                    placeholder="Enter conversation name"
+                    value={conversationName}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setConversationName(e.target.value)
+                    }
+                    className="w-full rounded-md border border-gray-700 bg-gray-700 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
+                />
+                <DropdownMenu
+                    options={models}
+                    onChange={(value: ConversationNS.ChatbotType) => handleModelTypeChange(value)}
+                    selectedValue={selectedModel}
+                    label="Model type"
+                />
+            </div>
+            <div className="flex justify-end pr-2">
+                <div className="ml-5">
+                    <Button mode="secondary" onClick={_handleCancelClick}>
+                        Cancel
+                    </Button>
+                </div>
+                <div className="ml-5">
+                    <Button mode="primary" onClick={_handleSubmitModal}>
+                        Save
+                    </Button>
+                </div>
+            </div>
+        </Modal>
+    );
 });
 
 Component.displayName = "ConversationModal";

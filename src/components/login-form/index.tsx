@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 
 import { cloneDeep } from "lodash";
 import Link from "next/link";
@@ -9,11 +9,11 @@ import Button from "@/core/button";
 import TextInput from "@/core/text-input";
 import { FormExtension } from "@/core/text-input/type";
 import useLogin from "@/hooks/auth/useLogin";
+import {LoadingContext} from "@/contexts/loading-context";
 
 const Component = React.memo(() => {
   const [form, setForm] = useImmer(DefaultLoginForm);
-  const { login, data, isLoading } = useLogin();
-
+  const { login } = useLogin();
   const _onInputChange = (value: string, extension?: FormExtension) => {
     const { dataKey } = extension!;
     const temp = cloneDeep(form);
@@ -32,6 +32,7 @@ const Component = React.memo(() => {
     login(form);
     setForm(DefaultLoginForm);
   };
+
 
   return (
     <div className="flex w-2/5 flex-col gap-1">

@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 
 import { cloneDeep } from "lodash";
 import Link from "next/link";
 import { useImmer } from "use-immer";
 
 import { DefaultLoginForm } from "@/constant/auth-page";
-import { LoadingContext } from "@/contexts/loading-context";
 import Button from "@/core/button";
 import TextInput from "@/core/text-input";
 import { FormExtension } from "@/core/text-input/type";

@@ -2,18 +2,14 @@ import React, { useContext, useEffect } from "react";
 
 import { useImmer } from "use-immer";
 
-import useConversation from "@/hooks/conversation/useConversation";
 import { ConversationNS } from "@/services/conversation/type";
 import Conversation from "@/shared/conversation";
 import { DefaultConversation } from "@/shared/conversation/type";
+import {IConversationList} from "@/components/conversation-list/type";
+import useMessage from "@/hooks/message";
 
-export const ConversationList: React.FC = () => {
-  const [selectedConversation, setSelectedConversation] =
-    useImmer<ConversationNS.Conversation>(DefaultConversation);
-  const { getAllConversations, conversations } = useConversation();
-  const [localConversations, setLocalConversations] = useImmer<
-    ConversationNS.Conversation[]
-  >([]);
+export const ConversationList: React.FC = (props: IConversationList) => {
+  const {getAllConversations, conversations, setSelectedConversation, selectedConversation} = props
   const _onSelectConversation = (item: ConversationNS.Conversation) => {
     setSelectedConversation(item);
   };
@@ -22,22 +18,12 @@ export const ConversationList: React.FC = () => {
     getAllConversations();
   }, []);
 
-  useEffect(() => {
-    if (conversations && conversations.length && !selectedConversation) {
-      setSelectedConversation(conversations[0]);
-    }
-  }, [conversations]);
-
-  useEffect(() => {
-    if (conversations) setLocalConversations(conversations);
-  }, [conversations]);
-
-  if (!localConversations)
+  if (!conversations)
     return <div className="font-bold text-gray-300"> Empty Conversation </div>;
 
   return (
     <div className="mt-4 flex scroll-m-2 flex-col gap-2 overflow-y-scroll border-b-amber-100">
-      {localConversations.map((conversation) => (
+      {conversations.map((conversation) => (
         <div
           key={conversation.id}
           onClick={() => _onSelectConversation(conversation)}

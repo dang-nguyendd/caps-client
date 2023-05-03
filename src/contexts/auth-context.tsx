@@ -46,6 +46,8 @@ export const AuthProvider = (props: IAuthContextProps) => {
 
   const setAxiosAuthHeader = (accessToken: string) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+
   };
 
   const resetAxiosHeader = () => {

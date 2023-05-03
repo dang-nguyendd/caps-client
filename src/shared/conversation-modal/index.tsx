@@ -11,8 +11,7 @@ import { CustomStyle } from "@/shared/conversation-modal/constant";
 import { IConversationModalProps } from "@/shared/conversation-modal/type";
 
 const Component = React.memo((props: IConversationModalProps) => {
-  const { isOpen, onClose } = props;
-  const { createNewConversation } = useConversation();
+  const { isOpen, onClose, createNewConversation } = props;
   const [conversationName, setConversationName] = useState<string>("");
   const models: ConversationNS.ChatbotType[] = [
     ConversationNS.ChatbotType.DUMMY,

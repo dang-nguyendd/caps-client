@@ -1,18 +1,18 @@
 import * as React from "react";
 
-import { IRadioProps, RadioOption } from "@/core/radio/type";
+import { ISelectOptionProps, SelectOption } from "@/core/select-option/type";
 
-const Component = React.memo((props: IRadioProps) => {
+const Component = React.memo((props: ISelectOptionProps) => {
   const {
     onChange,
     selectedOption,
     options,
     title,
     dataKey,
-    type = "radio",
+    type = "select-option",
   } = props;
 
-  const handleChange = (option: RadioOption) => {
+  const handleChange = (option: SelectOption) => {
     if (onChange) {
       onChange(option, { dataKey });
     }
@@ -41,6 +41,6 @@ const Component = React.memo((props: IRadioProps) => {
   );
 });
 
-Component.displayName = "Radio";
+Component.displayName = "Option";
 
 export default Component;

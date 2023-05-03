@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
-import { HttpResponse } from "@/types/enum/HttpResponse";
+import { HttpResponse } from "@/types/enum/http-response";
 import { showToast } from "@/utils/toast";
 
 export const API_BASE_URL = "http://localhost:3003";

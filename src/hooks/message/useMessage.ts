@@ -6,7 +6,7 @@ import { MessageNS } from "@/services/message/type";
 import { showToast } from "@/utils/toast";
 
 type MessageResult = {
-  getAllMessages: (conversationId: number) => void;
+  getAllMessages: ({ conversationId }: MessageNS.GetMessageReq) => void;
   messages: MessageNS.Messages;
   setMessages: (messages: MessageNS.Message) => void;
 };
@@ -19,7 +19,9 @@ const useMessage = (): MessageResult => {
     setMessages((prev) => [...prev, newMessage]);
   };
 
-  const getAllMessages = async (conversationId: number) => {
+  const getAllMessages = async ({
+    conversationId,
+  }: MessageNS.GetMessageReq) => {
     setLoading(true);
     try {
       const response = await MessageService.getAllMessages({ conversationId });

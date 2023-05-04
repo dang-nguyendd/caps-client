@@ -1,9 +1,17 @@
 import { ReactNode } from "react";
 
+type GenderType = "male" | "female" | "other";
+type RoleType = string[];
+
 export interface User {
   id: number;
-  email: string;
   name: string;
+  gender: GenderType;
+  dob: string;
+  age: number;
+  email: string;
+  roles: RoleType;
+  createdAt: string;
 }
 
 export interface AuthContextData {

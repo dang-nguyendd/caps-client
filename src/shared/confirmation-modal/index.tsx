@@ -8,6 +8,7 @@ import {
 import Modal from "react-modal";
 
 import Button from "@/core/button";
+import { CustomStyle } from "@/shared/confirmation-modal/constant";
 import { IConfirmationModalProps } from "@/shared/confirmation-modal/type";
 
 const Component = React.memo((props: IConfirmationModalProps) => {
@@ -51,26 +52,6 @@ const Component = React.memo((props: IConfirmationModalProps) => {
 
   const { color } = getConfirmationModalTypeStyle(type);
 
-  const customStyles = {
-    overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-      zIndex: 100,
-    },
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "500px",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "#1F2937",
-      border: "none",
-      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
-      borderRadius: "8px",
-      padding: "24px",
-    },
-  };
-
   const getConfirmationModalIcon = () => {
     switch (type) {
       case "success":
@@ -87,7 +68,7 @@ const Component = React.memo((props: IConfirmationModalProps) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
+    <Modal isOpen={isOpen} onRequestClose={onClose} style={CustomStyle}>
       <div className="flex w-full items-center justify-center">
         <div
           className={`mb-2 flex h-16 w-16 items-center justify-center rounded-full border-2`}

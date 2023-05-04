@@ -22,27 +22,27 @@ import {
 } from "@/shared/conversation/type";
 
 const Component = React.memo((props: IConversationProps) => {
-  const { conversation } = props;
+  const { conversation, selected } = props;
   const [selectedConversation, setSelectedConversation] =
     useState(DefaultConversation);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isRenaming, setIsRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState("");
 
-  const handleEnterDown = (e: KeyboardEvent<HTMLDivElement>) => {
+  const _handleEnterDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      selectedConversation && handleRename(selectedConversation);
+      selectedConversation && _handleRename(selectedConversation);
     }
   };
 
-  const handleUpdateConversation = (conversation: IConversation) => {};
+  const _handleUpdateConversation = (conversation: IConversation) => {};
 
-  const handleSelectConversation = (conversation: IConversation) => {};
+  const _handleSelectConversation = (conversation: IConversation) => {};
 
-  const handleDeleteConversation = (conversation: IConversation) => {};
+  const _handleDeleteConversation = (conversation: IConversation) => {};
 
-  const handleDragStart = (
+  const _handleDragStart = (
     e: DragEvent<HTMLButtonElement>,
     conversation: IConversation
   ) => {
@@ -51,37 +51,37 @@ const Component = React.memo((props: IConversationProps) => {
     }
   };
 
-  const handleRename = (conversation: IConversation) => {
+  const _handleRename = (conversation: IConversation) => {
     if (renameValue.trim().length > 0) {
-      handleUpdateConversation(conversation);
+      _handleUpdateConversation(conversation);
       setRenameValue("");
       setIsRenaming(false);
     }
   };
 
-  const handleConfirm: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const _handleConfirm: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     if (isDeleting) {
-      handleDeleteConversation(conversation);
+      _handleDeleteConversation(conversation);
     } else if (isRenaming) {
-      handleRename(conversation);
+      _handleRename(conversation);
     }
     setIsDeleting(false);
     setIsRenaming(false);
   };
 
-  const handleCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const _handleCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     setIsDeleting(false);
     setIsRenaming(false);
   };
 
-  const handleOpenRenameModal: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const _handleOpenRenameModal: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     setIsRenaming(true);
     selectedConversation && setRenameValue(selectedConversation.name);
   };
-  const handleOpenDeleteModal: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const _handleOpenDeleteModal: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     setIsDeleting(true);
   };
@@ -94,7 +94,9 @@ const Component = React.memo((props: IConversationProps) => {
     }
   }, [isRenaming, isDeleting]);
   return (
-    <div className="relative flex items-center">
+    <div
+      className={`relative flex items-center ${selected ? "bg-gray-700" : ""}`}
+    >
       {isRenaming && selectedConversation?.id === conversation.id ? (
         <div className="flex w-full items-center gap-3 rounded-lg bg-[#343541]/90 p-3">
           <IconMessage size={18} />
@@ -103,7 +105,7 @@ const Component = React.memo((props: IConversationProps) => {
             type="text"
             value={renameValue}
             onChange={(e) => setRenameValue(e.target.value)}
-            onKeyDown={handleEnterDown}
+            onKeyDown={_handleEnterDown}
             autoFocus
           />
         </div>
@@ -114,9 +116,9 @@ const Component = React.memo((props: IConversationProps) => {
               ? "bg-[#343541]/90"
               : ""
           }`}
-          onClick={() => handleSelectConversation(conversation)}
+          onClick={() => _handleSelectConversation(conversation)}
           draggable="true"
-          onDragStart={(e) => handleDragStart(e, conversation)}
+          onDragStart={(e) => _handleDragStart(e, conversation)}
         >
           <IconMessage size={18} />
           <div
@@ -132,10 +134,10 @@ const Component = React.memo((props: IConversationProps) => {
       {(isDeleting || isRenaming) &&
         selectedConversation?.id === conversation.id && (
           <div className="absolute right-1 z-10 flex text-gray-300">
-            <SidebarActionButton handleClick={handleConfirm}>
+            <SidebarActionButton handleClick={_handleConfirm}>
               <IconCheck size={18} />
             </SidebarActionButton>
-            <SidebarActionButton handleClick={handleCancel}>
+            <SidebarActionButton handleClick={_handleCancel}>
               <IconX size={18} />
             </SidebarActionButton>
           </div>
@@ -145,10 +147,10 @@ const Component = React.memo((props: IConversationProps) => {
         !isDeleting &&
         !isRenaming && (
           <div className="absolute right-1 z-10 flex text-gray-300">
-            <SidebarActionButton handleClick={handleOpenRenameModal}>
+            <SidebarActionButton handleClick={_handleOpenRenameModal}>
               <IconPencil size={18} />
             </SidebarActionButton>
-            <SidebarActionButton handleClick={handleOpenDeleteModal}>
+            <SidebarActionButton handleClick={_handleOpenDeleteModal}>
               <IconTrash size={18} />
             </SidebarActionButton>
           </div>

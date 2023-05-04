@@ -5,42 +5,36 @@ import Modal from "react-modal";
 
 import Button from "@/core/button";
 import DropdownMenu from "@/core/dropdown-menu";
+import { ConversationNS } from "@/services/conversation/type";
+import { CustomStyle } from "@/shared/conversation-modal/constant";
 import { IConversationModalProps } from "@/shared/conversation-modal/type";
 
 const Component = React.memo((props: IConversationModalProps) => {
-  const { isOpen, onClose, handleCancelClick, handleSaveClick } = props;
-
+  const { isOpen, onClose, createNewConversation } = props;
   const [conversationName, setConversationName] = useState<string>("");
-  const models = ["OpenAPI", "Gpt4All"];
+  const models: ConversationNS.ChatbotType[] = [
+    ConversationNS.ChatbotType.DUMMY,
+    ConversationNS.ChatbotType.SMART,
+  ];
 
-  const [selectedModel, setSelectedModel] = useState(models[0]);
+  const [selectedModel, setSelectedModel] =
+    useState<ConversationNS.ChatbotType>(ConversationNS.ChatbotType.DUMMY);
 
-  const customStyles = {
-    overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-      zIndex: 100,
-    },
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "500px",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "#1F2937",
-      border: "none",
-      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
-      borderRadius: "8px",
-      padding: "24px",
-    },
+  const _handleCancelClick = () => {
+    onClose();
   };
 
-  const handleModelTypeChange = (value: string) => {
+  const _handleSubmitModal = () => {
+    createNewConversation(conversationName, selectedModel);
+    onClose();
+  };
+
+  const handleModelTypeChange = (value: ConversationNS.ChatbotType) => {
     setSelectedModel(value);
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
+    <Modal isOpen={isOpen} onRequestClose={onClose} style={CustomStyle}>
       <div className="flex justify-end">
         <button onClick={onClose} className="text-white">
           <IconX />
@@ -62,19 +56,21 @@ const Component = React.memo((props: IConversationModalProps) => {
         />
         <DropdownMenu
           options={models}
-          onChange={(value) => handleModelTypeChange(value)}
+          onChange={(value: ConversationNS.ChatbotType) =>
+            handleModelTypeChange(value)
+          }
           selectedValue={selectedModel}
           label="Model type"
         />
       </div>
       <div className="flex justify-end pr-2">
         <div className="ml-5">
-          <Button mode="secondary" onClick={handleCancelClick}>
+          <Button mode="secondary" onClick={_handleCancelClick}>
             Cancel
           </Button>
         </div>
         <div className="ml-5">
-          <Button mode="primary" onClick={handleSaveClick}>
+          <Button mode="primary" onClick={_handleSubmitModal}>
             Save
           </Button>
         </div>

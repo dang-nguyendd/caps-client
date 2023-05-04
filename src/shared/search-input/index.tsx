@@ -6,11 +6,11 @@ import { ISearchInputProps } from "@/shared/search-input/type";
 
 const Component = React.memo((props: ISearchInputProps) => {
   const { placeholder, searchTerm, onSearch, onFocus, onBlur } = props;
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const _handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSearch(e.target.value);
   };
 
-  const clearSearch = () => {
+  const _clearSearch = () => {
     onSearch("");
   };
 
@@ -20,7 +20,7 @@ const Component = React.memo((props: ISearchInputProps) => {
         <IconSearch
           className="absolute right-4 cursor-pointer text-neutral-300 hover:text-neutral-400"
           size={18}
-          onClick={clearSearch}
+          onClick={_clearSearch}
         />
       )}
       <input
@@ -28,7 +28,7 @@ const Component = React.memo((props: ISearchInputProps) => {
         type="text"
         placeholder={placeholder || ""}
         value={searchTerm}
-        onChange={handleSearchChange}
+        onChange={_handleSearchChange}
         onFocus={onFocus}
         onBlur={onBlur}
       />
@@ -37,7 +37,7 @@ const Component = React.memo((props: ISearchInputProps) => {
         <IconX
           className="absolute right-4 cursor-pointer text-neutral-300 hover:text-neutral-400"
           size={18}
-          onClick={clearSearch}
+          onClick={_clearSearch}
         />
       )}
     </div>

@@ -7,15 +7,15 @@ const Component = () => {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
 
-  const handleChangeAge = (value: string) => {
+  const _handleChangeAge = (value: string) => {
     setAge(value);
   };
 
-  const handleChangeWeight = (value: string) => {
+  const _handleChangeWeight = (value: string) => {
     setWeight(value);
   };
 
-  const handleChangeHeight = (value: string) => {
+  const _handleChangeHeight = (value: string) => {
     setHeight(value);
   };
 
@@ -27,7 +27,7 @@ const Component = () => {
         placeHolder="age"
         label="Age"
         name="age"
-        onChange={(value) => handleChangeAge(value)}
+        onChange={(value) => _handleChangeAge(value)}
       />
       <TextInput
         value={weight}
@@ -35,7 +35,7 @@ const Component = () => {
         placeHolder="weight in kg"
         label="Weight"
         name="weight"
-        onChange={(value) => handleChangeWeight(value)}
+        onChange={(value) => _handleChangeWeight(value)}
       />
       <TextInput
         value={height}
@@ -43,7 +43,7 @@ const Component = () => {
         placeHolder="height in cm"
         label="Height"
         name="height"
-        onChange={(value) => handleChangeHeight(value)}
+        onChange={(value) => _handleChangeHeight(value)}
       />
     </div>
   );

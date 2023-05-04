@@ -30,15 +30,15 @@ const Component = () => {
     useImmer<SelectOption>(DefaultCheckboxOption);
   const [familyHistoryDescription, setFamilyHistoryDescription] = useState("");
 
-  const handleChangeBloodPressure = (value: string) => {
+  const _handleChangeBloodPressure = (value: string) => {
     setBloodPressure(value);
   };
 
-  const handleChangeBloodType = (value: string) => {
+  const _handleChangeBloodType = (value: string) => {
     setBloodType(value);
   };
 
-  const handleAllergiesChange = (
+  const _handleAllergiesChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = event.target.value;
@@ -47,11 +47,11 @@ const Component = () => {
     }
   };
 
-  const handleAllergiesDelete = (value: string) => {
+  const _handleAllergiesDelete = (value: string) => {
     setAllergies(allergies.filter((allergy) => allergy !== value));
   };
 
-  const handleMedicationsChange = (
+  const _handleMedicationsChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = event.target.value;
@@ -60,7 +60,7 @@ const Component = () => {
     }
   };
 
-  const handleMedicationsDelete = (value: string) => {
+  const _handleMedicationsDelete = (value: string) => {
     setMedications(medications.filter((medication) => medication !== value));
   };
 
@@ -75,7 +75,7 @@ const Component = () => {
               placeHolder="blood pressure"
               label="Blood pressure"
               name="blood-pressure"
-              onChange={(value) => handleChangeBloodPressure(value)}
+              onChange={(value) => _handleChangeBloodPressure(value)}
             />
           </div>
           <div className="ml-2 flex-1">
@@ -85,7 +85,7 @@ const Component = () => {
               placeHolder="blood type"
               label="Blood type"
               name="blood-type"
-              onChange={(value) => handleChangeBloodType(value)}
+              onChange={(value) => _handleChangeBloodType(value)}
             />
           </div>
         </div>

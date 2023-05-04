@@ -1,8 +1,65 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
-import { AuthNS } from "@/services/auth/type";
+import { LoadingContext } from "@/contexts/loading-context";
+import ConversationService from "@/services/conversation";
+import { ConversationNS } from "@/services/conversation/type";
+import { showToast } from "@/utils/toast";
+
+type ConversationResult = {
+  getAllConversations: () => void;
+  createNewConversation: (
+    name: string,
+    chatBotType: ConversationNS.ChatbotType
+  ) => void;
+  conversations: ConversationNS.Conversation[];
+  selectedConversation: ConversationNS.Conversation;
+  setSelectedConversation: (x: ConversationNS.Conversation) => void;
+};
 
 const useConversation = () => {
-  const [data, setData] = useState<AuthNS.LoginResponse | null>(null);
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [conversations, setConversations] = useState<
+    ConversationNS.Conversation[]
+  >([]);
+  const { setLoading } = useContext(LoadingContext);
+  const [selectedConversation, setSelectedConversation] =
+    useState<ConversationNS.Conversation | null>(null);
+  const createNewConversation = async (
+    name: string,
+    chatBotType: ConversationNS.ChatbotType
+  ) => {
+    setLoading(true);
+    try {
+      const newConversation: ConversationNS.Conversation =
+        await ConversationService.createNewConversation({
+          name,
+          chatBotType,
+        });
+      setConversations((prev) => [...prev, newConversation]);
+      showToast("success", "Create new conversation successfully!");
+    } catch (error) {
+      showToast("error", "Fail to get conversations");
+    }
+    setLoading(false);
+  };
+
+  const getAllConversations = async () => {
+    setLoading(true);
+    try {
+      const response = await ConversationService.getAllConversation();
+      setConversations(response);
+    } catch (error) {
+      showToast("error", "Could not fetch conversations");
+    }
+    setLoading(false);
+  };
+
+  return {
+    createNewConversation,
+    getAllConversations,
+    conversations,
+    setSelectedConversation,
+    selectedConversation,
+  } as ConversationResult;
 };
+
+export default useConversation;

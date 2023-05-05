@@ -66,6 +66,13 @@ const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
     }
   };
 
+  const _handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      _handleSend();
+    }
+  };
+
   return (
     <section className="flex flex-auto flex-col border-l border-gray-800">
       <div className="flex-1 overflow-y-scroll p-4">
@@ -89,10 +96,10 @@ const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
           <div className="relative grow">
             <input
               className="w-full rounded-full border border-gray-800 bg-gray-800 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
-              type="text"
               value={message}
               onChange={(e) => _onValueChange(e.target.value)}
-              placeholder="Ask anything ( Shift-Enter to new line)"
+              onKeyDown={(e) => _handleKeyDown(e)}
+              placeholder="Ask anything (Shift-Enter for new line, Enter to send)"
             />
           </div>
           <button

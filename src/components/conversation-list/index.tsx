@@ -10,6 +10,15 @@ const Component: React.FC<IConversationListProps> = ({
   setSelectedConversation,
   selectedConversation,
 }) => {
+export const ConversationList: React.FC<IConversationList> = (
+  props: IConversationList
+) => {
+  const {
+    getAllConversations,
+    conversations,
+    setSelectedConversation,
+    selectedConversation,
+  } = props;
   const _onSelectConversation = (item: ConversationNS.Conversation) => {
     setSelectedConversation(item);
   };

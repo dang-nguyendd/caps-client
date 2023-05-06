@@ -24,7 +24,7 @@ const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
 
   useEffect(() => {
     if (selectedConversation && selectedConversation.id)
-      getAllMessages({ conversationId: selectedConversation.id });
+      getAllMessages(selectedConversation.id);
   }, [selectedConversation]);
 
   useEffect(() => {
@@ -76,9 +76,9 @@ const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
   return (
     <section className="flex flex-auto flex-col border-l border-gray-800">
       <div className="flex-1 overflow-y-scroll p-4">
-        {messages.map((message) => (
+        {messages.map((message, index) => (
           <ChatMessage
-            key={message.id}
+            key={index}
             conservationId={message.id}
             content={message.content}
             senderType={message.sender}

@@ -3,15 +3,13 @@ import React, { useEffect, useRef } from "react";
 import { IconSend } from "@tabler/icons-react";
 import { useImmer } from "use-immer";
 
-import { IMessageList } from "@/components/message-list/type";
+import { IMessageListProps } from "@/components/message-list/type";
 import ChatMessage from "@/core/chat-message";
-import MessageInput from "@/core/message-input";
-import useMessage from "@/hooks/message";
+import useMessage from "@/hooks/message/useMessage";
 import { MessageNS } from "@/services/message/type";
 import { closeSocket, getSocket, initSocket } from "@/socket";
 
-const Component: React.FC<IMessageList> = (props: IMessageList) => {
-  const { selectedConversation } = props;
+const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
   const { getAllMessages, messages, setMessages } = useMessage();
   const [message, setMessage] = useImmer<string>("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -45,7 +43,7 @@ const Component: React.FC<IMessageList> = (props: IMessageList) => {
     };
   }, []);
 
-  const scrollToBottom = () => {
+  const _scrollToBottom = () => {
     if (messagesEndRef && messagesEndRef.current) {
       const dom = messagesEndRef.current as HTMLDivElement;
       dom.scrollIntoView({ behavior: "smooth" });
@@ -53,8 +51,8 @@ const Component: React.FC<IMessageList> = (props: IMessageList) => {
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages[messages.length - 1]]); // Watch the last message in the array
+    _scrollToBottom();
+  }, [messages[messages.length - 1]]);
 
   const _handleSend = () => {
     const socket = getSocket();
@@ -65,6 +63,13 @@ const Component: React.FC<IMessageList> = (props: IMessageList) => {
         sender: MessageNS.SenderType.USER,
       });
       _clearMessage();
+    }
+  };
+
+  const _handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      _handleSend();
     }
   };
 
@@ -83,17 +88,7 @@ const Component: React.FC<IMessageList> = (props: IMessageList) => {
         {messages &&
         messages.length &&
         messages[messages.length - 1].sender === MessageNS.SenderType.USER ? (
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              fontWeight: "bold",
-              fontStyle: "italic",
-            }}
-          >
-            The chat advisor is typing...
-          </div>
+          <div className="text-white">The chat advisor is typing...</div>
         ) : null}
       </div>
       <div className="flex-none">
@@ -101,10 +96,10 @@ const Component: React.FC<IMessageList> = (props: IMessageList) => {
           <div className="relative grow">
             <input
               className="w-full rounded-full border border-gray-800 bg-gray-800 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
-              type="text"
               value={message}
               onChange={(e) => _onValueChange(e.target.value)}
-              placeholder="Ask anything ( Shift-Enter to new line)"
+              onKeyDown={(e) => _handleKeyDown(e)}
+              placeholder="Ask anything (Shift-Enter for new line, Enter to send)"
             />
           </div>
           <button
@@ -119,5 +114,7 @@ const Component: React.FC<IMessageList> = (props: IMessageList) => {
     </section>
   );
 };
+
+Component.displayName = "MessageList";
 
 export default Component;

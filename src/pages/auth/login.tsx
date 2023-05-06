@@ -1,16 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import LoginForm from "@/components/login-form";
-import { LoadingContext } from "@/contexts/loading-context";
 import withLayout from "@/hoc/withLayout";
 
-const Component = React.memo((props) => {
+const Component = () => {
   return (
     <div className="flex h-full w-full items-center justify-center">
       <LoginForm />
     </div>
   );
-});
+};
 
 Component.displayName = "Login";
 

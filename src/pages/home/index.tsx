@@ -6,18 +6,15 @@ import {
   IconUserCancel,
 } from "@tabler/icons-react";
 import Link from "next/link";
-import { useImmer } from "use-immer";
 
 import ConversationList from "@/components/conversation-list";
 import MessageList from "@/components/message-list";
+import Weather from "@/components/weather";
 import { AuthContext } from "@/contexts/auth-context";
-import ChatMessage from "@/core/chat-message";
-import MessageInput from "@/core/message-input";
 import withAuth from "@/hoc/withLogin";
 import useConversation from "@/hooks/conversation/useConversation";
 import ConversationModal from "@/shared/conversation-modal";
 import SearchInput from "@/shared/search-input";
-import { User } from "@/types/context/with-auth-context";
 
 const Component: React.FC = () => {
   {
@@ -30,11 +27,11 @@ const Component: React.FC = () => {
       selectedConversation,
       setSelectedConversation,
     } = useConversation();
-    const handleOpenConversationModal = () => {
+    const _handleOpenConversationModal = () => {
       setShowConversationModal(true);
     };
 
-    const handleCloseConversationModal = () => {
+    const _handleCloseConversationModal = () => {
       setShowConversationModal(false);
     };
 
@@ -42,7 +39,7 @@ const Component: React.FC = () => {
       <div className="flex h-screen w-full overflow-hidden bg-gray-900 text-gray-200 antialiased">
         <div className="flex flex-1 flex-col">
           <main className="flex min-h-0 grow flex-row">
-            <section className="flex w-24 flex-none flex-col overflow-auto  md:w-2/5 lg:max-w-sm">
+            <section className="group flex w-24 flex-none flex-col overflow-auto transition-all duration-300 ease-in-out md:w-2/5 lg:max-w-sm">
               <div className="flex flex-none flex-row items-center justify-between p-4">
                 <p className="hidden text-lg font-bold md:block">
                   Welcome, {user?.name}
@@ -61,7 +58,7 @@ const Component: React.FC = () => {
               <div className="mx-4 flex-none cursor-pointer gap-3 rounded-md border border-white/20 p-4 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10">
                 <div
                   className="flex cursor-pointer items-center"
-                  onClick={handleOpenConversationModal}
+                  onClick={_handleOpenConversationModal}
                 >
                   <IconPlus />
                   <span className="ml-2 text-white">New Conversation</span>
@@ -75,10 +72,9 @@ const Component: React.FC = () => {
               />
               <ConversationModal
                 isOpen={showConversationModal}
-                onClose={handleCloseConversationModal}
+                onClose={_handleCloseConversationModal}
                 createNewConversation={createNewConversation}
               />
-
               <div className="grow"></div>
               <div className="flex border-t border-gray-800 p-4 pt-8">
                 <div className="flex flex-col gap-1">
@@ -94,7 +90,7 @@ const Component: React.FC = () => {
                   <div className="flex cursor-pointer flex-row items-center gap-1">
                     <IconUserCancel />
                     <span
-                      className="ml-2 cursor-pointer text-sm text-white"
+                      className="ml-2 mt-4 cursor-pointer text-sm text-white"
                       onClick={signOut}
                     >
                       Logout
@@ -103,7 +99,22 @@ const Component: React.FC = () => {
                 </div>
               </div>
             </section>
-            <MessageList selectedConversation={selectedConversation} />
+            <section className="flex flex-auto flex-col border border-gray-800">
+              <div className="flex flex-none flex-row items-center justify-between border-b border-gray-800 px-6 py-4 shadow">
+                <div className="flex">
+                  <div>
+                    <p className="mb-2 text-xl font-bold">
+                      Dengue Intelligent Chatbot Assistance
+                    </p>
+                    {/*<p>Model type: {selectedConversation.chatBotType}</p>*/}
+                  </div>
+                </div>
+                <div className="flex">
+                  <Weather />
+                </div>
+              </div>
+              <MessageList selectedConversation={selectedConversation} />
+            </section>
           </main>
         </div>
       </div>

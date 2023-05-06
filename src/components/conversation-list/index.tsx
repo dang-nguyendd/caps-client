@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
 
-import { IConversationList } from "@/components/conversation-list/type";
+import { IConversationListProps } from "@/components/conversation-list/type";
 import { ConversationNS } from "@/services/conversation/type";
 import Conversation from "@/shared/conversation";
 
+const Component: React.FC<IConversationListProps> = ({
+  getAllConversations,
+  conversations,
+  setSelectedConversation,
+  selectedConversation,
+}) => {
 export const ConversationList: React.FC<IConversationList> = (
   props: IConversationList
 ) => {
@@ -43,4 +49,6 @@ export const ConversationList: React.FC<IConversationList> = (
     </div>
   );
 };
-export default ConversationList;
+
+Component.displayName = "ConversationList";
+export default Component;

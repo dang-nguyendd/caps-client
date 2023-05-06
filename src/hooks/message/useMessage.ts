@@ -11,7 +11,7 @@ type MessageResult = {
   setMessages: (messages: MessageNS.Message) => void;
 };
 
-const useMessage = () => {
+const useMessage = (): MessageResult => {
   const [messages, setMessages] = useState<MessageNS.Messages>([]);
   const { setLoading } = useContext(LoadingContext);
 
@@ -19,7 +19,9 @@ const useMessage = () => {
     setMessages((prev) => [...prev, newMessage]);
   };
 
-  const getAllMessages = async (conversationId: number) => {
+  const getAllMessages = async ({
+    conversationId,
+  }: MessageNS.GetMessageReq) => {
     setLoading(true);
     console.log({conversationId})
     try {
@@ -36,7 +38,7 @@ const useMessage = () => {
     getAllMessages,
     messages,
     setMessages: _handleSetMessage,
-  } as MessageResult;
+  };
 };
 
 export default useMessage;

@@ -9,10 +9,10 @@ const Component = React.memo((props: ISelectOptionProps) => {
     options,
     title,
     dataKey,
-    type = "select-option",
+    type = "radio",
   } = props;
 
-  const handleChange = (option: SelectOption) => {
+  const _handleChange = (option: SelectOption) => {
     if (onChange) {
       onChange(option, { dataKey });
     }
@@ -30,7 +30,7 @@ const Component = React.memo((props: ISelectOptionProps) => {
                 className="text-blue"
                 value={option.value}
                 checked={selectedOption === option}
-                onChange={() => handleChange(option)}
+                onChange={() => _handleChange(option)}
               />
               <span className="ml-2">{option.label}</span>
             </label>

@@ -1,14 +1,12 @@
-import React, { useContext, useEffect } from "react";
-
-import { useImmer } from "use-immer";
+import React, { useEffect } from "react";
 
 import { IConversationList } from "@/components/conversation-list/type";
-import useMessage from "@/hooks/message";
 import { ConversationNS } from "@/services/conversation/type";
 import Conversation from "@/shared/conversation";
-import { DefaultConversation } from "@/shared/conversation/type";
 
-export const ConversationList: React.FC = (props: IConversationList) => {
+export const ConversationList: React.FC<IConversationList> = (
+  props: IConversationList
+) => {
   const {
     getAllConversations,
     conversations,

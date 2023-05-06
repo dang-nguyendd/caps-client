@@ -10,7 +10,7 @@ import useMessage from "@/hooks/message";
 import { MessageNS } from "@/services/message/type";
 import { closeSocket, getSocket, initSocket } from "@/socket";
 
-const Component: React.FC = (props: IMessageList) => {
+const Component: React.FC<IMessageList> = (props: IMessageList) => {
   const { selectedConversation } = props;
   const { getAllMessages, messages, setMessages } = useMessage();
   const [message, setMessage] = useImmer<string>("");
@@ -26,7 +26,7 @@ const Component: React.FC = (props: IMessageList) => {
 
   useEffect(() => {
     if (selectedConversation && selectedConversation.id)
-      getAllMessages({ conversationId: selectedConversation.id });
+      getAllMessages(selectedConversation.id);
   }, [selectedConversation]);
 
   useEffect(() => {
@@ -71,8 +71,9 @@ const Component: React.FC = (props: IMessageList) => {
   return (
     <section className="flex flex-auto flex-col border-l border-gray-800">
       <div className="flex-1 overflow-y-scroll p-4">
-        {messages.map((message) => (
+        {messages.map((message, index) => (
           <ChatMessage
+            key={index}
             conservationId={message.id}
             content={message.content}
             senderType={message.sender}

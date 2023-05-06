@@ -1,6 +1,10 @@
+import { ConversationNS } from "@/services/conversation/type";
+
 export interface IConversationModalProps {
   isOpen: boolean;
   onClose: () => void;
-  handleCancelClick: () => void;
-  handleSaveClick: () => void;
+  createNewConversation: (
+    name: string,
+    chatBotType: ConversationNS.ChatbotType
+  ) => void;
 }

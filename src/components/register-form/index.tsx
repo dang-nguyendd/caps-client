@@ -10,8 +10,8 @@ import {
 } from "@/components/register-form/constant";
 import { DefaultRegisterForm } from "@/constant/auth-page";
 import Button from "@/core/button";
-import Radio from "@/core/radio";
-import { RadioOption } from "@/core/radio/type";
+import Option from "@/core/select-option";
+import { SelectOption } from "@/core/select-option/type";
 import TextInput from "@/core/text-input";
 import { FormExtension } from "@/core/text-input/type";
 import useRegister from "@/hooks/auth/useRegister";
@@ -19,7 +19,7 @@ import useRegister from "@/hooks/auth/useRegister";
 const Component = React.memo(() => {
   const [form, setForm] = useImmer(DefaultRegisterForm);
   const [selectedGender, setSelectedGender] =
-    useImmer<RadioOption>(DefaultGenderOption);
+    useImmer<SelectOption>(DefaultGenderOption);
   const { register } = useRegister();
 
   const _onInputChange = (value: string, extension?: FormExtension) => {
@@ -46,8 +46,8 @@ const Component = React.memo(() => {
     // setForm(DefaultRegisterForm);
   };
 
-  const _onChangeRadioOption = (
-    option: RadioOption,
+  const _onChangeSelectOption = (
+    option: SelectOption,
     extension?: FormExtension
   ) => {
     const { dataKey } = extension!;
@@ -101,8 +101,8 @@ const Component = React.memo(() => {
         dataKey="confirmPassword"
         onChange={_onInputChange}
       />
-      <Radio
-        onChange={_onChangeRadioOption}
+      <Option
+        onChange={_onChangeSelectOption}
         dataKey="gender"
         selectedOption={selectedGender}
         options={GenderOptions}

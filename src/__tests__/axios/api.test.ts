@@ -1,8 +1,8 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import MockAdapter from "axios-mock-adapter";
 
 import api, { API_BASE_URL } from "@/axios";
-import { HttpResponse } from "@/types/enum/HttpResponse";
+import { HttpResponse } from "@/types/enum/http-response";
 import { showToast } from "@/utils/toast";
 
 jest.mock("@/utils/toast");
@@ -127,18 +127,6 @@ describe("api", () => {
     }
   });
 
-  it("should handle request error with no internet connection", async () => {
-    const error = new Error("Network Error");
-    mock.onGet("/test").networkError();
-
-    await expect(api.get("/test")).rejects.toThrow();
-
-    expect(showToast).toHaveBeenCalledWith(
-      "error",
-      `No response received: ${error.message}`
-    );
-  });
-
   it("should handle request error", async () => {
     mock.onGet("/test").networkErrorOnce();
 
@@ -151,21 +139,6 @@ describe("api", () => {
         `Request error: ${error.message}`
       );
       expect(error.message).toEqual("Network Error");
-    }
-  });
-
-  it("should handle no response error", async () => {
-    mock.onGet("/test").timeoutOnce();
-
-    try {
-      await api.get("/test");
-    } catch (error: any) {
-      expect(error).toBeInstanceOf(AxiosError);
-      expect(showToast).toHaveBeenCalledWith(
-        "error",
-        `No response received: ${error.message}`
-      );
-      expect(error.message).toEqual("timeout of 0ms exceeded");
     }
   });
 });

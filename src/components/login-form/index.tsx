@@ -12,8 +12,7 @@ import useLogin from "@/hooks/auth/useLogin";
 
 const Component = React.memo(() => {
   const [form, setForm] = useImmer(DefaultLoginForm);
-  const { login, data, isLoading } = useLogin();
-
+  const { login } = useLogin();
   const _onInputChange = (value: string, extension?: FormExtension) => {
     const { dataKey } = extension!;
     const temp = cloneDeep(form);

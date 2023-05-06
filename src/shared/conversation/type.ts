@@ -1,31 +1,20 @@
+import { ConversationNS } from "@/services/conversation/type";
+
+import ChatbotType = ConversationNS.ChatbotType;
+
 export interface IConversation {
-  id: string;
+  id: number;
   name: string;
-  model: OpenAIModel | Gpt4AllModel;
+  chatBotType: ConversationNS.ChatbotType;
 }
 
-export interface IConversationProps {
+export interface IConversationProps extends IConversation {
   conversation: IConversation;
+  selected: boolean;
 }
-
-export interface Model {
-  id: string;
-  name: string;
-  maxLength: number;
-  tokenLimit: number;
-}
-
-export interface OpenAIModel extends Model {}
-
-export interface Gpt4AllModel extends Model {}
 
 export const DefaultConversation: IConversation = {
-  id: "",
+  id: 0,
   name: "",
-  model: {
-    id: "",
-    name: "",
-    maxLength: 0,
-    tokenLimit: 0,
-  },
+  chatBotType: ChatbotType.DUMMY,
 };

@@ -13,11 +13,11 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps, router }: AppProps) {
-  const { isLoading, setIsLoading } = useContext(LoadingContext);
+  const { loading, setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
-    const handleStart = () => setIsLoading(true);
-    const handleComplete = () => setIsLoading(false);
+    const handleStart = () => setLoading(true);
+    const handleComplete = () => setLoading(false);
 
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleComplete);
@@ -28,7 +28,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       router.events.off("routeChangeComplete", handleComplete);
       router.events.off("routeChangeError", handleComplete);
     };
-  }, [router, setIsLoading]);
+  }, [router, setLoading]);
 
   return (
     <AnimatePresence>

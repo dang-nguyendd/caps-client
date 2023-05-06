@@ -1,5 +1,6 @@
 import React from "react";
 
+import { LoadingProvider } from "@/contexts/loading-context";
 import Footer from "@/shared/footer";
 import Header from "@/shared/header";
 
@@ -10,8 +11,13 @@ export default function withLayout<P extends object>(
     return (
       <>
         <Header />
-        <main data-testid="wrapped-component" className="h-screen bg-white">
-          <WrappedComponent {...props} />
+        <main
+          data-testid="wrapped-component"
+          className=" m-0 h-screen w-screen bg-white px-2"
+        >
+          <LoadingProvider>
+            <WrappedComponent {...props} />
+          </LoadingProvider>
         </main>
         <Footer />
       </>

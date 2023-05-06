@@ -1,5 +1,10 @@
+import { useContext } from "react";
+
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
+import { LoadingContext } from "@/contexts/loading-context";
+import { LocalStorageService } from "@/services/local-storage";
+import { LocalStorageKeys } from "@/services/local-storage/constant";
 import { HttpResponse } from "@/types/enum/http-response";
 import { showToast } from "@/utils/toast";
 
@@ -7,6 +12,7 @@ export const API_BASE_URL = "http://localhost:3003";
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
+  timeout: 10000,
 });
 
 api.interceptors.response.use(
@@ -22,6 +28,7 @@ api.interceptors.response.use(
           showToast("error", `Bad Request: ${message}`);
           break;
         case HttpResponse.UNAUTHORIZED:
+          //TODO: add axios refresh token mechanism
           showToast("error", `Unauthorized: ${message}`);
           break;
         case HttpResponse.FORBIDDEN:

@@ -12,4 +12,4 @@ const Component = React.memo(() => {
 
 Component.displayName = "General";
 
-export default withLayout(Component);
+export default Component;

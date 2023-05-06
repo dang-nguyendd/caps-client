@@ -19,9 +19,7 @@ const useMessage = (): MessageResult => {
     setMessages((prev) => [...prev, newMessage]);
   };
 
-  const getAllMessages = async ({
-    conversationId,
-  }: MessageNS.GetMessageReq) => {
+  const getAllMessages = async (conversationId: number) => {
     setLoading(true);
     console.log({ conversationId });
     try {

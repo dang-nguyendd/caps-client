@@ -90,7 +90,7 @@ const Component: React.FC<IConversationListProps> = (
           key={conversation.id}
           onClick={() => _onSelectConversation(conversation)}
         >
-          <div className="mb-1 text-sm text-gray-400">
+          <div className="mb-2 text-sm text-gray-400">
             {getConversationLabel(conversation)}
           </div>
           <Conversation

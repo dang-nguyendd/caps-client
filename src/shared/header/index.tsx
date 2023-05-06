@@ -6,7 +6,7 @@ const Component = React.memo(() => {
   return (
     <header
       data-testid="header"
-      className="fixed top-0 w-full bg-orange pb-4 md:p-6"
+      className="fixed top-0 w-full bg-black pb-4 md:p-6"
     >
       <div className="container mx-auto">
         <Link href={"/"}>

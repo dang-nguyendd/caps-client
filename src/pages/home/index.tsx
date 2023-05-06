@@ -106,7 +106,7 @@ const Component: React.FC = () => {
                     <p className="mb-2 text-xl font-bold">
                       Dengue Intelligent Chatbot Assistance
                     </p>
-                    {/*<p>Model type: {selectedConversation.chatBotType}</p>*/}
+                    <p>Model type: {selectedConversation.chatBotType}</p>
                   </div>
                 </div>
                 <div className="flex">

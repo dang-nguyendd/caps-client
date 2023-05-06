@@ -1,8 +1,6 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import { useState } from "react";
 
-import { useRouter } from "next/router";
-
 import withSettings from "@/hoc/withSettings";
 
 import General from "./general";
@@ -13,28 +11,23 @@ import { TAB_NAMES } from "../../constant/settings-page";
 const Component = () => {
   const { general, personal, health } = TAB_NAMES;
   const [activeTab, setActiveTab] = useState(general);
-  const router = useRouter();
 
-  const handleTabClick = (tab: any) => {
+  const handleTabClick = (tab: string) => {
     setActiveTab(tab);
-  };
-
-  const handleLogOut = () => {
-    router.push("/");
   };
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <aside
+      <div
         id="default-sidebar"
-        className="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
+        className="left-0 top-0 z-40 h-screen w-[20%] -translate-x-full transition-transform sm:translate-x-0"
         aria-label="Sidebar"
       >
         <div className="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-blue">
           <ul className="space-y-2 font-medium">
             <li>
               <a
-                className={`flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${
+                className={`flex items-center rounded-lg p-2 text-gray-900 hover:bg-grey dark:text-white dark:hover:bg-grey ${
                   activeTab === general ? "bg-gray-100 dark:bg-grey" : ""
                 }`}
                 onClick={() => handleTabClick(general)}
@@ -125,20 +118,22 @@ const Component = () => {
             </li>
           </ul>
         </div>
-      </aside>
-      {activeTab == "general" ? (
-        <General />
-      ) : activeTab == "health" ? (
-        <Health />
-      ) : activeTab == "personal" ? (
-        <Personal />
-      ) : (
-        <h1></h1>
-      )}
+      </div>
+      <div className="h-full w-full">
+        {activeTab == "general" ? (
+          <General />
+        ) : activeTab == "health" ? (
+          <Health />
+        ) : activeTab == "personal" ? (
+          <Personal />
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 };
 
 Component.displayName = "Settings";
 
-export default withSettings(Component);
+export default Component;

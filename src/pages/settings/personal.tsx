@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+
+import withSettings from "@/hoc/withSettings";
 interface userInfo {
   name: string;
   dob: string;
@@ -44,4 +46,4 @@ const Component = React.memo(() => {
 
 Component.displayName = "Personal";
 
-export default Component;
+export default withSettings(Component, "Personal Information");

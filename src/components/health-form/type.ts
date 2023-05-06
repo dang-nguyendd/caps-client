@@ -3,6 +3,7 @@ export enum BloodType {
   O,
   AB,
   Other,
+  B,
 }
 
 export interface IHealthFormProps {

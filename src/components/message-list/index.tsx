@@ -20,7 +20,7 @@ const MessageList: React.FC<IMessageListProps> = ({
 
   useEffect(() => {
     if (selectedConversation && selectedConversation.id)
-      getAllMessages(selectedConversation.id);
+      getAllMessages({ conversationId: selectedConversation.id });
   }, [selectedConversation]);
 
   useEffect(() => {

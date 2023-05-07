@@ -9,7 +9,11 @@ import useMessage from "@/hooks/message/useMessage";
 import { MessageNS } from "@/services/message/type";
 import { closeSocket, getSocket, initSocket } from "@/socket";
 
-const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
+const Component: React.FC<IMessageListProps> = ({
+  selectedConversation,
+  dataTourOne,
+  dataTourTwo,
+}) => {
   const { getAllMessages, messages, setMessages } = useMessage();
   const [message, setMessage] = useImmer<string>("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -75,7 +79,7 @@ const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
 
   return (
     <section className="flex flex-auto flex-col border-l border-gray-800">
-      <div className="flex-1 overflow-y-scroll p-4">
+      <div data-tour={dataTourOne} className="flex-1 overflow-y-scroll p-4">
         {messages.map((message, index) => (
           <ChatMessage
             key={index}
@@ -95,6 +99,7 @@ const Component: React.FC<IMessageListProps> = ({ selectedConversation }) => {
         <div className="flex flex-row items-center p-4">
           <div className="relative grow">
             <input
+              data-tour={dataTourTwo}
               className="w-full rounded-full border border-gray-800 bg-gray-800 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
               value={message}
               onChange={(e) => _onValueChange(e.target.value)}

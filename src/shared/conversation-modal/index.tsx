@@ -45,7 +45,6 @@ const Component = React.memo((props: IConversationModalProps) => {
       </h2>
       <div className="mb-4">
         <input
-          id="conversation"
           type="text"
           placeholder="Enter conversation name"
           value={conversationName}
@@ -69,7 +68,7 @@ const Component = React.memo((props: IConversationModalProps) => {
             Cancel
           </Button>
         </div>
-        <div className="ml-5">
+        <div id="step-4" className="ml-5">
           <Button mode="primary" onClick={_handleSubmitModal}>
             Save
           </Button>

@@ -9,7 +9,8 @@ import Link from "next/link";
 
 import ConversationList from "@/components/conversation-list";
 import MessageList from "@/components/message-list";
-import Weather from "@/components/weather";
+import OnboardingTutorial from "@/components/onboarding-tutorial";
+import Weather from "@/components/weather-report";
 import { AuthContext } from "@/contexts/auth-context";
 import withAuth from "@/hoc/withLogin";
 import useConversation from "@/hooks/conversation/useConversation";
@@ -35,6 +36,35 @@ const Component: React.FC = () => {
       setShowConversationModal(false);
     };
 
+    const steps = [
+      {
+        target: '[data-tour="step1"]',
+        content: "Create new conversation to start asking question",
+        disableBeacon: true,
+      },
+      {
+        target: '[data-tour="step2"]',
+        content:
+          "This will show the model type that you will be using in this conversation",
+        disableBeacon: true,
+      },
+      {
+        target: '[data-tour="step3"]',
+        content: "The current weather on your location will show here",
+        disableBeacon: true,
+      },
+      {
+        target: '[data-tour="step4"]',
+        content: "Your chat message will show here",
+        disableBeacon: true,
+      },
+      {
+        target: '[data-tour="step5"]',
+        content: "You can start asking the question here",
+        disableBeacon: true,
+      },
+    ];
+
     return (
       <div className="flex h-screen w-full overflow-hidden bg-gray-900 text-gray-200 antialiased">
         <div className="flex flex-1 flex-col">
@@ -57,6 +87,7 @@ const Component: React.FC = () => {
               </div>
               <div className="mx-4 flex-none cursor-pointer gap-3 rounded-md border border-white/20 p-4 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10">
                 <div
+                  data-tour="step1"
                   className="flex cursor-pointer items-center"
                   onClick={_handleOpenConversationModal}
                 >
@@ -102,21 +133,26 @@ const Component: React.FC = () => {
             <section className="flex flex-auto flex-col border border-gray-800">
               <div className="flex flex-none flex-row items-center justify-between border-b border-gray-800 px-6 py-4 shadow">
                 <div className="flex">
-                  <div>
+                  <div data-tour="step2">
                     <p className="mb-2 text-xl font-bold">
                       Dengue Intelligent Chatbot Assistance
                     </p>
                     {/*<p>Model type: {selectedConversation.chatBotType}</p>*/}
                   </div>
                 </div>
-                <div className="flex">
-                  <Weather />
+                <div data-tour="step3" className="flex">
+                  {/*<Weather />*/}
                 </div>
               </div>
-              <MessageList selectedConversation={selectedConversation} />
+              <MessageList
+                dataTourOne="step4"
+                dataTourTwo="step5"
+                selectedConversation={selectedConversation}
+              />
             </section>
           </main>
         </div>
+        <OnboardingTutorial steps={steps} />
       </div>
     );
   }

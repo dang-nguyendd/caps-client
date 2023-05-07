@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { IWeatherData } from "@/components/weather/type";
+import { IWeatherData } from "@/components/weather-report/type";
 import { showToast } from "@/utils/toast";
 
 const Component = () => {

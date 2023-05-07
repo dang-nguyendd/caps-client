@@ -22,7 +22,7 @@ import {
 } from "@/shared/conversation/type";
 
 const Component = React.memo((props: IConversationProps) => {
-  const { conversation, selected } = props;
+  const { conversation, selected, createdAt } = props;
   const [selectedConversation, setSelectedConversation] =
     useState(DefaultConversation);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -98,10 +98,10 @@ const Component = React.memo((props: IConversationProps) => {
       className={`relative flex items-center ${selected ? "bg-gray-700" : ""}`}
     >
       {isRenaming && selectedConversation?.id === conversation.id ? (
-        <div className="flex w-full items-center gap-3 rounded-lg bg-[#343541]/90 p-3">
+        <div className="group flex w-full items-center gap-3 rounded-md bg-gray-800 p-3">
           <IconMessage size={18} />
           <input
-            className="mr-12 flex-1 overflow-hidden text-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 text-white outline-none focus:border-neutral-100"
+            className="mr-12 flex-1 overflow-hidden text-ellipsis bg-transparent text-left text-[12.5px] leading-3 text-white outline-none"
             type="text"
             value={renameValue}
             onChange={(e) => setRenameValue(e.target.value)}

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import dayjs from "dayjs";
 
-import { IConversationListProps } from "@/components/conversation-list/type";
+import {
+  IConversationLabel,
+  IConversationListProps,
+} from "@/components/conversation-list/type";
+import { ConversationProvider } from "@/contexts/conversation-context";
 import { ConversationNS } from "@/services/conversation/type";
 import Conversation from "@/shared/conversation";
-
-interface IConversationListPropsWithSort extends IConversationListProps {
-  sortedConversations: ConversationNS.Conversation[];
-}
 
 const Component: React.FC<IConversationListProps> = (
   props: IConversationListProps
@@ -19,16 +19,11 @@ const Component: React.FC<IConversationListProps> = (
     setSelectedConversation,
     selectedConversation,
   } = props;
-  const [sortedConversations, setSortedConversations] = useState<
-    ConversationNS.Conversation[]
-  >([]);
+  const [groupedConversations, setGroupedConversations] = useState<{
+    [key: string]: ConversationNS.Conversation[];
+  }>({});
 
-  interface ILabel {
-    name: string;
-    condition: number;
-  }
-
-  const conversationLabels: ILabel[] = [
+  const conversationLabels: IConversationLabel[] = [
     { name: "Today", condition: 0 },
     { name: "Yesterday", condition: 1 },
     { name: "Last week", condition: 7 },
@@ -46,7 +41,16 @@ const Component: React.FC<IConversationListProps> = (
         dayjs(b.createdAt, "ddd, DD MMM YYYY HH:mm:ss [GMT]").valueOf() -
         dayjs(a.createdAt, "ddd, DD MMM YYYY HH:mm:ss [GMT]").valueOf()
     );
-    setSortedConversations(sortedByCreatedAt);
+    const groupedByLabel: { [key: string]: ConversationNS.Conversation[] } = {};
+    sortedByCreatedAt.forEach((conversation) => {
+      const label = getConversationLabel(conversation);
+      if (!groupedByLabel[label]) {
+        groupedByLabel[label] = [conversation];
+      } else {
+        groupedByLabel[label].push(conversation);
+      }
+    });
+    setGroupedConversations(groupedByLabel);
   };
 
   useEffect(() => {
@@ -80,27 +84,32 @@ const Component: React.FC<IConversationListProps> = (
     setSelectedConversation(item);
   };
 
-  if (!sortedConversations?.length)
-    return <div className="font-bold text-gray-300"> Empty Conversation </div>;
+  if (!Object.keys(groupedConversations).length)
+    return (
+      <div className="m-4 font-bold text-gray-300"> Empty Conversation </div>
+    );
 
   return (
     <div className="mt-4 flex scroll-m-2 flex-col gap-2 overflow-y-scroll border-b-black p-2">
-      {sortedConversations.map((conversation) => (
-        <div
-          key={conversation.id}
-          onClick={() => _onSelectConversation(conversation)}
-        >
-          <div className="mb-2 text-sm text-gray-400">
-            {getConversationLabel(conversation)}
-          </div>
-          <Conversation
-            id={conversation.id}
-            name={conversation.name}
-            chatBotType={conversation.chatBotType}
-            createdAt={conversation.createdAt}
-            conversation={conversation}
-            selected={selectedConversation?.id === conversation?.id}
-          />
+      {Object.keys(groupedConversations).map((label) => (
+        <div key={label}>
+          <div className="mb-2 text-sm text-gray-400">{label}</div>
+          {groupedConversations[label].map((conversation) => (
+            <div
+              key={conversation.id}
+              onClick={() => _onSelectConversation(conversation)}
+            >
+              <Conversation
+                key={conversation.id}
+                id={conversation.id}
+                name={conversation.name}
+                chatBotType={conversation.chatBotType}
+                createdAt={conversation.createdAt}
+                conversation={conversation}
+                selected={selectedConversation?.id === conversation?.id}
+              />
+            </div>
+          ))}
         </div>
       ))}
     </div>

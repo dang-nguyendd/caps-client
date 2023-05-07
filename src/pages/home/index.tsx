@@ -15,6 +15,7 @@ import { AuthContext } from "@/contexts/auth-context";
 import withAuth from "@/hoc/withLogin";
 import useConversation from "@/hooks/conversation/useConversation";
 import ConversationModal from "@/shared/conversation-modal";
+import DefaultChatMessage from "@/shared/default-chat-message";
 import SearchInput from "@/shared/search-input";
 
 const Component: React.FC = () => {
@@ -101,6 +102,7 @@ const Component: React.FC = () => {
                 selectedConversation={selectedConversation}
                 setSelectedConversation={setSelectedConversation}
               />
+
               <ConversationModal
                 isOpen={showConversationModal}
                 onClose={_handleCloseConversationModal}
@@ -137,18 +139,24 @@ const Component: React.FC = () => {
                     <p className="mb-2 text-xl font-bold">
                       Dengue Intelligent Chatbot Assistance
                     </p>
-                    {/*<p>Model type: {selectedConversation.chatBotType}</p>*/}
+                    {selectedConversation ? (
+                      <p>Model type: {selectedConversation?.chatBotType}</p>
+                    ) : null}
                   </div>
                 </div>
                 <div data-tour="step3" className="flex">
                   {/*<Weather />*/}
                 </div>
               </div>
-              <MessageList
-                dataTourOne="step4"
-                dataTourTwo="step5"
-                selectedConversation={selectedConversation}
-              />
+              {!selectedConversation ? (
+                <DefaultChatMessage />
+              ) : (
+                <MessageList
+                  dataTourOne="step4"
+                  dataTourTwo="step5"
+                  selectedConversation={selectedConversation}
+                />
+              )}
             </section>
           </main>
         </div>

@@ -1,10 +1,13 @@
 import { AuthProvider } from "@/contexts/auth-context";
+import { ConversationProvider } from "@/contexts/conversation-context";
 import Home from "@/pages/home";
 
 const App = () => {
   return (
     <AuthProvider>
-      <Home />
+      <ConversationProvider>
+        <Home />
+      </ConversationProvider>
     </AuthProvider>
   );
 };

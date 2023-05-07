@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useRouter } from "next/router";
-import Joyride, { CallBackProps, ACTIONS } from "react-joyride";
+import Joyride, { CallBackProps } from "react-joyride";
 
 import { options } from "@/components/onboarding-tutorial/constant";
 import { IOnboardingStepProps } from "@/components/onboarding-tutorial/type";

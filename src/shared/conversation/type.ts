@@ -6,6 +6,7 @@ export interface IConversation {
   id: number;
   name: string;
   chatBotType: ConversationNS.ChatbotType;
+  createdAt: string;
 }
 
 export interface IConversationProps extends IConversation {
@@ -17,4 +18,5 @@ export const DefaultConversation: IConversation = {
   id: 0,
   name: "",
   chatBotType: ChatbotType.DUMMY,
+  createdAt: "",
 };

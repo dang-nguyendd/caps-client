@@ -4,6 +4,7 @@ import { useContext, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
+import { appWithTranslation } from "next-i18next";
 
 import { LoadingContext } from "@/contexts/loading-context";
 import ToastContainer from "@/core/toast-container";
@@ -12,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function App({ Component, pageProps, router }: AppProps) {
+function App({ Component, pageProps, router }: AppProps) {
   const { loading, setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
@@ -47,3 +48,5 @@ export default function App({ Component, pageProps, router }: AppProps) {
     </AnimatePresence>
   );
 }
+
+export default appWithTranslation(App);

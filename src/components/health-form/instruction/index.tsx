@@ -74,7 +74,7 @@ const Component = () => {
           </p>
         </div>
         <div>
-          <Link href={"/health-form/personal-info"}>
+          <Link href={"/health-form/health-data"}>
             <Button mode="primary">Start</Button>
           </Link>
         </div>

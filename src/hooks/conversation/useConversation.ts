@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 
+import { ConversationContext } from "@/contexts/conversation-context";
 import { LoadingContext } from "@/contexts/loading-context";
 import ConversationService from "@/services/conversation";
 import { ConversationNS } from "@/services/conversation/type";
@@ -21,8 +22,8 @@ const useConversation = () => {
     ConversationNS.Conversation[]
   >([]);
   const { setLoading } = useContext(LoadingContext);
-  const [selectedConversation, setSelectedConversation] =
-    useState<ConversationNS.Conversation | null>(null);
+  const { selectedConversation, setSelectedConversation } =
+    useContext(ConversationContext);
   const createNewConversation = async (
     name: string,
     chatBotType: ConversationNS.ChatbotType
@@ -36,8 +37,12 @@ const useConversation = () => {
         });
       setConversations((prev) => [...prev, newConversation]);
       showToast("success", "Create new conversation successfully!");
+
+      if (!selectedConversation) {
+        setSelectedConversation(null);
+      }
     } catch (error) {
-      showToast("error", "Fail to get conversations");
+      showToast("error", "Failed to get conversations");
     }
     setLoading(false);
   };

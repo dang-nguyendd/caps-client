@@ -9,7 +9,7 @@ const Component = React.memo((props: ISelectOptionProps) => {
     options,
     title,
     dataKey,
-    type = "select-option",
+    type = "radio",
   } = props;
 
   const _handleChange = (option: SelectOption) => {

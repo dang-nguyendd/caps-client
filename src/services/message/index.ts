@@ -11,6 +11,6 @@ export default class MessageService {
   static getAllMessages = (
     data: MessageNS.GetMessageReq
   ): Promise<MessageNS.Messages> => {
-    return axios.get("/conversation/messages", { params: data.conversationId });
+    return axios.get("/conversation/messages", { params: data });
   };
 }

@@ -6,3 +6,8 @@ export interface IConversationListProps {
   selectedConversation: ConversationNS.Conversation;
   setSelectedConversation: (x: ConversationNS.Conversation) => void;
 }
+
+export interface IConversationLabel {
+  name: string;
+  condition: number;
+}

@@ -1,10 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import {
-  IconExternalLink,
-  IconPlus,
-  IconUserCancel,
-} from "@tabler/icons-react";
+import { IconSettings, IconPlus, IconUserCancel } from "@tabler/icons-react";
 import Link from "next/link";
 
 import ConversationList from "@/components/conversation-list";
@@ -115,15 +111,15 @@ const Component: React.FC = () => {
                     href={"/settings"}
                     className="flex cursor-pointer flex-row items-center gap-1"
                   >
-                    <IconExternalLink />
+                    <IconSettings />
                     <span className="ml-2 cursor-pointer text-sm text-white">
                       Open settings
                     </span>
                   </Link>
-                  <div className="flex cursor-pointer flex-row items-center gap-1">
+                  <div className="mt-2 flex cursor-pointer flex-row items-center gap-1">
                     <IconUserCancel />
                     <span
-                      className="ml-2 mt-4 cursor-pointer text-sm text-white"
+                      className="ml-2  cursor-pointer text-sm text-white"
                       onClick={signOut}
                     >
                       Logout
@@ -139,7 +135,7 @@ const Component: React.FC = () => {
                     <p className="mb-2 text-xl font-bold">
                       Dengue Intelligent Chatbot Assistance
                     </p>
-                    {selectedConversation ? (
+                    {selectedConversation && conversations.length > 0 ? (
                       <p>Model type: {selectedConversation?.chatBotType}</p>
                     ) : null}
                   </div>
@@ -148,14 +144,14 @@ const Component: React.FC = () => {
                   {/*<Weather />*/}
                 </div>
               </div>
-              {!selectedConversation ? (
-                <DefaultChatMessage />
-              ) : (
+              {selectedConversation && conversations.length > 0 ? (
                 <MessageList
                   dataTourOne="step4"
                   dataTourTwo="step5"
                   selectedConversation={selectedConversation}
                 />
+              ) : (
+                <DefaultChatMessage />
               )}
             </section>
           </main>

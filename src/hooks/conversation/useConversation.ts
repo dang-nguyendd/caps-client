@@ -37,6 +37,10 @@ const useConversation = () => {
         });
       setConversations((prev) => [...prev, newConversation]);
       showToast("success", "Create new conversation successfully!");
+
+      if (!selectedConversation) {
+        setSelectedConversation(null);
+      }
     } catch (error) {
       showToast("error", "Failed to get conversations");
     }

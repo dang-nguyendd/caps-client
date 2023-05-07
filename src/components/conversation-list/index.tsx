@@ -6,7 +6,6 @@ import {
   IConversationLabel,
   IConversationListProps,
 } from "@/components/conversation-list/type";
-import { ConversationProvider } from "@/contexts/conversation-context";
 import { ConversationNS } from "@/services/conversation/type";
 import Conversation from "@/shared/conversation";
 

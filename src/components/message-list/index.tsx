@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { KeyboardEvent, useEffect, useRef } from "react";
 
 import { useImmer } from "use-immer";
 
@@ -62,6 +62,13 @@ const MessageList: React.FC<IMessageListProps> = ({
     }
   };
 
+  const _handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      _handleSend();
+    }
+  };
+
   const _clearMessage = () => {
     setMessage("");
   };
@@ -94,6 +101,7 @@ const MessageList: React.FC<IMessageListProps> = ({
       <MessageInput
         dataTourTwo={dataTourTwo}
         message={message}
+        handleKeyDown={_handleKeyDown}
         onValueChange={_onValueChange}
         handleSend={_handleSend}
       />

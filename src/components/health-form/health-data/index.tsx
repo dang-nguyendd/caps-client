@@ -7,11 +7,11 @@ import {
   DefaultCheckboxOption,
 } from "@/components/health-form/constant";
 import BadgeListInput from "@/core/badge-list-input";
+import Button from "@/core/button";
 import Option from "@/core/select-option";
 import { SelectOption } from "@/core/select-option/type";
 import TextInput from "@/core/text-input";
 import Textarea from "@/core/textarea";
-import Button from "@/core/button";
 
 const Component = () => {
   const [age, setAge] = useState("");

@@ -1,10 +1,9 @@
-import withForm from "@/hoc/withForm";
-import PersonalInfo from "src/components/health-form/health-data";
+import HealthData from "src/components/health-form/health-data";
 
 const Component = () => {
-  return <PersonalInfo />;
+  return <HealthData />;
 };
 
-Component.display = "PersonalInfo";
+Component.display = "HealthData";
 
-export default withForm(Component);
+export default Component;

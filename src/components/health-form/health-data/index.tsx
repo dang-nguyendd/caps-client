@@ -11,6 +11,7 @@ import Option from "@/core/select-option";
 import { SelectOption } from "@/core/select-option/type";
 import TextInput from "@/core/text-input";
 import Textarea from "@/core/textarea";
+import Button from "@/core/button";
 
 const Component = () => {
   const [age, setAge] = useState("");
@@ -105,110 +106,133 @@ const Component = () => {
     setFamilyHistoryDescription(value);
   };
 
+  const _handleSubmitForm = () => {};
+
   return (
-    <div className="mt-5 grid grid-cols-3 gap-4">
-      <TextInput
-        value={age}
-        type="text"
-        placeHolder="age"
-        label="Age"
-        name="age"
-        onChange={(value) => _handleChangeAge(value)}
-      />
-      <TextInput
-        value={weight}
-        type="text"
-        placeHolder="weight in kg"
-        label="Weight"
-        name="weight"
-        onChange={(value) => _handleChangeWeight(value)}
-      />
-      <TextInput
-        value={height}
-        type="text"
-        placeHolder="height in cm"
-        label="Height"
-        name="height"
-        onChange={(value) => _handleChangeHeight(value)}
-      />
+    <div className="flex min-h-screen items-center justify-center py-5">
+      <div className="flex w-full max-w-6xl flex-col items-center">
+        <div className="mb-10 text-center text-5xl font-bold tracking-normal text-blue">
+          Health form
+        </div>
+        <div className="w-full">
+          <div className="mt-5 grid grid-cols-3 gap-4">
+            <TextInput
+              value={age}
+              type="text"
+              placeHolder="age"
+              label="Age"
+              name="age"
+              onChange={(value) => _handleChangeAge(value)}
+            />
+            <TextInput
+              value={weight}
+              type="text"
+              placeHolder="weight in kg"
+              label="Weight"
+              name="weight"
+              onChange={(value) => _handleChangeWeight(value)}
+            />
+            <TextInput
+              value={height}
+              type="text"
+              placeHolder="height in cm"
+              label="Height"
+              name="height"
+              onChange={(value) => _handleChangeHeight(value)}
+            />
 
-      <TextInput
-        value={bloodPressure}
-        type="text"
-        placeHolder="blood pressure"
-        label="Blood pressure"
-        name="blood-pressure"
-        onChange={(value) => _handleChangeBloodPressure(value)}
-      />
-      <TextInput
-        value={bloodType}
-        type="text"
-        placeHolder="blood type"
-        label="Blood type"
-        name="blood-type"
-        onChange={(value) => _handleChangeBloodType(value)}
-      />
-      <TextInput
-        value={bloodType}
-        type="text"
-        placeHolder="blood type"
-        label="Blood type"
-        name="blood-type"
-        onChange={(value) => _handleChangeBloodType(value)}
-      />
-      <BadgeListInput label="Allergies" onSubmit={() => {}} />
-      <BadgeListInput label="Medications" onSubmit={() => {}} />
+            <TextInput
+              value={bloodPressure}
+              type="text"
+              placeHolder="blood pressure"
+              label="Blood pressure"
+              name="blood-pressure"
+              onChange={(value) => _handleChangeBloodPressure(value)}
+            />
+            <TextInput
+              value={bloodType}
+              type="text"
+              placeHolder="blood type"
+              label="Blood type"
+              name="blood-type"
+              onChange={(value) => _handleChangeBloodType(value)}
+            />
+            <TextInput
+              value={bloodType}
+              type="text"
+              placeHolder="blood type"
+              label="Blood type"
+              name="blood-type"
+              onChange={(value) => _handleChangeBloodType(value)}
+            />
+            <BadgeListInput label="Allergies" onSubmit={() => {}} />
+            <BadgeListInput label="Medications" onSubmit={() => {}} />
 
-      <div className="col-span-3">
-        <Option
-          type="checkbox"
-          options={CheckboxOptions}
-          selectedOption={hasSurgery}
-          onChange={_handleHasSurgery}
-          title="Have you ever had surgery?"
-          dataKey="hasSurgery"
-        />
-      </div>
-      <div className="col-span-3">
-        <Textarea
-          value={surgeryDescription}
-          onChange={_handleSurgeryDescription}
-          label="Please describe your surgery history"
-        />
-      </div>
-      <div className="col-span-3">
-        <Option
-          type="checkbox"
-          options={CheckboxOptions}
-          selectedOption={hasChronicIllness}
-          onChange={_handleHasChronicIllness}
-          title="Do you have any chronic illnesses?"
-          dataKey="hasChronicIllness"
-        />
-      </div>
-      <div className="col-span-3">
-        <Textarea
-          value={chronicIllnessDescription}
-          onChange={_handleChangeChronicIllnessDescription}
-          label="Please describe any chronic illnesses you have"
-        />
-      </div>
-      <div className="col-span-3">
-        <Option
-          type="checkbox"
-          options={CheckboxOptions}
-          selectedOption={hasHereditaryDisease}
-          onChange={_handleHasHereditaryDisease}
-          title="Is there a history of hereditary disease in your family?"
-          dataKey="hasHereditaryDisease"
-        />
-      </div>
-      <div className="col-span-3">
-        <Textarea
-          value={familyHistoryDescription}
-          onChange={_handleChangeFamilyHistoryDescription}
-          label="Please describe any history of hereditary diseases in your family"
-        />
+            <div className="col-span-3">
+              <Option
+                type="checkbox"
+                options={CheckboxOptions}
+                selectedOption={hasSurgery}
+                onChange={_handleHasSurgery}
+                title="Have you ever had surgery?"
+                dataKey="hasSurgery"
+              />
+            </div>
+            <div className="col-span-3">
+              <Textarea
+                value={surgeryDescription}
+                onChange={_handleSurgeryDescription}
+                label="Please describe your surgery history"
+              />
+            </div>
+            <div className="col-span-3">
+              <Option
+                type="checkbox"
+                options={CheckboxOptions}
+                selectedOption={hasChronicIllness}
+                onChange={_handleHasChronicIllness}
+                title="Do you have any chronic illnesses?"
+                dataKey="hasChronicIllness"
+              />
+            </div>
+            <div className="col-span-3">
+              <Textarea
+                value={chronicIllnessDescription}
+                onChange={_handleChangeChronicIllnessDescription}
+                label="Please describe any chronic illnesses you have"
+              />
+            </div>
+            <div className="col-span-3">
+              <Option
+                type="checkbox"
+                options={CheckboxOptions}
+                selectedOption={hasHereditaryDisease}
+                onChange={_handleHasHereditaryDisease}
+                title="Is there a history of hereditary disease in your family?"
+                dataKey="hasHereditaryDisease"
+              />
+            </div>
+            <div className="col-span-3">
+              <Textarea
+                value={familyHistoryDescription}
+                onChange={_handleChangeFamilyHistoryDescription}
+                label="Please describe any history of hereditary diseases in your family"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mt-10 flex w-full flex-col items-center justify-between sm:flex-row">
+          <div>
+            <Button onClick={() => {}} mode="secondary">
+              Back
+            </Button>
+          </div>
+          <div className="flex justify-end">
+            <Button onClick={_handleSubmitForm} mode="primary">
+              Continue
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

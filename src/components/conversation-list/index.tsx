@@ -106,6 +106,7 @@ const Component: React.FC<IConversationListProps> = (
                 createdAt={conversation.createdAt}
                 conversation={conversation}
                 selected={selectedConversation?.id === conversation?.id}
+                selectedConversation={selectedConversation}
               />
             </div>
           ))}

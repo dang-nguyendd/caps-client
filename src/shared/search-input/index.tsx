@@ -5,7 +5,7 @@ import { IconSearch, IconX } from "@tabler/icons-react";
 import { ISearchInputProps } from "@/shared/search-input/type";
 
 const Component = React.memo((props: ISearchInputProps) => {
-  const { placeholder, searchTerm, onSearch, onFocus, onBlur } = props;
+  const { placeholder, searchTerm, onSearch } = props;
   const _handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSearch(e.target.value);
   };
@@ -29,8 +29,6 @@ const Component = React.memo((props: ISearchInputProps) => {
         placeholder={placeholder || ""}
         value={searchTerm}
         onChange={_handleSearchChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
       />
 
       {searchTerm && (

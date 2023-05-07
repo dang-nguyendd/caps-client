@@ -17,6 +17,8 @@ import SearchInput from "@/shared/search-input";
 const Component: React.FC = () => {
   {
     const [showConversationModal, setShowConversationModal] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+
     const { user, signOut } = useContext(AuthContext);
     const {
       getAllConversations,
@@ -32,6 +34,14 @@ const Component: React.FC = () => {
     const _handleCloseConversationModal = () => {
       setShowConversationModal(false);
     };
+
+    const _handleSearchConversation = (term: string) => {
+      setSearchTerm(term);
+    };
+
+    const filteredConversations = conversations.filter((conversation) =>
+      conversation.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const steps = [
       {
@@ -76,10 +86,8 @@ const Component: React.FC = () => {
               <div className="flex-none p-4">
                 <SearchInput
                   placeholder="Search anything"
-                  searchTerm={""}
-                  onSearch={() => {}}
-                  onFocus={() => {}}
-                  onBlur={() => {}}
+                  searchTerm={searchTerm}
+                  onSearch={_handleSearchConversation}
                 />
               </div>
               <div className="mx-4 flex-none cursor-pointer gap-3 rounded-md border border-white/20 p-4 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10">
@@ -93,7 +101,7 @@ const Component: React.FC = () => {
                 </div>
               </div>
               <ConversationList
-                conversations={conversations}
+                conversations={filteredConversations}
                 getAllConversations={getAllConversations}
                 selectedConversation={selectedConversation}
                 setSelectedConversation={setSelectedConversation}

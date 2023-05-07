@@ -7,13 +7,14 @@ export default function withForm<P extends object>(
 ): React.FC<P> {
   const WithForm: React.FC<P> = (props: P) => {
     return (
-      <div className="mt-5 flex min-h-screen flex-col items-center justify-center py-5">
-        <div className="mb-[40px] w-full text-center text-5xl font-bold tracking-normal text-blue">
-          Health form
-        </div>
-        <div className="mx-auto flex w-full max-w-5xl flex-col items-center justify-center">
-          <WrappedComponent {...props} />
-
+      <div className="flex min-h-screen items-center justify-center py-5">
+        <div className="flex w-full max-w-6xl flex-col items-center">
+          <div className="mb-10 text-center text-5xl font-bold tracking-normal text-blue">
+            Health form
+          </div>
+          <div className="w-full">
+            <WrappedComponent {...props} />
+          </div>
           <div className="mt-10 flex w-full flex-col items-center justify-between sm:flex-row">
             <div>
               <Button onClick={() => {}} mode="secondary">

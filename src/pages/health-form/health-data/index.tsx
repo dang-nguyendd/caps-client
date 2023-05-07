@@ -1,5 +1,5 @@
-import PersonalInfo from "@/components/health-form/personal-info";
 import withForm from "@/hoc/withForm";
+import PersonalInfo from "src/components/health-form/health-data";
 
 const Component = () => {
   return <PersonalInfo />;

@@ -135,7 +135,7 @@ const Component: React.FC = () => {
                 <div className="flex">
                   <div data-tour="step2">
                     <p className="mb-2 text-xl font-bold">
-                      Dengue Intelligent Chatbot Assistance 123
+                      Dengue Intelligent Chatbot Assistance
                     </p>
                     <p>Model type: {selectedConversation?.chatBotType}</p>
                   </div>

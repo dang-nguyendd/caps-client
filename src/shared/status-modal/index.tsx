@@ -8,8 +8,8 @@ import {
 import Modal from "react-modal";
 
 import Button from "@/core/button";
-import { CustomStyle } from "@/shared/confirmation-modal/constant";
-import { IConfirmationModalProps } from "@/shared/confirmation-modal/type";
+import { CustomStyle } from "@/shared/status-modal/constant";
+import { IConfirmationModalProps } from "@/shared/status-modal/type";
 
 const Component = React.memo((props: IConfirmationModalProps) => {
   const getConfirmationModalTypeStyle = (type: string) => {

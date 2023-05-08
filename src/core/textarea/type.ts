@@ -1,7 +1,5 @@
-import { InputHTMLAttributes } from "react";
-
-export interface ITextareaProps
-  extends InputHTMLAttributes<HTMLTextAreaElement> {
+export interface ITextareaProps {
   value: string;
   label: string;
+  onChange?: (value: string) => void;
 }

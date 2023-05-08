@@ -1,10 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import {
-  IconExternalLink,
-  IconPlus,
-  IconUserCancel,
-} from "@tabler/icons-react";
+import { IconSettings, IconPlus, IconUserCancel } from "@tabler/icons-react";
 import Link from "next/link";
 
 import ConversationList from "@/components/conversation-list";
@@ -15,11 +11,14 @@ import { AuthContext } from "@/contexts/auth-context";
 import withAuth from "@/hoc/withLogin";
 import useConversation from "@/hooks/conversation/useConversation";
 import ConversationModal from "@/shared/conversation-modal";
+import DefaultChatMessage from "@/shared/default-chat-message";
 import SearchInput from "@/shared/search-input";
 
 const Component: React.FC = () => {
   {
     const [showConversationModal, setShowConversationModal] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+
     const { user, signOut } = useContext(AuthContext);
     const {
       getAllConversations,
@@ -35,6 +34,14 @@ const Component: React.FC = () => {
     const _handleCloseConversationModal = () => {
       setShowConversationModal(false);
     };
+
+    const _handleSearchConversation = (term: string) => {
+      setSearchTerm(term);
+    };
+
+    const filteredConversations = conversations.filter((conversation) =>
+      conversation.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const steps = [
       {
@@ -79,10 +86,8 @@ const Component: React.FC = () => {
               <div className="flex-none p-4">
                 <SearchInput
                   placeholder="Search anything"
-                  searchTerm={""}
-                  onSearch={() => {}}
-                  onFocus={() => {}}
-                  onBlur={() => {}}
+                  searchTerm={searchTerm}
+                  onSearch={_handleSearchConversation}
                 />
               </div>
               <div className="mx-4 flex-none cursor-pointer gap-3 rounded-md border border-white/20 p-4 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10">
@@ -96,11 +101,12 @@ const Component: React.FC = () => {
                 </div>
               </div>
               <ConversationList
-                conversations={conversations}
+                conversations={filteredConversations}
                 getAllConversations={getAllConversations}
                 selectedConversation={selectedConversation}
                 setSelectedConversation={setSelectedConversation}
               />
+
               <ConversationModal
                 isOpen={showConversationModal}
                 onClose={_handleCloseConversationModal}
@@ -113,15 +119,15 @@ const Component: React.FC = () => {
                     href={"/settings"}
                     className="flex cursor-pointer flex-row items-center gap-1"
                   >
-                    <IconExternalLink />
+                    <IconSettings />
                     <span className="ml-2 cursor-pointer text-sm text-white">
                       Open settings
                     </span>
                   </Link>
-                  <div className="flex cursor-pointer flex-row items-center gap-1">
+                  <div className="mt-2 flex cursor-pointer flex-row items-center gap-1">
                     <IconUserCancel />
                     <span
-                      className="ml-2 mt-4 cursor-pointer text-sm text-white"
+                      className="ml-2  cursor-pointer text-sm text-white"
                       onClick={signOut}
                     >
                       Logout
@@ -137,18 +143,24 @@ const Component: React.FC = () => {
                     <p className="mb-2 text-xl font-bold">
                       Dengue Intelligent Chatbot Assistance
                     </p>
-                    <p>Model type: {selectedConversation?.chatBotType}</p>
+                    {selectedConversation && conversations.length > 0 ? (
+                      <p>Model type: {selectedConversation?.chatBotType}</p>
+                    ) : null}
                   </div>
                 </div>
                 <div data-tour="step3" className="flex">
                   {/*<Weather />*/}
                 </div>
               </div>
-              <MessageList
-                dataTourOne="step4"
-                dataTourTwo="step5"
-                selectedConversation={selectedConversation}
-              />
+              {selectedConversation && conversations.length > 0 ? (
+                <MessageList
+                  dataTourOne="step4"
+                  dataTourTwo="step5"
+                  selectedConversation={selectedConversation}
+                />
+              ) : (
+                <DefaultChatMessage />
+              )}
             </section>
           </main>
         </div>

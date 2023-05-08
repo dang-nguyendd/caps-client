@@ -6,6 +6,7 @@ import {
   IConversationLabel,
   IConversationListProps,
 } from "@/components/conversation-list/type";
+import useDevice from "@/hooks/useDevice";
 import { ConversationNS } from "@/services/conversation/type";
 import Conversation from "@/shared/conversation";
 
@@ -18,6 +19,8 @@ const Component: React.FC<IConversationListProps> = (
     setSelectedConversation,
     selectedConversation,
   } = props;
+  const { isDesktop } = useDevice();
+
   const [groupedConversations, setGroupedConversations] = useState<{
     [key: string]: ConversationNS.Conversation[];
   }>({});
@@ -89,7 +92,11 @@ const Component: React.FC<IConversationListProps> = (
     );
 
   return (
-    <div className="mt-4 flex scroll-m-2 flex-col gap-2 overflow-y-scroll border-b-black p-2">
+    <div
+      className={`mt-4 flex ${
+        isDesktop ? "flex-col" : "scroll-m-2"
+      } gap-2 overflow-y-scroll border-b-black p-2`}
+    >
       {Object.keys(groupedConversations).map((label) => (
         <div key={label}>
           <div className="mb-2 text-sm text-gray-400">{label}</div>

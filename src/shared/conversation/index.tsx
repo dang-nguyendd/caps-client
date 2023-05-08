@@ -15,11 +15,7 @@ import {
 } from "@tabler/icons-react";
 
 import SidebarActionButton from "@/core/sidebar-action-button";
-import {
-  DefaultConversation,
-  IConversation,
-  IConversationProps,
-} from "@/shared/conversation/type";
+import { IConversation, IConversationProps } from "@/shared/conversation/type";
 
 const Component = React.memo(
   (

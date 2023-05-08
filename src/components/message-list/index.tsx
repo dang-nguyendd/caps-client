@@ -6,6 +6,7 @@ import { IMessageListProps } from "@/components/message-list/type";
 import ChatMessage from "@/core/chat-message";
 import MessageInput from "@/core/message-input";
 import useMessage from "@/hooks/message/useMessage";
+import useDevice from "@/hooks/useDevice";
 import { MessageNS } from "@/services/message/type";
 import { closeSocket, getSocket, initSocket } from "@/socket";
 
@@ -15,6 +16,8 @@ const MessageList: React.FC<IMessageListProps> = ({
   dataTourTwo,
 }) => {
   const { getAllMessages, messages, setMessages } = useMessage();
+  const { isMobile } = useDevice();
+
   const [message, setMessage] = useImmer<string>("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -79,7 +82,11 @@ const MessageList: React.FC<IMessageListProps> = ({
 
   return (
     <>
-      <div className="flex flex-auto flex-col overflow-y-scroll border-l border-gray-800">
+      <div
+        className={`flex ${
+          isMobile ? "h-full" : "flex-auto"
+        } flex-col overflow-y-scroll border-l border-gray-800`}
+      >
         <div data-tour={dataTourOne} className="flex-1  p-4">
           {messages.map((message, index) => (
             <ChatMessage

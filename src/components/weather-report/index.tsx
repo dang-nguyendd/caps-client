@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 
 import { IWeatherData } from "@/components/weather-report/type";
+import useDevice from "@/hooks/useDevice";
 import { showToast } from "@/utils/toast";
 
 const Component = () => {
   const [weather, setWeather] = useState<IWeatherData | null>(null);
+  const { isMobile } = useDevice();
+  const iconSize = isMobile ? 40 : 60;
+  const temperatureFontSize = isMobile ? "text-sm" : "text-md";
+  const locationFontSize = isMobile ? "text-sm" : "text-base";
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -47,11 +52,16 @@ const Component = () => {
   return (
     <div className="flex items-center">
       <div className="mr-4">
-        <img src={iconUrl} alt={weatherCondition} />
+        <img
+          src={iconUrl}
+          alt={weatherCondition}
+          width={iconSize}
+          height={iconSize}
+        />
       </div>
       <div>
-        <div>Temperature: {temperature} °C</div>
-        <div>Location: {location}</div>
+        <div className={temperatureFontSize}>Temperature: {temperature} °C</div>
+        <div className={locationFontSize}>Location: {location}</div>
       </div>
     </div>
   );

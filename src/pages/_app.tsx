@@ -8,6 +8,7 @@ import { appWithTranslation } from "next-i18next";
 
 import { LoadingContext } from "@/contexts/loading-context";
 import ToastContainer from "@/core/toast-container";
+import nextI18nextConfig from "next-i18next.config";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -49,4 +50,4 @@ function App({ Component, pageProps, router }: AppProps) {
   );
 }
 
-export default appWithTranslation(App);
+export default appWithTranslation(App, nextI18nextConfig);

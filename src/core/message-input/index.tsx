@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { IconSend } from "@tabler/icons-react";
+import { IconSend, IconHeartbeat } from "@tabler/icons-react";
 
 import { IMessageInputProps } from "@/core/message-input/type";
+import HealthStatusPopupModal from "@/shared/health-status-popup-modal";
 
 const Component: React.FC<IMessageInputProps> = ({
   dataTourTwo,
@@ -11,6 +12,19 @@ const Component: React.FC<IMessageInputProps> = ({
   handleSend,
   handleKeyDown,
 }) => {
+  const [isHealthStatusModalOpen, setIsHealthStatusPopupModalOpen] =
+    useState<boolean>(false);
+
+  const _handleOpenModal = () => {
+    setIsHealthStatusPopupModalOpen(true);
+  };
+
+  const _handleCloseModal = () => {
+    setIsHealthStatusPopupModalOpen(false);
+  };
+
+  const _handleSubmit = () => {};
+
   return (
     <div className="flex-none">
       <div className="flex flex-row items-center p-4">
@@ -31,6 +45,18 @@ const Component: React.FC<IMessageInputProps> = ({
         >
           <IconSend color="white" />
         </button>
+        <button
+          type="button"
+          className="mx-2 flex h-6 w-6 shrink-0 text-blue hover:text-blue focus:outline-none"
+          onClick={_handleOpenModal}
+        >
+          <IconHeartbeat color="white" />
+        </button>
+        <HealthStatusPopupModal
+          isOpen={isHealthStatusModalOpen}
+          onRequestClose={_handleCloseModal}
+          onSubmit={_handleSubmit}
+        />
       </div>
     </div>
   );

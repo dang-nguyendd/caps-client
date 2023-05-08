@@ -5,16 +5,17 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
 import { options } from "@/components/chart-analysist/line-chart/constant";
+import useDevice from "@/hooks/useDevice";
 
 Chart.register(LinearScale);
 
 const Component: React.FC = () => {
+  const { isMobile } = useDevice();
   const data = {
-    type: "line",
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
-        label: new Date().getFullYear(),
+        label: "Label A",
         data: [65, 78, 66, 44, 56, 67, 75],
         fill: false,
         backgroundColor: "#4c51bf",
@@ -22,7 +23,7 @@ const Component: React.FC = () => {
         tension: 0.1,
       },
       {
-        label: new Date().getFullYear() - 1,
+        label: "Label B",
         data: [65, 59, 80, 81, 56, 55, 40],
         fill: false,
         backgroundColor: "#fff",
@@ -31,6 +32,8 @@ const Component: React.FC = () => {
       },
     ],
   };
+
+  const chartContainerClass = isMobile ? "h-[250px]" : "h-[350px]";
 
   return (
     <>
@@ -46,7 +49,7 @@ const Component: React.FC = () => {
           </div>
         </div>
         <div className="flex-auto p-4">
-          <div className="relative h-[350px]">
+          <div className={`relative ${chartContainerClass}`}>
             <Line data={data} options={options} />
           </div>
         </div>

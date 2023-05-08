@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import { useImmer } from "use-immer";
 
@@ -12,8 +12,10 @@ import Option from "@/core/select-option";
 import { SelectOption } from "@/core/select-option/type";
 import TextInput from "@/core/text-input";
 import Textarea from "@/core/textarea";
+import useDevice from "@/hooks/useDevice";
 
 const Component = () => {
+  const { isMobile } = useDevice();
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
@@ -108,9 +110,41 @@ const Component = () => {
 
   const _handleSubmitForm = () => {};
 
+  const containerClass = useMemo(() => {
+    if (isMobile) {
+      return "flex flex-col min-h-screen px-5 py-10";
+    } else {
+      return "flex min-h-screen items-center justify-center py-5 px-2";
+    }
+  }, [isMobile]);
+
+  const formClass = useMemo(() => {
+    if (isMobile) {
+      return "w-full";
+    } else {
+      return "w-full max-w-6xl";
+    }
+  }, [isMobile]);
+
+  const formItemClass = useMemo(() => {
+    if (isMobile) {
+      return "mb-5";
+    } else {
+      return "col-span-3";
+    }
+  }, [isMobile]);
+
+  const buttonContainerClass = useMemo(() => {
+    if (isMobile) {
+      return "flex flex-col items-center justify-between sm:flex-row mt-10";
+    } else {
+      return "mt-10 flex w-full flex-col items-center justify-between sm:flex-row";
+    }
+  }, [isMobile]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center py-5">
-      <div className="flex w-full max-w-6xl flex-col items-center">
+    <div className={containerClass}>
+      <div className={formClass}>
         <div className="mb-10 text-center text-5xl font-bold tracking-normal text-blue">
           Health form
         </div>

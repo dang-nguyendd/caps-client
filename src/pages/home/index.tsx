@@ -6,15 +6,18 @@ import Link from "next/link";
 import ConversationList from "@/components/conversation-list";
 import MessageList from "@/components/message-list";
 import OnboardingTutorial from "@/components/onboarding-tutorial";
-import Weather from "@/components/weather-report";
+import WeatherReport from "@/components/weather-report";
 import { AuthContext } from "@/contexts/auth-context";
 import withAuth from "@/hoc/withLogin";
 import useConversation from "@/hooks/conversation/useConversation";
+import useDevice from "@/hooks/useDevice";
 import ConversationModal from "@/shared/conversation-modal";
 import DefaultChatMessage from "@/shared/default-chat-message";
 import SearchInput from "@/shared/search-input";
 
 const Component: React.FC = () => {
+  const { isMobile } = useDevice();
+
   {
     const [showConversationModal, setShowConversationModal] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -73,10 +76,22 @@ const Component: React.FC = () => {
     ];
 
     return (
-      <div className="flex h-screen w-full overflow-hidden bg-gray-900 text-gray-200 antialiased">
-        <div className="flex flex-1 flex-col">
-          <main className="flex min-h-0 grow flex-row">
-            <section className="group flex w-24 flex-none flex-col overflow-auto transition-all duration-300 ease-in-out md:w-2/5 lg:max-w-sm">
+      <div
+        className={`flex h-screen w-full overflow-hidden bg-gray-900 text-gray-200 antialiased ${
+          isMobile ? "flex-col" : ""
+        }`}
+      >
+        <div className={`flex flex-1 ${isMobile ? "h-full" : ""} flex-col`}>
+          <main
+            className={`flex min-h-0 grow ${
+              isMobile ? "flex-col" : "flex-row"
+            }`}
+          >
+            <section
+              className={`group flex ${
+                isMobile ? "h-full" : ""
+              } w-24 flex-none flex-col overflow-auto transition-all duration-300 ease-in-out md:w-2/5 lg:max-w-sm`}
+            >
               <div className="flex flex-none flex-row items-center justify-between p-4">
                 <p className="hidden text-lg font-bold md:block">
                   Welcome, {user?.name}
@@ -136,7 +151,11 @@ const Component: React.FC = () => {
                 </div>
               </div>
             </section>
-            <section className="flex flex-auto flex-col border border-gray-800">
+            <section
+              className={`flex flex-auto flex-col border border-gray-800 ${
+                isMobile ? "" : "w-full"
+              }`}
+            >
               <div className="flex flex-none flex-row items-center justify-between border-b border-gray-800 px-6 py-4 shadow">
                 <div className="flex">
                   <div data-tour="step2">
@@ -149,7 +168,7 @@ const Component: React.FC = () => {
                   </div>
                 </div>
                 <div data-tour="step3" className="flex">
-                  {/*<Weather />*/}
+                  <WeatherReport />
                 </div>
               </div>
               {selectedConversation && conversations.length > 0 ? (

@@ -2,7 +2,10 @@ import React from "react";
 
 import Link from "next/link";
 
+import useDevice from "@/hooks/useDevice";
+
 const Component = React.memo(() => {
+  const { isMobile } = useDevice();
   return (
     <header
       data-testid="header"
@@ -10,7 +13,11 @@ const Component = React.memo(() => {
     >
       <div className="container mx-auto">
         <Link href={"/"}>
-          <h1 className="text-2xl font-bold text-white md:text-4xl">
+          <h1
+            className={`text-${
+              isMobile ? "lg" : "2xl"
+            } font-bold text-white md:text-4xl`}
+          >
             Dengue Intelligent Chatbot Assistance
           </h1>
         </Link>

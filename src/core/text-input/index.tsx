@@ -1,6 +1,7 @@
 import React from "react";
 
 import { IInputProps } from "@/core/text-input/type";
+import useDevice from "@/hooks/useDevice";
 
 const Component = React.memo((props: IInputProps) => {
   const {
@@ -14,19 +15,26 @@ const Component = React.memo((props: IInputProps) => {
     name,
     errorMessage,
   } = props;
+  const { isMobile } = useDevice();
   const _onValueChange = (value: string) => {
     if (onChange) {
       if (dataKey) onChange(value, { dataKey });
       else onChange(value);
     }
   };
+  let inputClassNames =
+    "w-full rounded-lg border border-gray-300 p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue";
+
+  if (isMobile) {
+    inputClassNames += " py-2";
+  }
   return (
     <div className="mb-5 space-y-1">
       <label className="mb-2 block font-medium text-blue" htmlFor={name}>
         {label}
       </label>
       <input
-        className="w-full rounded-lg border border-gray-300 p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue"
+        className={inputClassNames}
         type={type}
         name={name}
         value={value}

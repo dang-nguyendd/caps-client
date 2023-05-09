@@ -14,7 +14,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-function App({ Component, pageProps, router }: AppProps) {
+interface CustomAppProps extends AppProps {
+  err: Error;
+}
+
+function App({ Component, pageProps, router, err }: CustomAppProps) {
   const { loading, setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
@@ -42,7 +46,7 @@ function App({ Component, pageProps, router }: AppProps) {
         transition={{ duration: 0.5 }}
       >
         <div className={inter.className}>
-          <Component {...pageProps} />
+          <Component {...pageProps} err={err} />
           <ToastContainer />
         </div>
       </motion.div>

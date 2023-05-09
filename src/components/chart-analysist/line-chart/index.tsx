@@ -1,13 +1,13 @@
 import React from "react";
 
-import { LinearScale } from "chart.js";
+import { RadialLinearScale } from "chart.js";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
 import { options } from "@/components/chart-analysist/line-chart/constant";
 import useDevice from "@/hooks/useDevice";
 
-Chart.register(LinearScale);
+Chart.register(RadialLinearScale);
 
 const Component: React.FC = () => {
   const { isMobile } = useDevice();

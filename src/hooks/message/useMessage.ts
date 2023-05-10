@@ -6,7 +6,7 @@ import { MessageNS } from "@/services/message/type";
 import { showToast } from "@/utils/toast";
 
 type MessageResult = {
-  getAllMessages: (conversationId: number) => void;
+  getAllMessages: (x: MessageNS.GetMessageReq) => Promise<void>;
   messages: MessageNS.Messages;
   setMessages: (messages: MessageNS.Message) => void;
 };
@@ -19,12 +19,16 @@ const useMessage = (): MessageResult => {
     setMessages((prev) => [...prev, newMessage]);
   };
 
-  const getAllMessages = async (conversationId: number) => {
+  const getAllMessages = async (params: MessageNS.GetMessageReq) => {
     setLoading(true);
+    const { conversationId } = params;
     try {
-      const response = await MessageService.getAllMessages({ conversationId });
+      const response: MessageNS.Messages = await MessageService.getAllMessages({
+        conversationId,
+      });
       setMessages(response);
     } catch (error) {
+      console.log("error", error);
       showToast("error", "Could not fetch conversations");
     }
     setLoading(false);
@@ -34,7 +38,7 @@ const useMessage = (): MessageResult => {
     getAllMessages,
     messages,
     setMessages: _handleSetMessage,
-  };
+  } as MessageResult;
 };
 
 export default useMessage;

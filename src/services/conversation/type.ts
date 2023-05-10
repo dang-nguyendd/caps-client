@@ -8,6 +8,7 @@ export namespace ConversationNS {
     id: number;
     name: string;
     chatBotType: ChatbotType;
+    createdAt: string;
   };
 
   export type CreateConversationRequest = {

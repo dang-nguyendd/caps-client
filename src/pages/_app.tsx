@@ -4,15 +4,21 @@ import { useContext, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
+import { appWithTranslation } from "next-i18next";
 
 import { LoadingContext } from "@/contexts/loading-context";
 import ToastContainer from "@/core/toast-container";
+import nextI18nextConfig from "next-i18next.config";
 
 import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function App({ Component, pageProps, router }: AppProps) {
+interface CustomAppProps extends AppProps {
+  err: Error;
+}
+
+function App({ Component, pageProps, router, err }: CustomAppProps) {
   const { loading, setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
@@ -40,10 +46,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
         transition={{ duration: 0.5 }}
       >
         <div className={inter.className}>
-          <Component {...pageProps} />
+          <Component {...pageProps} err={err} />
           <ToastContainer />
         </div>
       </motion.div>
     </AnimatePresence>
   );
 }
+
+export default appWithTranslation(App, nextI18nextConfig);

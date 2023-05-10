@@ -1,16 +1,11 @@
 import React from "react";
 import { useState } from "react";
 
+import { IUserInfo } from "@/components/settings/type";
 import withSettings from "@/hoc/withSettings";
-interface userInfo {
-  name: string;
-  dob: string;
-  gender: string;
-  email: string;
-}
 
 const Component = React.memo(() => {
-  const placeHolder: userInfo = {
+  const placeHolder: IUserInfo = {
     name: "Giang Nguyen",
     dob: "18/05",
     gender: "male",

@@ -1,6 +1,8 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import { useState } from "react";
 
+import LanguageSwitcher from "@/components/language-switcher";
+import ThemeSwitcher from "@/components/theme-switcher";
 import withSettings from "@/hoc/withSettings";
 
 import General from "./general";
@@ -17,13 +19,13 @@ const Component = () => {
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center">
-      <div
-        id="default-sidebar"
-        className="left-0 top-0 z-40 h-screen w-[20%] -translate-x-full transition-transform sm:translate-x-0"
-        aria-label="Sidebar"
-      >
-        <div className="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-blue">
+    <>
+      <div className="flex h-full w-full items-center justify-center">
+        <div
+          id="default-sidebar"
+          className="left-0 top-0 z-40 h-screen w-[20%] -translate-x-full transition-transform sm:translate-x-0"
+          aria-label="Sidebar"
+        >
           <ul className="space-y-2 font-medium">
             <li>
               <a
@@ -130,10 +132,10 @@ const Component = () => {
           <></>
         )}
       </div>
-    </div>
+      <div>Settings</div>
+      <ThemeSwitcher />
+      <LanguageSwitcher />
+    </>
   );
 };
-
-Component.displayName = "Settings";
-
 export default Component;

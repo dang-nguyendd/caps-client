@@ -5,12 +5,14 @@ import Modal from "react-modal";
 
 import Button from "@/core/button";
 import DropdownMenu from "@/core/dropdown-menu";
+import useDevice from "@/hooks/useDevice";
 import { ConversationNS } from "@/services/conversation/type";
 import { CustomStyle } from "@/shared/conversation-modal/constant";
 import { IConversationModalProps } from "@/shared/conversation-modal/type";
 
 const Component = React.memo((props: IConversationModalProps) => {
   const { isOpen, onClose, createNewConversation } = props;
+  const { isMobile } = useDevice();
   const [conversationName, setConversationName] = useState<string>("");
   const models: ConversationNS.ChatbotType[] = [
     ConversationNS.ChatbotType.DUMMY,
@@ -33,6 +35,11 @@ const Component = React.memo((props: IConversationModalProps) => {
     setSelectedModel(value);
   };
 
+  if (isMobile) {
+    CustomStyle.content.width = "90%";
+    CustomStyle.content.padding = "16px";
+  }
+
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={CustomStyle}>
       <div className="flex justify-end">
@@ -45,14 +52,15 @@ const Component = React.memo((props: IConversationModalProps) => {
       </h2>
       <div className="mb-4">
         <input
-          id="conversation"
           type="text"
           placeholder="Enter conversation name"
           value={conversationName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setConversationName(e.target.value)
           }
-          className="w-full rounded-md border border-gray-700 bg-gray-700 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none"
+          className={`w-full rounded-md border border-gray-700 bg-gray-700 py-2 pl-3 pr-10 text-gray-200 transition duration-300 ease-in focus:border-gray-700 focus:bg-gray-900 focus:shadow-md focus:outline-none ${
+            isMobile ? "text-sm" : ""
+          }`}
         />
         <DropdownMenu
           options={models}

@@ -1,10 +1,16 @@
 import Link from "next/link";
 
 import Button from "@/core/button";
+import useDevice from "@/hooks/useDevice";
 
 const Component = () => {
+  const { isMobile } = useDevice();
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8">
+    <div
+      className={`mx-auto max-w-3xl px-4 py-8 ${
+        isMobile ? "sm:px-6" : "lg:px-8"
+      }`}
+    >
       <div className="mb-8">
         <h2 className="mb-4 text-2xl font-bold">Form Instructions</h2>
         <div className="mb-4">
@@ -74,7 +80,7 @@ const Component = () => {
           </p>
         </div>
         <div>
-          <Link href={"/health-form/personal-info"}>
+          <Link href={"/health-form/health-data"}>
             <Button mode="primary">Start</Button>
           </Link>
         </div>

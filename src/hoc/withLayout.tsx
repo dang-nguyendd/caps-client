@@ -13,7 +13,7 @@ export default function withLayout<P extends object>(
         <Header />
         <main
           data-testid="wrapped-component"
-          className=" m-0 h-screen w-screen bg-white px-2"
+          className="m-0 h-screen w-screen bg-white px-2"
         >
           <LoadingProvider>
             <WrappedComponent {...props} />

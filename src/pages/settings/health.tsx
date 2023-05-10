@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import { IHealthFormProps } from "@/components/health-form/type";
+import { BloodType } from "@/components/health-form/type";
 import Button from "@/core/button";
 import withSettings from "@/hoc/withSettings";
-
-import { BloodType } from "../../components/health-form/type";
 
 const Component = React.memo(() => {
   const testHealthRecord: IHealthFormProps = {

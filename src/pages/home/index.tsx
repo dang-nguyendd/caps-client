@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { IconSettings, IconPlus, IconUserCancel } from "@tabler/icons-react";
+import { router } from "next/client";
 import Link from "next/link";
 
 import ConversationList from "@/components/conversation-list";
@@ -10,14 +11,13 @@ import WeatherReport from "@/components/weather-report";
 import { AuthContext } from "@/contexts/auth-context";
 import withAuth from "@/hoc/withLogin";
 import useConversation from "@/hooks/conversation/useConversation";
-import useDevice from "@/hooks/useDevice";
 import ConversationModal from "@/shared/conversation-modal";
 import DefaultChatMessage from "@/shared/default-chat-message";
 import SearchInput from "@/shared/search-input";
+import StatusModal from "@/shared/status-modal";
 
 const Component: React.FC = () => {
-  const { isMobile } = useDevice();
-
+  const [open, setOpen] = useState(false);
   {
     const [showConversationModal, setShowConversationModal] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -74,6 +74,30 @@ const Component: React.FC = () => {
         disableBeacon: true,
       },
     ];
+
+    const _onModalClose = () => {
+      setOpen(false);
+    };
+
+    const _onModalConfirm = () => {
+      router.push("/health-form/instruction");
+      _onModalClose();
+    };
+    //
+    // const _getUserStaticHealth = async () => {
+    //   return await axios.get("/static-health");
+    // };
+    //
+    // const _initForm = async () => {
+    //   const currentRecord = await _getUserStaticHealth();
+    //   if (isEmpty(currentRecord)) {
+    //     setOpen(true);
+    //   }
+    // };
+
+    // useEffect(() => {
+    //   if (user && user.firstLogin) _initForm();
+    // }, [user]);
 
     return (
       <div
@@ -168,7 +192,7 @@ const Component: React.FC = () => {
                   </div>
                 </div>
                 <div data-tour="step3" className="flex">
-                  <WeatherReport />
+                  {/*<WeatherReport />*/}
                 </div>
               </div>
               {selectedConversation && conversations.length > 0 ? (
@@ -184,6 +208,17 @@ const Component: React.FC = () => {
           </main>
         </div>
         <OnboardingTutorial steps={steps} />
+        <StatusModal
+          type="info"
+          isOpen={open}
+          onClose={_onModalClose}
+          title="Health Status Update"
+          description={`Hi, ${user?.name}. Thank you for using DICA. Please complete the first-time health declaration form to let us support you better.`}
+          primaryButtonText="Sure"
+          secondaryButtonText="Not right now"
+          onSecondaryButtonClick={_onModalClose}
+          onPrimaryButtonClick={_onModalConfirm}
+        />
       </div>
     );
   }

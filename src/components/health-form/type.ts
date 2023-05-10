@@ -10,7 +10,7 @@ export interface IHealthFormProps {
   height: string;
   weight: string;
   bloodPressure: string;
-  bloodType: BloodType;
+  bloodType: string;
   allergies: string[];
   medications: string[];
   hasSurgery: boolean;

@@ -1,21 +1,28 @@
 import React, { useMemo, useState } from "react";
 
+import { useRouter } from "next/router";
 import { useImmer } from "use-immer";
 
+import axios from "@/axios";
 import {
   CheckboxOptions,
   DefaultCheckboxOption,
 } from "@/components/health-form/constant";
+import { BloodType, IHealthFormProps } from "@/components/health-form/type";
 import BadgeListInput from "@/core/badge-list-input";
+import { Badge } from "@/core/badge-list-input/type";
 import Button from "@/core/button";
 import Option from "@/core/select-option";
 import { SelectOption } from "@/core/select-option/type";
 import TextInput from "@/core/text-input";
 import Textarea from "@/core/textarea";
+import withAuth from "@/hoc/withLogin";
 import useDevice from "@/hooks/useDevice";
+import { showToast } from "@/utils/toast";
 
 const Component = () => {
   const { isMobile } = useDevice();
+  const router = useRouter();
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
@@ -58,26 +65,12 @@ const Component = () => {
     setBloodType(value);
   };
 
-  const _handleAllergiesChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
-    if (!allergies.includes(value)) {
-      setAllergies([...allergies, value]);
-    }
+  const _handleAllergiesChange = (allergies: string[]) => {
+    setAllergies(allergies);
   };
 
-  const _handleAllergiesDelete = (value: string) => {
-    setAllergies(allergies.filter((allergy) => allergy !== value));
-  };
-
-  const _handleMedicationsChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
-    if (!medications.includes(value)) {
-      setMedications([...medications, value]);
-    }
+  const _handleMedicationsChange = (allergies: string[]) => {
+    setMedications(allergies);
   };
 
   const _handleHasSurgery = (value: SelectOption) => {
@@ -92,10 +85,6 @@ const Component = () => {
     setHasHereditaryDisease(value);
   };
 
-  const _handleMedicationsDelete = (value: string) => {
-    setMedications(medications.filter((medication) => medication !== value));
-  };
-
   const _handleSurgeryDescription = (value: string) => {
     setSurgeryDescription(value);
   };
@@ -108,7 +97,26 @@ const Component = () => {
     setFamilyHistoryDescription(value);
   };
 
-  const _handleSubmitForm = () => {};
+  const _handleSubmitForm = async () => {
+    const finalForm: IHealthFormProps = {
+      age,
+      height,
+      weight,
+      bloodPressure,
+      bloodType,
+      allergies,
+      medications,
+      hasSurgery,
+      surgeryDescription,
+      hasChronicIllness,
+      chronicIllnessDescription,
+      hasHereditaryDisease,
+      familyHistoryDescription,
+    } as IHealthFormProps;
+    await axios.post("/static-health", finalForm);
+    showToast("success", "Congratulations. You have updated your health data.");
+    await router.push("/");
+  };
 
   const containerClass = useMemo(() => {
     if (isMobile) {
@@ -191,16 +199,14 @@ const Component = () => {
               name="blood-type"
               onChange={(value) => _handleChangeBloodType(value)}
             />
-            <TextInput
-              value={bloodType}
-              type="text"
-              placeHolder="blood type"
-              label="Blood type"
-              name="blood-type"
-              onChange={(value) => _handleChangeBloodType(value)}
+            <BadgeListInput
+              label="Allergies (please press enter to input)"
+              onSubmit={_handleAllergiesChange}
             />
-            <BadgeListInput label="Allergies" onSubmit={() => {}} />
-            <BadgeListInput label="Medications" onSubmit={() => {}} />
+            <BadgeListInput
+              label="Medications (please press enter to input)"
+              onSubmit={_handleMedicationsChange}
+            />
 
             <div className="col-span-3">
               <Option
@@ -257,13 +263,13 @@ const Component = () => {
         </div>
         <div className="mt-10 flex w-full flex-col items-center justify-between sm:flex-row">
           <div>
-            <Button onClick={() => {}} mode="secondary">
+            <Button onClick={() => router.back()} mode="secondary">
               Back
             </Button>
           </div>
           <div className="flex justify-end">
             <Button onClick={_handleSubmitForm} mode="primary">
-              Continue
+              Submit
             </Button>
           </div>
         </div>
@@ -274,4 +280,4 @@ const Component = () => {
 
 Component.displayName = "HealthFormHealthData";
 
-export default Component;
+export default withAuth(Component);

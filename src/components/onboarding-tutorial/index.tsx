@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 
 import { useRouter } from "next/router";
 import Joyride, { CallBackProps } from "react-joyride";
 
+import axios from "@/axios";
 import { options } from "@/components/onboarding-tutorial/constant";
 import { IOnboardingStepProps } from "@/components/onboarding-tutorial/type";
+import { AuthContext } from "@/contexts/auth-context";
 
 const Component: React.FC<IOnboardingStepProps> = ({ steps }) => {
   const [run, setRun] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
+  const { user } = useContext(AuthContext);
   const router = useRouter();
 
   const handleJoyrideCallback = (data: CallBackProps) => {
@@ -29,12 +32,19 @@ const Component: React.FC<IOnboardingStepProps> = ({ steps }) => {
 
     if (action === "skip" || action === "close") {
       setRun(false);
+      handleUpdateUser();
       setStepIndex(0);
     }
   };
 
   // TODO: it should be modified to only run when user login the first time
-  const shouldRun = router.pathname === "/";
+  const shouldRun = useMemo(() => {
+    return router.pathname === "/" && user?.firstLogin;
+  }, [router, user]);
+
+  const handleUpdateUser = async () => {
+    await axios.put("/users/update", { firstLogin: false });
+  };
 
   return (
     <Joyride
@@ -43,7 +53,7 @@ const Component: React.FC<IOnboardingStepProps> = ({ steps }) => {
       showProgress
       showSkipButton
       steps={steps}
-      run={shouldRun}
+      run={!!shouldRun}
       stepIndex={stepIndex}
       callback={handleJoyrideCallback}
       styles={{

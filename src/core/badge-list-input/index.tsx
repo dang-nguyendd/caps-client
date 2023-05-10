@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 import { IconX } from "@tabler/icons-react";
 
-import { IBadgeListInputProps } from "@/core/badge-list-input/type";
+import { Badge, IBadgeListInputProps } from "@/core/badge-list-input/type";
 
 const Component: React.FC<IBadgeListInputProps> = ({ onSubmit, label }) => {
   const [badgeText, setBadgeText] = useState("");
-  const [badges, setBadges] = useState<string[]>([]);
+  const [badges, setBadges] = useState<Badge[]>([]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBadgeText(event.target.value);
@@ -14,14 +14,22 @@ const Component: React.FC<IBadgeListInputProps> = ({ onSubmit, label }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setBadges([...badges, badgeText.trim()]);
+    setBadges([...badges, { value: badgeText.trim(), id: badges.length + 1 }]);
     setBadgeText("");
-    onSubmit([...badges, badgeText.trim()]);
+    onSubmit(
+      [...badges, { value: badgeText.trim(), id: badges.length + 1 }].map(
+        (item) => item.value
+      )
+    );
   };
 
-  const handleDelete = (badgeToDelete: string) => {
-    setBadges(badges.filter((badge) => badge !== badgeToDelete));
-    onSubmit(badges.filter((badge) => badge !== badgeToDelete));
+  const handleDelete = (badgeToDelete: Badge) => {
+    setBadges(badges.filter((badge) => badge.id !== badgeToDelete.id));
+    onSubmit(
+      badges
+        .filter((badge) => badge.id !== badgeToDelete.id)
+        .map((item) => item.value)
+    );
   };
 
   return (
@@ -36,12 +44,12 @@ const Component: React.FC<IBadgeListInputProps> = ({ onSubmit, label }) => {
         />
       </form>
       <div className="mt-2 flex flex-wrap">
-        {badges.map((badge) => (
+        {badges.map((badge, index) => (
           <div
-            key={badge}
+            key={index}
             className="m-1 inline-flex items-center rounded-lg bg-blue px-3 py-1 text-white"
           >
-            {badge}
+            {badge.value}
             <button className="ml-2" onClick={() => handleDelete(badge)}>
               <IconX className="h-4 w-4 text-white" />
             </button>

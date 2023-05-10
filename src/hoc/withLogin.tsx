@@ -6,6 +6,7 @@ import { AuthContext, AuthProvider, useAuth } from "@/contexts/auth-context";
 import { LoadingProvider } from "@/contexts/loading-context";
 // import useUser from "@/hooks/user/useUser";
 import useUserDetail from "@/hooks/user/useUser";
+import { showToast } from "@/utils/toast";
 
 export default function withAuth<P extends object>(
   Component: React.ComponentType<P>
@@ -17,7 +18,7 @@ export default function withAuth<P extends object>(
     const _firstGetUser = async () => {
       const response = await getUser();
       if (response) {
-        signIn(response);
+        if (signIn) signIn(response);
       }
     };
     useEffect(() => {

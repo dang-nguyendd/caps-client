@@ -11,6 +11,7 @@ export interface User {
   age: number;
   email: string;
   roles: RoleType;
+  firstLogin: boolean;
   createdAt: string;
 }
 

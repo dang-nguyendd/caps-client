@@ -22,98 +22,116 @@ import { showToast } from "@/utils/toast";
 const Component = () => {
   const { isMobile } = useDevice();
   const router = useRouter();
-  const [age, setAge] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-
-  const [bloodPressure, setBloodPressure] = useState("");
-  const [bloodType, setBloodType] = useState("");
-
-  const [allergies, setAllergies] = useState<string[]>([]);
-  const [medications, setMedications] = useState<string[]>([]);
-  const [hasSurgery, setHasSurgery] = useImmer<SelectOption>(
-    DefaultCheckboxOption
-  );
-  const [surgeryDescription, setSurgeryDescription] = useState("");
-  const [hasChronicIllness, setHasChronicIllness] = useImmer<SelectOption>(
-    DefaultCheckboxOption
-  );
-  const [chronicIllnessDescription, setChronicIllnessDescription] =
-    useState("");
-  const [hasHereditaryDisease, setHasHereditaryDisease] =
-    useImmer<SelectOption>(DefaultCheckboxOption);
-  const [familyHistoryDescription, setFamilyHistoryDescription] = useState("");
+  const [healthForm, setHealthForm] = useState({
+    age: "",
+    weight: "",
+    height: "",
+    bloodPressure: "",
+    bloodType: "",
+    allergies: [] as string[],
+    medications: [] as string[],
+    hasSurgery: DefaultCheckboxOption,
+    surgeryDescription: "",
+    hasChronicIllness: DefaultCheckboxOption,
+    chronicIllnessDescription: "",
+    hasHereditaryDisease: DefaultCheckboxOption,
+    familyHistoryDescription: "",
+  });
 
   const _handleChangeAge = (value: string) => {
-    setAge(value);
+    setHealthForm({
+      ...healthForm,
+      age: value,
+    });
   };
 
   const _handleChangeWeight = (value: string) => {
-    setWeight(value);
+    setHealthForm({
+      ...healthForm,
+      weight: value,
+    });
   };
 
   const _handleChangeHeight = (value: string) => {
-    setHeight(value);
+    setHealthForm({
+      ...healthForm,
+      height: value,
+    });
   };
 
   const _handleChangeBloodPressure = (value: string) => {
-    setBloodPressure(value);
+    setHealthForm({
+      ...healthForm,
+      bloodPressure: value,
+    });
   };
 
   const _handleChangeBloodType = (value: string) => {
-    setBloodType(value);
+    setHealthForm({
+      ...healthForm,
+      bloodType: value,
+    });
   };
 
-  const _handleAllergiesChange = (allergies: string[]) => {
-    setAllergies(allergies);
+  const _handleAllergiesChange = (selectedAllergies: string[]) => {
+    setHealthForm({
+      ...healthForm,
+      allergies: selectedAllergies,
+    });
   };
 
-  const _handleMedicationsChange = (allergies: string[]) => {
-    setMedications(allergies);
+  const _handleMedicationsChange = (selectedMedications: string[]) => {
+    setHealthForm({
+      ...healthForm,
+      medications: selectedMedications,
+    });
   };
 
   const _handleHasSurgery = (value: SelectOption) => {
-    setHasSurgery(value);
-  };
-
-  const _handleHasChronicIllness = (value: SelectOption) => {
-    setHasChronicIllness(value);
-  };
-
-  const _handleHasHereditaryDisease = (value: SelectOption) => {
-    setHasHereditaryDisease(value);
+    setHealthForm({
+      ...healthForm,
+      hasSurgery: value,
+    });
   };
 
   const _handleSurgeryDescription = (value: string) => {
-    setSurgeryDescription(value);
+    setHealthForm({
+      ...healthForm,
+      surgeryDescription: value,
+    });
+  };
+
+  const _handleHasChronicIllness = (value: SelectOption) => {
+    setHealthForm({
+      ...healthForm,
+      hasChronicIllness: value,
+    });
   };
 
   const _handleChangeChronicIllnessDescription = (value: string) => {
-    setChronicIllnessDescription(value);
+    setHealthForm({
+      ...healthForm,
+      chronicIllnessDescription: value,
+    });
+  };
+
+  const _handleHasHereditaryDisease = (value: SelectOption) => {
+    setHealthForm({
+      ...healthForm,
+      hasHereditaryDisease: value,
+    });
   };
 
   const _handleChangeFamilyHistoryDescription = (value: string) => {
-    setFamilyHistoryDescription(value);
+    setHealthForm({
+      ...healthForm,
+      familyHistoryDescription: value,
+    });
   };
 
   const _handleSubmitForm = async () => {
     // TODO: refactor this using formData instead of multiple useState
-    const finalForm: IHealthFormProps = {
-      age,
-      height,
-      weight,
-      bloodPressure,
-      bloodType,
-      allergies,
-      medications,
-      hasSurgery,
-      surgeryDescription,
-      hasChronicIllness,
-      chronicIllnessDescription,
-      hasHereditaryDisease,
-      familyHistoryDescription,
-    } as IHealthFormProps;
-    await axios.post("/static-health", finalForm);
+    await axios.post("/static-health", healthForm);
     showToast("success", "Congratulations. You have updated your health data.");
     await router.push("/");
   };
@@ -159,7 +177,7 @@ const Component = () => {
         <div className="w-full">
           <div className="mt-5 grid grid-cols-3 gap-4">
             <TextInput
-              value={age}
+              value={healthForm.age}
               type="text"
               placeHolder="age"
               label="Age"
@@ -167,7 +185,7 @@ const Component = () => {
               onChange={(value) => _handleChangeAge(value)}
             />
             <TextInput
-              value={weight}
+              value={healthForm.weight}
               type="text"
               placeHolder="weight in kg"
               label="Weight"
@@ -175,7 +193,7 @@ const Component = () => {
               onChange={(value) => _handleChangeWeight(value)}
             />
             <TextInput
-              value={height}
+              value={healthForm.height}
               type="text"
               placeHolder="height in cm"
               label="Height"
@@ -184,7 +202,7 @@ const Component = () => {
             />
 
             <TextInput
-              value={bloodPressure}
+              value={healthForm.bloodPressure}
               type="text"
               placeHolder="blood pressure"
               label="Blood pressure"
@@ -192,7 +210,7 @@ const Component = () => {
               onChange={(value) => _handleChangeBloodPressure(value)}
             />
             <TextInput
-              value={bloodType}
+              value={healthForm.bloodType}
               type="text"
               placeHolder="blood type"
               label="Blood type"
@@ -212,7 +230,7 @@ const Component = () => {
               <Option
                 type="checkbox"
                 options={CheckboxOptions}
-                selectedOption={hasSurgery}
+                selectedOption={healthForm.hasSurgery}
                 onChange={_handleHasSurgery}
                 title="Have you ever had surgery?"
                 dataKey="hasSurgery"
@@ -220,7 +238,7 @@ const Component = () => {
             </div>
             <div className="col-span-3">
               <Textarea
-                value={surgeryDescription}
+                value={healthForm.surgeryDescription}
                 onChange={_handleSurgeryDescription}
                 label="Please describe your surgery history"
               />
@@ -229,7 +247,7 @@ const Component = () => {
               <Option
                 type="checkbox"
                 options={CheckboxOptions}
-                selectedOption={hasChronicIllness}
+                selectedOption={healthForm.hasChronicIllness}
                 onChange={_handleHasChronicIllness}
                 title="Do you have any chronic illnesses?"
                 dataKey="hasChronicIllness"
@@ -237,7 +255,7 @@ const Component = () => {
             </div>
             <div className="col-span-3">
               <Textarea
-                value={chronicIllnessDescription}
+                value={healthForm.chronicIllnessDescription}
                 onChange={_handleChangeChronicIllnessDescription}
                 label="Please describe any chronic illnesses you have"
               />
@@ -246,7 +264,7 @@ const Component = () => {
               <Option
                 type="checkbox"
                 options={CheckboxOptions}
-                selectedOption={hasHereditaryDisease}
+                selectedOption={healthForm.hasHereditaryDisease}
                 onChange={_handleHasHereditaryDisease}
                 title="Is there a history of hereditary disease in your family?"
                 dataKey="hasHereditaryDisease"
@@ -254,7 +272,7 @@ const Component = () => {
             </div>
             <div className="col-span-3">
               <Textarea
-                value={familyHistoryDescription}
+                value={healthForm.familyHistoryDescription}
                 onChange={_handleChangeFamilyHistoryDescription}
                 label="Please describe any history of hereditary diseases in your family"
               />

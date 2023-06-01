@@ -16,6 +16,7 @@
     "analyze": "cross-env ANALYZE=true npm run build",
     "serve": "serve .next/analyze",
     "prepare": "husky install",
+    "update-translations": "npx tsx scripts/update-translations.ts",
     "postbuild": "next-sitemap"
   },
   "dependencies": {
@@ -40,6 +41,7 @@
     "next-auth": "^4.22.1",
     "next-i18next": "^13.2.2",
     "next-sitemap": "^4.0.9",
+    "openai": "^3.2.1",
     "puppeteer": "^20.4.0",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",

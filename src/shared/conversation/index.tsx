@@ -95,6 +95,7 @@ const Component = React.memo(
       HTMLButtonElement
     > = (e) => {
       e.stopPropagation();
+      setIsSharing(true);
     };
 
     useEffect(() => {

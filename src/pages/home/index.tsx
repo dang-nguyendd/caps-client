@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { IconSettings, IconPlus, IconUserCancel } from "@tabler/icons-react";
 import { isEmpty } from "lodash";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 import axios from "@/axios";
 import ConversationList from "@/components/conversation-list";
 import MessageList from "@/components/message-list";
 import OnboardingTutorial from "@/components/onboarding-tutorial";
+import Settings from "@/components/settings";
 import WeatherReport from "@/components/weather-report";
 import { AuthContext } from "@/contexts/auth-context";
 import withAuth from "@/hoc/withLogin";
@@ -27,6 +27,7 @@ const Component: React.FC = () => {
   {
     const [showConversationModal, setShowConversationModal] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
+    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
     const { user, signOut } = useContext(AuthContext);
     const {
@@ -71,6 +72,14 @@ const Component: React.FC = () => {
       if (isEmpty(currentRecord)) {
         setOpen(true);
       }
+    };
+
+    const _openSettingsModal = () => {
+      setIsSettingsModalOpen(true);
+    };
+
+    const _closeSettingsModal = () => {
+      setIsSettingsModalOpen(false);
     };
 
     const _handleExportJson = () => {};
@@ -147,15 +156,20 @@ const Component: React.FC = () => {
               <div className="grow"></div>
               <div className="flex border-t border-gray-800 p-4 pt-8">
                 <div className="flex flex-col gap-1">
-                  <Link
-                    href={"/settings"}
-                    className="flex cursor-pointer flex-row items-center gap-1"
-                  >
+                  <div className="mt-2 flex cursor-pointer flex-row items-center gap-1">
                     <IconSettings />
-                    <span className="ml-2 cursor-pointer text-sm text-white">
-                      Open settings
+                    <span
+                      className="ml-2  cursor-pointer text-sm text-white"
+                      onClick={_openSettingsModal}
+                    >
+                      Settings
                     </span>
-                  </Link>
+                  </div>
+                  <Settings
+                    isOpen={isSettingsModalOpen}
+                    onClose={_closeSettingsModal}
+                  />
+
                   <div className="mt-2 flex cursor-pointer flex-row items-center gap-1">
                     <IconUserCancel />
                     <span

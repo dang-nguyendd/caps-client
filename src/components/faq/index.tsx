@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 
-import { questions } from "@/components/faq/constant";
+import { breadcrumbItems, questions } from "@/components/faq/constant";
+import Breadcrumb from "@/core/breadcrumb";
 import SearchInput from "@/shared/search-input";
 
 const Component = () => {
+  const [currentPage, setCurrentPage] = useState("");
+
+  const _handleQuestionClick = (title: string) => {
+    setCurrentPage(title);
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
       <div>
@@ -19,7 +26,7 @@ const Component = () => {
           </div>
         </div>
         <div className="mx-auto mt-10 max-w-3xl">
-          {/* Breadcrumb component */}
+          <Breadcrumb items={breadcrumbItems} currentPage={currentPage} />
         </div>
         <div className="mx-auto mt-10 max-w-3xl">
           <div className="mb-2 flex items-center">
@@ -32,7 +39,8 @@ const Component = () => {
               {questions.map((question) => (
                 <Link
                   key={question.id}
-                  href={`/articles/${question.url}`}
+                  href={`/faq/${question.url}`}
+                  onClick={() => _handleQuestionClick(question.title)}
                   className="duration-250 group/article text-black-10 flex flex-row justify-between gap-2 rounded-lg px-3 py-2 no-underline transition ease-linear hover:bg-gray-300 hover:text-primary sm:py-3"
                 >
                   <div className="flex items-center">

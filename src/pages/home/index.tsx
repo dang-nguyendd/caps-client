@@ -29,6 +29,8 @@ import DefaultChatMessage from "@/shared/default-chat-message";
 import Popover from "@/shared/popover";
 import SearchInput from "@/shared/search-input";
 import StatusModal from "@/shared/status-modal";
+import useMessage from "@/hooks/message/useMessage";
+import { MessageNS } from "@/services/message/type";
 
 const Component: React.FC = () => {
   const { isMobile } = useDevice();
@@ -47,6 +49,8 @@ const Component: React.FC = () => {
       selectedConversation,
       setSelectedConversation,
     } = useConversation();
+
+    const { getAllMessages } = useMessage();
 
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -115,7 +119,25 @@ const Component: React.FC = () => {
         });
     };
 
-    const _handleExportJson = () => {};
+    const _handleExportJson = async () => {
+      const getMessageReq: MessageNS.GetMessageReq = {
+        conversationId: selectedConversation.id,
+      };
+
+      try {
+        const messages = getAllMessages(getMessageReq);
+        const json = JSON.stringify(messages);
+        console.log(messages, "mess");
+        const blob = new Blob([json], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        // const link = document.createElement("a");
+        // link.href = url;
+        // link.download = "messages.json";
+        // link.click();
+      } catch (error) {
+        console.error("Error exporting messages:", error);
+      }
+    };
 
     const _handleExportMarkdown = () => {};
 

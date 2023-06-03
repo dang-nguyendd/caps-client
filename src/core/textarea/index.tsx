@@ -2,7 +2,7 @@ import React from "react";
 
 import { ITextareaProps } from "@/core/textarea/type";
 
-const Component = React.memo((props: ITextareaProps) => {
+const Component = React.memo((props: ITextareaProps)  => {
   const { value, label, onChange } = props;
   return (
     <div className="mb-4 flex w-full flex-col">

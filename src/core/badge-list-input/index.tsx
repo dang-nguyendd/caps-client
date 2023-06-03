@@ -4,7 +4,11 @@ import { IconX } from "@tabler/icons-react";
 
 import { Badge, IBadgeListInputProps } from "@/core/badge-list-input/type";
 
-const Component: React.FC<IBadgeListInputProps> = ({ onSubmit, label }) => {
+const Component: React.FC<IBadgeListInputProps> = ({
+  onSubmit,
+  label,
+  errorMessage,
+}) => {
   const [badgeText, setBadgeText] = useState("");
   const [badges, setBadges] = useState<Badge[]>([]);
 
@@ -32,16 +36,30 @@ const Component: React.FC<IBadgeListInputProps> = ({ onSubmit, label }) => {
     );
   };
 
+  let inputClassNames =
+    "w-full rounded-lg border border-gray-300 p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue";
+
+  if (errorMessage) {
+    inputClassNames =
+      "w-full rounded-lg border border-red p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue";
+  } else {
+    inputClassNames =
+      "w-full rounded-lg border border-gray-300 p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue";
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label className="mb-2 block font-medium text-blue">{label}</label>
         <input
-          className="w-full rounded-lg border border-gray-300 p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue"
+          className={inputClassNames}
           type="text"
           value={badgeText}
           onChange={handleInputChange}
         />
+        {errorMessage && (
+          <div className="mt-2 text-sm text-red">{errorMessage}</div>
+        )}
       </form>
       <div className="mt-2 flex flex-wrap">
         {badges.map((badge, index) => (

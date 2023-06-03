@@ -26,7 +26,7 @@
     "@mdx-js/react": "^2.3.0",
     "@next/bundle-analyzer": "^13.4.1",
     "@next/mdx": "^13.4.4",
-    "@tabler/icons-react": "^2.17.0",
+    "@tabler/icons-react": "^2.21.0",
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
     "clsx": "^1.2.1",
@@ -42,6 +42,7 @@
     "i18next-chained-backend": "^4.2.0",
     "i18next-http-backend": "^2.2.0",
     "i18next-localstorage-backend": "^4.1.1",
+    "immer": "^10.0.2",
     "lodash": "^4.17.21",
     "next": "13.4.1",
     "next-auth": "^4.22.1",
@@ -49,7 +50,7 @@
     "next-sitemap": "^4.0.9",
     "openai": "^3.2.1",
     "puppeteer": "^20.4.0",
-    "react": "18.2.0",
+    "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
@@ -59,9 +60,10 @@
     "react-modal": "^3.16.1",
     "react-toastify": "^9.1.2",
     "socket.io-client": "^4.6.1",
+    "tabler-icons-react": "^1.56.0",
     "typescript": "^5.0.4",
     "use-immer": "^0.9.0",
-    "yup": "^1.1.1"
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",

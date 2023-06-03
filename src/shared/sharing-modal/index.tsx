@@ -1,9 +1,12 @@
 import React from "react";
 
-import { IconLink, IconX } from "@tabler/icons-react";
+import { IconLink, IconX, IconExternalLink } from "@tabler/icons-react";
+import Link from "next/link";
 import Modal from "react-modal";
 
+import { CustomStyle } from "@/shared/sharing-modal/constant";
 import { ISharingModalProps } from "@/shared/sharing-modal/type";
+import { formatDate } from "@/utils/date-time";
 
 const Component: React.FC<ISharingModalProps> = ({
   isOpen,
@@ -18,6 +21,7 @@ const Component: React.FC<ISharingModalProps> = ({
       isOpen={isOpen}
       onRequestClose={closeModal}
       overlayClassName="overlay"
+      style={CustomStyle}
     >
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold">{title}</h2>
@@ -27,17 +31,30 @@ const Component: React.FC<ISharingModalProps> = ({
       </div>
       <hr className="my-4" />
       <p className="mb-4 text-sm">{description}</p>
-      <div className="border-y py-4">
+      <div>
         <div className="mb-2 flex items-center">
-          <span className="text-sm font-medium">{conversationName}</span>
-          <span className="ml-auto text-xs text-gray-500">{updatedAt}</span>
+          <div>
+            <span className="text-sm font-medium">{conversationName}</span>
+          </div>
+          <div>
+            <span className="text-xs text-gray-500">
+              {formatDate(updatedAt)}
+            </span>
+          </div>
         </div>
-        <hr className="my-2" />
         {/* Content of the conversation */}
       </div>
       <div className="mt-4 flex items-center justify-between">
-        <span className="text-sm">Copy Link</span>
-        <IconLink size={18} />
+        <div className="flex items-center">
+          <Link href="">
+            <span className="ml-2">More info</span>
+            <IconExternalLink />
+          </Link>
+        </div>
+        <button className="bg-green-500 focus:border-green-700 flex items-center rounded border-2 border-transparent px-3 py-2 text-xs text-white focus:outline-none">
+          <IconLink size={18} />
+          <span className="ml-2">Copy Link</span>
+        </button>
       </div>
     </Modal>
   );

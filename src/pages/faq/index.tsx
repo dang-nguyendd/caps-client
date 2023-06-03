@@ -1,7 +1,10 @@
-import FAQComponent from "@/components/faq"
-const Component = () => {
-    return <FAQComponent/>
-}
+import React from "react";
 
-Component.displayName = "FAQ"
+import FAQComponent from "@/components/faq";
+
+const Component = () => {
+  return <FAQComponent />;
+};
+
+Component.displayName = "FAQ";
 export default Component;

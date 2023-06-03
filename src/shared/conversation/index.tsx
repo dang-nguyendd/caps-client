@@ -98,6 +98,10 @@ const Component = React.memo(
       setIsSharing(true);
     };
 
+    const _onSharingModalClose = () => {
+      setIsSharing(false);
+    };
+
     useEffect(() => {
       if (isRenaming) {
         setIsDeleting(false);
@@ -180,7 +184,7 @@ const Component = React.memo(
         </div>
         <SharingModal
           isOpen={isSharing}
-          closeModal={() => {}}
+          closeModal={_onSharingModalClose}
           title="Share Link to Chat"
           description="Messages you send after creating your link won't be shared. Anyone with the URL will be able to view the shared chat."
           conversationName={conversation.name}

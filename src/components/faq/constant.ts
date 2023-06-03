@@ -25,3 +25,9 @@ export const questions = [
     title: "DICA - Release note",
   },
 ];
+
+export const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "DICA", href: "/faq" },
+  { label: "Current Page" },
+];

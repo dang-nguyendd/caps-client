@@ -46,12 +46,12 @@ const Component: React.FC<ISharingModalProps> = ({
       </div>
       <div className="mt-4 flex items-center justify-between">
         <div className="flex items-center">
-          <Link href="">
+          <Link href="/faq" className="flex items-center">
             <span className="ml-2">More info</span>
             <IconExternalLink />
           </Link>
         </div>
-        <button className="bg-green-500 focus:border-green-700 flex items-center rounded border-2 border-transparent px-3 py-2 text-xs text-white focus:outline-none">
+        <button className="flex items-center rounded border-2 border-transparent bg-green-500 px-3 py-2 text-xs text-white focus:border-green-700 focus:outline-none">
           <IconLink size={18} />
           <span className="ml-2">Copy Link</span>
         </button>

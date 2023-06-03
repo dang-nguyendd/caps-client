@@ -1,7 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
-import { IconSettings, IconPlus, IconUserCancel } from "@tabler/icons-react";
+import {
+  IconSettings,
+  IconPlus,
+  IconUserCancel,
+  IconNews,
+  IconScreenshot,
+  IconMarkdown,
+  IconJson,
+} from "@tabler/icons-react";
+import { toPng } from "html-to-image";
 import { isEmpty } from "lodash";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import axios from "@/axios";
@@ -37,6 +47,8 @@ const Component: React.FC = () => {
       selectedConversation,
       setSelectedConversation,
     } = useConversation();
+
+    const chatContainerRef = useRef<HTMLDivElement>(null);
 
     const _handleOpenConversationModal = () => {
       setShowConversationModal(true);
@@ -82,16 +94,44 @@ const Component: React.FC = () => {
       setIsSettingsModalOpen(false);
     };
 
+    const _onScreenshot = () => {
+      if (chatContainerRef.current === null) {
+        return;
+      }
+
+      chatContainerRef.current.classList.remove("max-h-full");
+      toPng(chatContainerRef.current, { cacheBust: true })
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.download = `${selectedConversation?.name || "conversation"}.png`;
+          link.href = dataUrl;
+          link.click();
+          if (chatContainerRef.current) {
+            chatContainerRef.current.classList.add("max-h-full");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
     const _handleExportJson = () => {};
 
     const _handleExportMarkdown = () => {};
 
     const exportOptions = [
       {
+        icon: <IconScreenshot />,
+        label: "Take screenshot",
+        onClick: _onScreenshot,
+      },
+      {
+        icon: <IconJson />,
         label: "Export JSON",
         onClick: _handleExportJson,
       },
       {
+        icon: <IconMarkdown />,
         label: "Export Markdown",
         onClick: _handleExportMarkdown,
       },
@@ -116,7 +156,7 @@ const Component: React.FC = () => {
             <section
               className={`group flex ${
                 isMobile ? "h-full" : ""
-              } w-24 flex-none flex-col overflow-auto transition-all duration-300 ease-in-out md:w-2/5 lg:max-w-sm`}
+              } w-80 flex-none flex-col overflow-auto transition-all duration-300 ease-in-out md:w-1/6 lg:max-w-sm`}
             >
               <div className="flex flex-none flex-row items-center justify-between p-4">
                 <p className="hidden text-lg font-bold md:block">
@@ -156,6 +196,15 @@ const Component: React.FC = () => {
               <div className="grow"></div>
               <div className="flex border-t border-gray-800 p-4 pt-8">
                 <div className="flex flex-col gap-1">
+                  <Link
+                    href={"/news"}
+                    className="flex cursor-pointer flex-row items-center gap-1"
+                  >
+                    <IconNews />
+                    <span className="ml-2 cursor-pointer text-sm text-white">
+                      News
+                    </span>
+                  </Link>
                   <div className="mt-2 flex cursor-pointer flex-row items-center gap-1">
                     <IconSettings />
                     <span
@@ -190,7 +239,7 @@ const Component: React.FC = () => {
               <div className="flex flex-none flex-row items-center justify-between border-b border-gray-800 px-6 py-4 shadow">
                 <div className="flex flex-col">
                   <div data-tour="step2" className="flex items-center">
-                    <span className="mb-2 text-xl font-bold">
+                    <span className="mb-2 mr-2 text-xl font-bold">
                       Dengue Intelligent Chatbot Assistance
                     </span>
                     <Popover options={exportOptions} />
@@ -202,11 +251,12 @@ const Component: React.FC = () => {
                   ) : null}
                 </div>
                 <div data-tour="step3" className="flex">
-                  <WeatherReport />
+                  {/*<WeatherReport />*/}
                 </div>
               </div>
               {selectedConversation && conversations.length > 0 ? (
                 <MessageList
+                  ref={chatContainerRef}
                   dataTourOne="step4"
                   dataTourTwo="step5"
                   selectedConversation={selectedConversation}

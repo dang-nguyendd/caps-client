@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Popover, Transition } from "@headlessui/react";
-import { IconDotsVertical } from "@tabler/icons-react";
+import { IconDots } from "@tabler/icons-react";
 
 import { IPopoverProps } from "@/shared/popover/type";
 
@@ -11,7 +11,7 @@ const Component: React.FC<IPopoverProps> = ({ options }) => {
       {({ open }) => (
         <>
           <Popover.Button className="focus:outline-none">
-            <IconDotsVertical color="white" />
+            <IconDots color="white" />
           </Popover.Button>
 
           <Transition
@@ -26,7 +26,7 @@ const Component: React.FC<IPopoverProps> = ({ options }) => {
           >
             <Popover.Panel
               static
-              className="absolute left-1/2 z-10 mt-2 w-40 -translate-x-1/2  px-2 sm:px-0"
+              className="absolute left-1/2 z-10 mt-2 w-48 -translate-x-1/2  px-2 sm:px-0"
             >
               <div className="rounded-md bg-white shadow-md">
                 <div className="py-1">
@@ -36,7 +36,10 @@ const Component: React.FC<IPopoverProps> = ({ options }) => {
                       className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={option.onClick}
                     >
-                      {option.label}
+                      <div className="flex items-center">
+                        <div>{option.icon}</div>
+                        <span className="ml-2">{option.label}</span>
+                      </div>
                     </button>
                   ))}
                 </div>

@@ -28,21 +28,25 @@ const Component: React.FC = () => {
   );
 
   return (
-    <div className="flex items-center">
-      {languageOptions.map(({ name, locale }) => (
-        <button
-          key={locale}
-          className={`rounded-lg p-2 ${
-            currentLocale?.locale === locale
-              ? "bg-blue text-white"
-              : "bg-white text-black"
-          }`}
-          onClick={_handleChangeLanguage(locale)}
-        >
-          {name}
-        </button>
-      ))}
-    </div>
+    <>
+      <h2 className="text-xl font-semibold my-4">Language</h2>
+
+      <div className="flex items-center">
+        {languageOptions.map(({ name, locale }) => (
+          <button
+            key={locale}
+            className={`rounded-lg p-2 ${
+              currentLocale?.locale === locale
+                ? "bg-blue text-white"
+                : "bg-white text-black"
+            }`}
+            onClick={_handleChangeLanguage(locale)}
+          >
+            {name}
+          </button>
+        ))}
+      </div>
+    </>
   );
 };
 

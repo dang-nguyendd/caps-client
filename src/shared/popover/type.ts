@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IPopoverProps {
-  options: { label: string; onClick: () => void }[];
+  options: { icon: ReactNode; label: string; onClick: () => void }[];
 }

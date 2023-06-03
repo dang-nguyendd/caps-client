@@ -21,7 +21,7 @@ const Component: React.FC<IMessageInputProps> = ({
 
   const _handleRecording = () => {
     const recognition = new (window as any).webkitSpeechRecognition();
-    recognition.lang = "vi";
+    recognition.lang = "en-US";
     recognition.continuous = false;
     recognition.interimResults = false;
 

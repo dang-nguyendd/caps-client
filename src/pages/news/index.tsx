@@ -3,7 +3,21 @@ import React from "react";
 import BreakingNewsHeadline from "@/components/news/breaking-news-headline";
 import FeatureNews from "@/components/news/feature-news";
 import TrendingStories from "@/components/news/trending-stories";
-import { trendingStories } from "@/pages/news/constant";
+
+export const trendingStories = [
+  {
+    title: "Story 1",
+    imageUrl: "/theme/dark.png",
+  },
+  {
+    title: "Story 2",
+    imageUrl: "/theme/dark.png",
+  },
+  {
+    title: "Story 3",
+    imageUrl: "/theme/dark.png",
+  },
+];
 
 const Component: React.FC = () => {
   const handleHeadlineClick = () => {

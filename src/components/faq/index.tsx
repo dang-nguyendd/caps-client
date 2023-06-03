@@ -39,7 +39,7 @@ const Component = () => {
               {questions.map((question) => (
                 <Link
                   key={question.id}
-                  href={`/articles/${question.url}`}
+                  href={`/faq/${question.url}`}
                   onClick={() => _handleQuestionClick(question.title)}
                   className="duration-250 group/article text-black-10 flex flex-row justify-between gap-2 rounded-lg px-3 py-2 no-underline transition ease-linear hover:bg-gray-300 hover:text-primary sm:py-3"
                 >

@@ -19,11 +19,7 @@ const Component: React.FC = () => {
 
   const _handleThemeChange = (newTheme: Theme) => {
     setTheme(newTheme);
-    if (newTheme === "system") {
-      localStorage.removeItem("theme");
-    } else {
-      localStorage.setItem("theme", newTheme);
-    }
+    localStorage.setItem("theme", newTheme);
   };
 
   const getCheckIcon = (selected: boolean) => {

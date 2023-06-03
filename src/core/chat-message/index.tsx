@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { IconVolume2 } from "@tabler/icons-react";
 
 import { IChatMessageProps } from "@/core/chat-message/type";
-import { Tooltip } from "@nextui-org/react";
 
 const Component = React.memo((props: IChatMessageProps) => {
   const { conservationId, content, senderType } = props;

@@ -2,13 +2,13 @@ import React, { Fragment, useState } from "react";
 
 import { Dialog, Transition } from "@headlessui/react";
 import { IconExternalLink, IconX } from "@tabler/icons-react";
+import Link from "next/link";
 
 import LanguageSwitcher from "@/components/language-switcher";
 import { tabs } from "@/components/settings/constant";
 import { ISettingsModalProps } from "@/components/settings/type";
 import ThemeSwitcher from "@/components/theme-switcher";
 import Switcher from "@/core/switcher";
-import Link from "next/link";
 
 const Component: React.FC<ISettingsModalProps> = ({ isOpen, onClose }) => {
   const [selectedTab, setSelectedTab] = useState(1);

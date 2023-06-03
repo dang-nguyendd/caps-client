@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 
 import { useRouter } from "next/router";
 import { useImmer } from "use-immer";
-
+import * as yup from "yup";
 import axios from "@/axios";
 import {
   CheckboxOptions,
@@ -38,11 +38,111 @@ const Component = () => {
     familyHistoryDescription: "",
   });
 
+  interface ErrorMessages {
+    [key: string]: string;
+  }
+  const [errorMessages, setErrorMessages] = useState<ErrorMessages>({});
+
+  const schema = yup.object().shape({
+    age: yup
+      .string()
+      .required("Age is required")
+      .matches(/^\d+$/, "Age must be a number"),
+    weight: yup
+      .string()
+      .required("Weight is required")
+      .matches(/^\d+$/, "Weight must be a number"),
+    height: yup
+      .string()
+      .required("Height is required")
+      .matches(/^\d+$/, "Height must be a number"),
+    bloodPressure: yup
+      .string()
+      .required("BloodPressure is required")
+      .matches(/^\d+$/, "BloodPressure must be a number"),
+    bloodType: yup
+      .string()
+      .required("Blood type is required")
+      .oneOf(["A", "B", "AB", "O"], "Invalid blood type"),
+    allergies: yup
+      .array()
+      .of(yup.string())
+      .required("Allergies are required")
+      .min(1, "At least one allergy must be specified")
+      .test(
+        "unique-allergies",
+        "Allergies must be unique",
+        function (allergies) {
+          if (!allergies || allergies.length === 0) {
+            return true; // Skip validation if the allergies array is empty or undefined
+          }
+          const uniqueElements = new Set(allergies);
+          return uniqueElements.size === allergies.length;
+        }
+      ),
+    medications: yup
+      .array()
+      .of(yup.string())
+      .required("Allergies are required")
+      .min(1, "At least one allergy must be specified")
+      .test(
+        "unique-allergies",
+        "Medications must be unique",
+        function (medications) {
+          if (!medications || medications.length === 0) {
+            return true; // Skip validation if the allergies array is empty or undefined
+          }
+          const uniqueElements = new Set(medications);
+          return uniqueElements.size === medications.length;
+        }
+      ),
+    surgeryDescription: yup
+      .string()
+      .test(
+        "word-count",
+        "Surgery description should be between 1 and 100 words",
+        (value) => {
+          if (!value) {
+            return false; // Fail validation if the value is empty or undefined
+          }
+          const words = value.trim().split(/\s+/); // Split the value into words
+          return words.length >= 1 && words.length <= 100; // Check if the word count is within the desired range
+        }
+      ),
+    chronicIllnessDescription: yup
+      .string()
+      .test(
+        "word-count",
+        "Surgery description should be between 1 and 100 words",
+        (value) => {
+          if (!value) {
+            return false; // Fail validation if the value is empty or undefined
+          }
+          const words = value.trim().split(/\s+/); // Split the value into words
+          return words.length >= 1 && words.length <= 100; // Check if the word count is within the desired range
+        }
+      ),
+    familyHistoryDescription: yup
+      .string()
+      .test(
+        "word-count",
+        "Surgery description should be between 1 and 100 words",
+        (value) => {
+          if (!value) {
+            return false; // Fail validation if the value is empty or undefined
+          }
+          const words = value.trim().split(/\s+/); // Split the value into words
+          return words.length >= 1 && words.length <= 100; // Check if the word count is within the desired range
+        }
+      ),
+  });
+
   const _handleChangeAge = (value: string) => {
     setHealthForm({
       ...healthForm,
       age: value,
     });
+    setErrorMessages({ ...errorMessages, age: "" });
   };
 
   const _handleChangeWeight = (value: string) => {
@@ -50,6 +150,7 @@ const Component = () => {
       ...healthForm,
       weight: value,
     });
+    setErrorMessages({ ...errorMessages, weight: "" });
   };
 
   const _handleChangeHeight = (value: string) => {
@@ -57,6 +158,7 @@ const Component = () => {
       ...healthForm,
       height: value,
     });
+    setErrorMessages({ ...errorMessages, height: "" });
   };
 
   const _handleChangeBloodPressure = (value: string) => {
@@ -64,6 +166,7 @@ const Component = () => {
       ...healthForm,
       bloodPressure: value,
     });
+    setErrorMessages({ ...errorMessages, bloodPressure: "" });
   };
 
   const _handleChangeBloodType = (value: string) => {
@@ -71,6 +174,7 @@ const Component = () => {
       ...healthForm,
       bloodType: value,
     });
+    setErrorMessages({ ...errorMessages, bloodType: "" });
   };
 
   const _handleAllergiesChange = (selectedAllergies: string[]) => {
@@ -78,6 +182,7 @@ const Component = () => {
       ...healthForm,
       allergies: selectedAllergies,
     });
+    setErrorMessages({ ...errorMessages, allergies: "" });
   };
 
   const _handleMedicationsChange = (selectedMedications: string[]) => {
@@ -85,6 +190,7 @@ const Component = () => {
       ...healthForm,
       medications: selectedMedications,
     });
+    setErrorMessages({ ...errorMessages, medications: "" });
   };
 
   const _handleHasSurgery = (value: SelectOption) => {
@@ -92,6 +198,7 @@ const Component = () => {
       ...healthForm,
       hasSurgery: value,
     });
+    setErrorMessages({ ...errorMessages, hasSurgery: "" });
   };
 
   const _handleSurgeryDescription = (value: string) => {
@@ -99,6 +206,7 @@ const Component = () => {
       ...healthForm,
       surgeryDescription: value,
     });
+    setErrorMessages({ ...errorMessages, surgeryDescription: "" });
   };
 
   const _handleHasChronicIllness = (value: SelectOption) => {
@@ -106,6 +214,7 @@ const Component = () => {
       ...healthForm,
       hasChronicIllness: value,
     });
+    setErrorMessages({ ...errorMessages, hasChronicIllness: "" });
   };
 
   const _handleChangeChronicIllnessDescription = (value: string) => {
@@ -113,6 +222,7 @@ const Component = () => {
       ...healthForm,
       chronicIllnessDescription: value,
     });
+    setErrorMessages({ ...errorMessages, chronicIllnessDescription: "" });
   };
 
   const _handleHasHereditaryDisease = (value: SelectOption) => {
@@ -120,6 +230,7 @@ const Component = () => {
       ...healthForm,
       hasHereditaryDisease: value,
     });
+    setErrorMessages({ ...errorMessages, hasHereditaryDisease: "" });
   };
 
   const _handleChangeFamilyHistoryDescription = (value: string) => {
@@ -127,13 +238,45 @@ const Component = () => {
       ...healthForm,
       familyHistoryDescription: value,
     });
+    setErrorMessages({ ...errorMessages, familyHistoryDescription: "" });
   };
 
-  const _handleSubmitForm = async () => {
-    // TODO: refactor this using formData instead of multiple useState
-    await axios.post("/static-health", healthForm);
-    showToast("success", "Congratulations. You have updated your health data.");
-    await router.push("/");
+  const _handleSubmitForm = () => {
+    schema
+      .validate(healthForm, { abortEarly: false })
+      .then(async (validatedData) => {
+        await axios.post("/static-health", healthForm);
+        showToast(
+          "success",
+          "Congratulations. You have updated your health data."
+        );
+        await router.push("/");
+      })
+      .catch((validationErrors) => {
+        // Form data is invalid, handle the validation errors
+        console.error("Validation errors:", validationErrors);
+
+        const newErrorMessages: ErrorMessages = {}; // Create a new object to store the error messages
+
+        // Extract error messages for each field
+        const errorMessages: { [key: string]: string } = {}; // Define the type of errorMessages
+
+        validationErrors.inner.forEach((error: any) => {
+          newErrorMessages[error.path] = error.message; // Store the error message for each field
+        });
+
+        setErrorMessages(newErrorMessages); // Update the error messages state variable
+
+        // validationErrors.inner.forEach((error: any) => {
+        //   // Add type annotation for 'error'
+        //   errorMessages[error.path] = error.message;
+        // });
+
+        // Display toast messages for each field error
+        Object.keys(errorMessages).forEach((fieldName) => {
+          showToast("error", `${fieldName}: ${errorMessages[fieldName]}`);
+        });
+      });
   };
 
   const containerClass = useMemo(() => {
@@ -178,6 +321,7 @@ const Component = () => {
           <div className="mt-5 grid grid-cols-3 gap-4">
             <TextInput
               value={healthForm.age}
+              errorMessage={errorMessages.age || ""}
               type="text"
               placeHolder="age"
               label="Age"
@@ -186,6 +330,7 @@ const Component = () => {
             />
             <TextInput
               value={healthForm.weight}
+              errorMessage={errorMessages.weight || ""}
               type="text"
               placeHolder="weight in kg"
               label="Weight"
@@ -194,6 +339,7 @@ const Component = () => {
             />
             <TextInput
               value={healthForm.height}
+              errorMessage={errorMessages.height || ""}
               type="text"
               placeHolder="height in cm"
               label="Height"
@@ -203,6 +349,7 @@ const Component = () => {
 
             <TextInput
               value={healthForm.bloodPressure}
+              errorMessage={errorMessages.bloodPressure || ""}
               type="text"
               placeHolder="blood pressure"
               label="Blood pressure"
@@ -211,6 +358,7 @@ const Component = () => {
             />
             <TextInput
               value={healthForm.bloodType}
+              errorMessage={errorMessages.bloodType || ""}
               type="text"
               placeHolder="blood type"
               label="Blood type"

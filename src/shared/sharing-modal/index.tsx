@@ -47,8 +47,8 @@ const Component: React.FC<ISharingModalProps> = ({
       <div className="mt-4 flex items-center justify-between">
         <div className="flex items-center">
           <Link href="/faq" className="flex items-center">
-            <span className="ml-2">More info</span>
             <IconExternalLink />
+            <span className="ml-2">More info</span>
           </Link>
         </div>
         <button className="flex items-center rounded border-2 border-transparent bg-green-500 px-3 py-2 text-xs text-white focus:border-green-700 focus:outline-none">

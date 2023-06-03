@@ -2,10 +2,10 @@ import React, { useMemo } from "react";
 
 import { useRouter } from "next/router";
 
-import locales from "@/components/language-switcher/locales.json";
+import { languageOptions } from "@/components/language-switcher/constant";
 import { LocalStorageService } from "@/services/local-storage";
 
-const LanguageSwitcher: React.FC = () => {
+const Component: React.FC = () => {
   const router = useRouter();
 
   const _handleChangeLanguage = (lang: string) => () => {
@@ -23,13 +23,13 @@ const LanguageSwitcher: React.FC = () => {
   };
 
   const currentLocale = useMemo(
-    () => locales.find(({ locale }) => router.locale === locale),
+    () => languageOptions.find(({ locale }) => router.locale === locale),
     [router.locale]
   );
 
   return (
     <div className="flex items-center">
-      {locales.map(({ name, locale }) => (
+      {languageOptions.map(({ name, locale }) => (
         <button
           key={locale}
           className={`rounded-lg p-2 ${
@@ -46,4 +46,5 @@ const LanguageSwitcher: React.FC = () => {
   );
 };
 
-export default LanguageSwitcher;
+Component.displayName = "LanguageSwitcher";
+export default Component;

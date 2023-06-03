@@ -17,7 +17,7 @@ const Component: React.FC = () => {
     setTheme(savedTheme ?? preferredTheme);
   }, []);
 
-  const handleThemeChange = (newTheme: Theme) => {
+  const _handleThemeChange = (newTheme: Theme) => {
     setTheme(newTheme);
     if (newTheme === "system") {
       localStorage.removeItem("theme");
@@ -45,7 +45,7 @@ const Component: React.FC = () => {
             className={`rounded border-2 ${
               theme === "system" ? "border-light-blue" : ""
             }`}
-            onClick={() => handleThemeChange("system")}
+            onClick={() => _handleThemeChange("system")}
           >
             <Image
               src="/theme/dark.png"
@@ -62,7 +62,7 @@ const Component: React.FC = () => {
             className={`rounded border-2 ${
               theme === "light" ? "border-light-blue" : ""
             }`}
-            onClick={() => handleThemeChange("light")}
+            onClick={() => _handleThemeChange("light")}
           >
             <Image
               src="/theme/dark.png"
@@ -79,7 +79,7 @@ const Component: React.FC = () => {
             className={`rounded border-2 ${
               theme === "dark" ? "border-light-blue" : ""
             }`}
-            onClick={() => handleThemeChange("dark")}
+            onClick={() => _handleThemeChange("dark")}
           >
             <Image
               src="/theme/dark.png"

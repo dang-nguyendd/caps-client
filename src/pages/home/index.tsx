@@ -16,6 +16,7 @@ import useConversation from "@/hooks/conversation/useConversation";
 import useDevice from "@/hooks/useDevice";
 import ConversationModal from "@/shared/conversation-modal";
 import DefaultChatMessage from "@/shared/default-chat-message";
+import Popover from "@/shared/popover";
 import SearchInput from "@/shared/search-input";
 import StatusModal from "@/shared/status-modal";
 
@@ -67,11 +68,25 @@ const Component: React.FC = () => {
 
     const _initForm = async () => {
       const currentRecord = await _getUserStaticHealth();
-      console.log("current record", currentRecord);
       if (isEmpty(currentRecord)) {
         setOpen(true);
       }
     };
+
+    const _handleExportJson = () => {};
+
+    const _handleExportMarkdown = () => {};
+
+    const exportOptions = [
+      {
+        label: "Export JSON",
+        onClick: _handleExportJson,
+      },
+      {
+        label: "Export Markdown",
+        onClick: _handleExportMarkdown,
+      },
+    ];
 
     useEffect(() => {
       if (user) _initForm();
@@ -159,17 +174,18 @@ const Component: React.FC = () => {
               }`}
             >
               <div className="flex flex-none flex-row items-center justify-between border-b border-gray-800 px-6 py-4 shadow">
-                <div className="flex">
-                  <div data-tour="step2">
-                    <p className="mb-2 text-xl font-bold">
+                <div className="flex flex-col">
+                  <div data-tour="step2" className="flex items-center">
+                    <span className="mb-2 text-xl font-bold">
                       Dengue Intelligent Chatbot Assistance
-                    </p>
-                    {selectedConversation && conversations.length > 0 ? (
-                      <div className="h-fit w-fit rounded bg-green px-5 py-1 text-sm text-white">
-                        {selectedConversation?.chatBotType}
-                      </div>
-                    ) : null}
+                    </span>
+                    <Popover options={exportOptions} />
                   </div>
+                  {selectedConversation && conversations.length > 0 ? (
+                    <div className="h-fit w-fit rounded bg-green-500 px-5 py-1 text-sm text-white">
+                      {selectedConversation?.chatBotType}
+                    </div>
+                  ) : null}
                 </div>
                 <div data-tour="step3" className="flex">
                   <WeatherReport />

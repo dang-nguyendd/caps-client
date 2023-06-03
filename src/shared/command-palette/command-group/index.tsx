@@ -10,6 +10,8 @@ import {
 } from "@tabler/icons-react";
 import clsx from "clsx";
 
+import { ICommandProps } from "@/shared/command-palette/command-group/type";
+
 const Component: React.FC<ICommandProps> = ({ commands, group }) => {
   return (
     <>

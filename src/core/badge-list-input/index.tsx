@@ -57,9 +57,7 @@ const Component: React.FC<IBadgeListInputProps> = ({
           value={badgeText}
           onChange={handleInputChange}
         />
-        {errorMessage && (
-          <div className="mt-2 text-sm text-red">{errorMessage}</div>
-        )}
+        {errorMessage ? ({errorMessage}): null }
       </form>
       <div className="mt-2 flex flex-wrap">
         {badges.map((badge, index) => (

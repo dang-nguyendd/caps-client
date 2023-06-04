@@ -1,10 +1,10 @@
 import React from "react";
 
-import FAQComponent from "@/components/faq";
+import FaqComponent from "@/components/faq";
 
 const Component = () => {
-  return <FAQComponent />;
+  return <FaqComponent />;
 };
 
-Component.displayName = "FAQ";
+Component.displayName = "Faq";
 export default Component;

@@ -21,8 +21,8 @@ export const questions = [
   },
   {
     id: 1,
-    url: "dica-release-note",
-    title: "DICA - Release note",
+    url: "dica-release-notes",
+    title: "DICA - Release notes",
   },
 ];
 

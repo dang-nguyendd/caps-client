@@ -29,7 +29,7 @@ const Component: React.FC = () => {
 
   return (
     <>
-      <h2 className="text-xl font-semibold my-4">Language</h2>
+      <h2 className="my-4 text-xl font-semibold">Language</h2>
 
       <div className="flex items-center">
         {languageOptions.map(({ name, locale }) => (

@@ -23,14 +23,14 @@ import WeatherReport from "@/components/weather-report";
 import { AuthContext } from "@/contexts/auth-context";
 import withAuth from "@/hoc/withLogin";
 import useConversation from "@/hooks/conversation/useConversation";
+import useMessage from "@/hooks/message/useMessage";
 import useDevice from "@/hooks/useDevice";
+import { MessageNS } from "@/services/message/type";
 import ConversationModal from "@/shared/conversation-modal";
 import DefaultChatMessage from "@/shared/default-chat-message";
 import Popover from "@/shared/popover";
 import SearchInput from "@/shared/search-input";
 import StatusModal from "@/shared/status-modal";
-import useMessage from "@/hooks/message/useMessage";
-import { MessageNS } from "@/services/message/type";
 
 const Component: React.FC = () => {
   const { isMobile } = useDevice();

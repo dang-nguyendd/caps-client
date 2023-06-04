@@ -1,15 +1,3 @@
-const withMDX = require("@next/mdx")({
-  extension: /\.mdx?$/,
-  options: {
-    // If you use remark-gfm, you'll need to use next.config.mjs
-    // as the package is ESM only
-    // https://github.com/remarkjs/remark-gfm#install
-    remarkPlugins: [],
-    rehypePlugins: [],
-    providerImportSource: "@mdx-js/react",
-  },
-});
-
 const { i18n } = require("./next-i18next.config");
 
 /** @type {import('next').NextConfig} */
@@ -31,4 +19,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withMDX(nextConfig);
+module.exports = nextConfig;

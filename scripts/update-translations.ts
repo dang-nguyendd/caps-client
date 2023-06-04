@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import dotenv from "dotenv";
 
+import dotenv from "dotenv";
 import { Configuration, OpenAIApi } from "openai";
 
 dotenv.config({ path: ".env.development" });

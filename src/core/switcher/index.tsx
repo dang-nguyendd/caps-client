@@ -33,7 +33,7 @@ const Switcher: React.FC<ISwitcherProps> = ({
         <label>
           <span className="block h-7 w-12 cursor-pointer overflow-hidden rounded-full bg-gray-200 transition-colors duration-300 ease-in">
             <span
-              className={`block w-6 h-6 bg-white absolute top-0.5 left-0.5 bottom-0.5 right-${
+              className={`right- absolute inset-y-0.5 left-0.5 block h-6 w-6 bg-white${
                 checked ? "1" : "10"
               } rounded-full transition-all duration-300 ease-in`}
             ></span>

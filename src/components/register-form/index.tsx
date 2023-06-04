@@ -116,11 +116,6 @@ const Component = React.memo(() => {
       });
   };
 
-  // const _handleSubmit = () => {
-
-  //   // setForm(DefaultRegisterForm);
-  // };
-
   const _onChangeSelectOption = (
     option: SelectOption,
     extension?: FormExtension

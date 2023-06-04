@@ -108,7 +108,7 @@ const Component = React.memo(() => {
         // Extract error messages for each field
         const errorMessages: { [key: string]: string } = {}; // Define the type of errorMessages
 
-        validationErrors.inner.forEach((error: any) => {
+        validationErrors.inner.forEach((error: ErrorMessages) => {
           newErrorMessages[error.path] = error.message; // Store the error message for each field
         });
 

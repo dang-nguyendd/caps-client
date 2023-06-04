@@ -32,19 +32,19 @@ const Component = React.memo(() => {
     switch (dataKey) {
       case "email":
         temp.email = value;
-        clearErrorMessage("email"); // Clear the error message for the email field
+        clearErrorMessage("email");
         break;
       case "password":
         temp.password = value;
-        clearErrorMessage("password"); // Clear the error message for the password field
+        clearErrorMessage("password");
         break;
       case "confirmPassword":
         temp.confirmPassword = value;
-        clearErrorMessage("confirmPassword"); // Clear the error message for the confirmPassword field
+        clearErrorMessage("confirmPassword");
         break;
       case "name":
         temp.name = value;
-        clearErrorMessage("name"); // Clear the error message for the name field
+        clearErrorMessage("name");
         break;
     }
     setForm(temp);
@@ -53,7 +53,7 @@ const Component = React.memo(() => {
   const clearErrorMessage = (field: string): void => {
     setErrorMessages((prevErrorMessages) => {
       const newErrorMessages = { ...prevErrorMessages };
-      delete newErrorMessages[field]; // Remove the error message for the specified field
+      delete newErrorMessages[field];
       return newErrorMessages;
     });
   };
@@ -68,11 +68,11 @@ const Component = React.memo(() => {
       .string()
       .test("word-count", "Name should be between 1 and 100 words", (value) => {
         if (!value) {
-          return false; // Fail validation if the value is empty or undefined
+          return false;
         }
-        const words = value.trim().split(/\s+/); // Split the value into words
-        const isNumberFormat = /^\d+$/.test(value); // Check if the value is in number format
-        return words.length >= 1 && words.length <= 100 && !isNumberFormat; // Check word count and number format
+        const words = value.trim().split(/\s+/);
+        const isNumberFormat = /^\d+$/.test(value);
+        return words.length >= 1 && words.length <= 100 && !isNumberFormat;
       }),
     email: yup
       .string()
@@ -100,19 +100,17 @@ const Component = React.memo(() => {
         register(form);
       })
       .catch((validationErrors) => {
-        // Form data is invalid, handle the validation errors
         console.error("Validation errors:", validationErrors);
 
-        const newErrorMessages: ErrorMessages = {}; // Create a new object to store the error messages
+        const newErrorMessages: ErrorMessages = {};
 
-        // Extract error messages for each field
-        const errorMessages: { [key: string]: string } = {}; // Define the type of errorMessages
+        const errorMessages: { [key: string]: string } = {};
 
         validationErrors.inner.forEach((error: ErrorMessages) => {
-          newErrorMessages[error.path] = error.message; // Store the error message for each field
+          newErrorMessages[error.path] = error.message;
         });
 
-        setErrorMessages(newErrorMessages); // Update the error messages state variable
+        setErrorMessages(newErrorMessages);
       });
   };
 

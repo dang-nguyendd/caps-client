@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 
 import { useRouter } from "next/router";
-// import { useImmer } from "use-immer";
 import * as yup from "yup";
 import axios from "@/axios";
 import {
@@ -59,7 +58,7 @@ const Component = () => {
     bloodPressure: yup
       .string()
       .required("BloodPressure is required")
-      .matches(/^\d+$/, "BloodPressure must be a number"),
+      .matches(/^\d+$/, "Blood pressure must be a number"),
     bloodType: yup
       .string()
       .required("Blood type is required")
@@ -74,7 +73,7 @@ const Component = () => {
         "Allergies must be unique",
         function (allergies) {
           if (!allergies || allergies.length === 0) {
-            return true; // Skip validation if the allergies array is empty or undefined
+            return true;
           }
           const uniqueElements = new Set(allergies);
           return uniqueElements.size === allergies.length;
@@ -90,7 +89,7 @@ const Component = () => {
         "Medications must be unique",
         function (medications) {
           if (!medications || medications.length === 0) {
-            return true; // Skip validation if the allergies array is empty or undefined
+            return true;
           }
           const uniqueElements = new Set(medications);
           return uniqueElements.size === medications.length;
@@ -103,10 +102,10 @@ const Component = () => {
         "Surgery description should be between 1 and 100 words",
         (value) => {
           if (!value) {
-            return false; // Fail validation if the value is empty or undefined
+            return false;
           }
-          const words = value.trim().split(/\s+/); // Split the value into words
-          return words.length >= 1 && words.length <= 100; // Check if the word count is within the desired range
+          const words = value.trim().split(/\s+/);
+          return words.length >= 1 && words.length <= 100;
         }
       ),
     chronicIllnessDescription: yup
@@ -116,10 +115,10 @@ const Component = () => {
         "Surgery description should be between 1 and 100 words",
         (value) => {
           if (!value) {
-            return false; // Fail validation if the value is empty or undefined
+            return false;
           }
-          const words = value.trim().split(/\s+/); // Split the value into words
-          return words.length >= 1 && words.length <= 100; // Check if the word count is within the desired range
+          const words = value.trim().split(/\s+/);
+          return words.length >= 1 && words.length <= 100;
         }
       ),
     familyHistoryDescription: yup
@@ -129,10 +128,10 @@ const Component = () => {
         "Surgery description should be between 1 and 100 words",
         (value) => {
           if (!value) {
-            return false; // Fail validation if the value is empty or undefined
+            return false;
           }
-          const words = value.trim().split(/\s+/); // Split the value into words
-          return words.length >= 1 && words.length <= 100; // Check if the word count is within the desired range
+          const words = value.trim().split(/\s+/);
+          return words.length >= 1 && words.length <= 100;
         }
       ),
   });
@@ -253,26 +252,18 @@ const Component = () => {
         await router.push("/");
       })
       .catch((validationErrors) => {
-        // Form data is invalid, handle the validation errors
         console.error("Validation errors:", validationErrors);
 
-        const newErrorMessages: ErrorMessages = {}; // Create a new object to store the error messages
+        const newErrorMessages: ErrorMessages = {};
 
-        // Extract error messages for each field
-        const errorMessages: { [key: string]: string } = {}; // Define the type of errorMessages
+        const errorMessages: { [key: string]: string } = {};
 
         validationErrors.inner.forEach((error: any) => {
-          newErrorMessages[error.path] = error.message; // Store the error message for each field
+          newErrorMessages[error.path] = error.message;
         });
 
-        setErrorMessages(newErrorMessages); // Update the error messages state variable
+        setErrorMessages(newErrorMessages);
 
-        // validationErrors.inner.forEach((error: any) => {
-        //   // Add type annotation for 'error'
-        //   errorMessages[error.path] = error.message;
-        // });
-
-        // Display toast messages for each field error
         Object.keys(errorMessages).forEach((fieldName) => {
           showToast("error", `${fieldName}: ${errorMessages[fieldName]}`);
         });

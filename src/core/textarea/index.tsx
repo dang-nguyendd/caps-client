@@ -29,9 +29,7 @@ const Component = React.memo((props: ITextareaProps) => {
         className={inputClassNames}
         onChange={(e) => (onChange ? onChange(e.target.value) : null)}
       />
-      {errorMessage && (
-        <div className="mt-2 text-sm text-red">{errorMessage}</div>
-      )}
+      {errorMessage ? ({errorMessage}): null }
     </div>
   );
 });

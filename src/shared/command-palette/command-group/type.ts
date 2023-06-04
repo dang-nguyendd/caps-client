@@ -1,10 +1,10 @@
-interface Command {
+export interface ICommand {
   group: string;
   name: string;
   shortcut: string;
 }
 
-interface ICommandProps {
-  commands: Command[];
+export interface ICommandProps {
+  commands: ICommand[];
   group: string;
 }

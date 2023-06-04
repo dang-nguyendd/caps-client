@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { IconMicrophone } from "@tabler/icons-react";
+import { IconVolume2 } from "@tabler/icons-react";
 
 import { IChatMessageProps } from "@/core/chat-message/type";
 
@@ -56,7 +56,7 @@ const Component = React.memo((props: IChatMessageProps) => {
               onClick={() => setIsSpeaking(true)}
               aria-label="Speak"
             >
-              <IconMicrophone />
+              <IconVolume2 />
             </button>
           </div>
         </div>

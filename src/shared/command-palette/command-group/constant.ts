@@ -1,4 +1,6 @@
-export const commands: Command[] = [
+import { ICommand } from "@/shared/command-palette/command-group/type";
+
+export const commands: ICommand[] = [
   {
     name: "Create new conversation",
     shortcut: "",

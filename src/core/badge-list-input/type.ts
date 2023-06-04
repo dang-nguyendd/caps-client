@@ -1,10 +1,10 @@
-export interface IBadgeListInputProps {
+interface IBadgeListInputProps {
   label: string;
   onSubmit: (badges: string[]) => void;
   errorMessage?: string;
 }
 
-export type Badge = {
+type Badge = {
   value: string;
   id: number;
 };

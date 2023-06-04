@@ -64,7 +64,7 @@ const Component = () => {
             }}
           >
             <div className="mx-4 mt-4 flex h-[25px] shrink-0 items-center self-start rounded bg-primary/30 px-2 text-xs text-slate-100">
-              Issue
+              DICA
             </div>
             <div className="flex items-center border-b border-slate-500 text-lg font-medium">
               <Combobox.Input

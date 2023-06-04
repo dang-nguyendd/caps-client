@@ -10,6 +10,8 @@ import {
 } from "@tabler/icons-react";
 import clsx from "clsx";
 
+import { ICommandProps } from "@/shared/command-palette/command-group/type";
+
 const Component: React.FC<ICommandProps> = ({ commands, group }) => {
   return (
     <>
@@ -25,7 +27,7 @@ const Component: React.FC<ICommandProps> = ({ commands, group }) => {
             {({ active }) => (
               <div
                 className={clsx(
-                  "hover:bg-primary/40 flex h-[46px] w-full cursor-default items-center text-white transition-colors duration-100 ease-in",
+                  "flex h-[46px] w-full cursor-default items-center text-white transition-colors duration-100 ease-in hover:bg-primary/40",
                   active ? "bg-primary/40" : ""
                 )}
               >
